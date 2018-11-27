@@ -1,32 +1,35 @@
 version: '3'
 services:
   nginx:
-    build: .docker/nginx
-    restart: always
+    build: .docker/nginx/
     ports:
-      - '8080:80'
+    - '8080:80'
     volumes:
-      - './AllWeShare:/var/www/AllWeShare:cached'
-      - './logs/AllWeShare:/var/www/AllWeShare/var/logs:cached'
-    depends_on:
-    - database
+    - './AllWeShare:/usr/share/nginx/html'
 
-  database:
-    image: postgres:10.4
+  adminer:
+    image: 'adminer:latest'
     ports:
-      - '5432:5432'
+    - '8081:8080'
+
+  php-fpm:
+    build: .docker/php/
+    volumes:
+    - './AllWeShare:/usr/share/nginx/html'
+
+  composer:
+    image: 'composer:latest'
+    volumes:
+    - './:/app'
+
+  postgresql:
+    image: 'postgres:10.4'
+    ports:
+    - '5432:5432'
+    volumes:
+    - './docker/database:/var/lib/postgresql/data/pgdata'
     environment:
-      - PGDATA=/var/lib/postgresql/data
-      - POSTGRES_DB=allweshare
-      - POSTGRES_ROOT_USER=root
-      - POSTGRES_ROOT_PASSWORD=root
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-    restart: always
-
-  php:
-    build: .docker/php
-    volumes:
-      - './AllWeShare:/var/www/AllWeShare:cached'
-    depends_on:
-      - database
+    - PGDATA=/var/lib/postgresql/data/pgdata
+    - POSTGRES_DB=allweshare
+    - POSTGRES_USER=user
+    - POSTGRES_PASSWORD=password
