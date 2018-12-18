@@ -14,6 +14,7 @@ services:
 
   php-fpm:
     build: docker/php/
+    container_name: allweshare_php-fpm_1
     volumes:
     - './AllWeShare:/usr/share/nginx/html'
 
@@ -24,10 +25,11 @@ services:
 
   postgresql:
     image: 'postgres:10.4'
+    container_name: allweshare_postgresql_1
     ports:
     - 5432:5432
     volumes:
-    - 'docker/database:/var/lib/postgresql/data'
+    - './docker/database:/var/lib/postgresql/data'
     environment:
     - PGDATA=/var/lib/postgresql/data
     - POSTGRES_DB=allweshare

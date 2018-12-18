@@ -1,5 +1,6 @@
 build:
 		docker-compose build
+		composer install -d ./AllWeShare
 
 start:
 		docker-compose up -d
