@@ -3,7 +3,7 @@ services:
   nginx:
     build: .docker/nginx/
     ports:
-    - '8080:80'
+    - '8080:4203'
     volumes:
     - './AllWeShare:/usr/share/nginx/html'
 
@@ -25,11 +25,11 @@ services:
   postgresql:
     image: 'postgres:10.4'
     ports:
-    - '5432:5432'
+    - 5432:5432
     volumes:
-    - './docker/database:/var/lib/postgresql/data/pgdata'
+    - '.docker/database:/var/lib/postgresql/data'
     environment:
-    - PGDATA=/var/lib/postgresql/data/pgdata
+    - PGDATA=/var/lib/postgresql/data
     - POSTGRES_DB=allweshare
     - POSTGRES_USER=user
     - POSTGRES_PASSWORD=password
