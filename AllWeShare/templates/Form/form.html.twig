@@ -271,8 +271,8 @@
     {%- if help is not empty -%}
         {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
     {%- endif -%}
-    <div class="row">
-        <div class="large-12 columns{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+    <div>
+        <div class="{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
             {{- form_label(form) -}}
             {{- form_widget(form, widget_attr) -}}
             {{- form_help(form) -}}

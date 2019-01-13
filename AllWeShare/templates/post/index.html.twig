@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <h1>Post index</h1>
+
+    {{ include('post/_form.html.twig') }}
+
+    {% for post in posts %}
+        <div class="callout secondary">
+            <h5>{{ post.title }}</h5>
+            <p>{{ post.descritpion }}</p>
+            <a href="#">{{ post.nbLike }} J'aime</a>
+        </div>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+
+
+{% endblock %}

@@ -47,11 +47,6 @@ class User
      */
     private $city;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_created;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -125,18 +120,6 @@ class User
     public function setCity(string $city): self
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getDateCreated(): ?\DateTimeInterface
-    {
-        return $this->date_created;
-    }
-
-    public function setDateCreated(\DateTimeInterface $date_created): self
-    {
-        $this->date_created = $date_created;
 
         return $this;
     }

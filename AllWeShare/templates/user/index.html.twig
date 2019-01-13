@@ -15,7 +15,6 @@
                 <th>Pwd</th>
                 <th>Address</th>
                 <th>City</th>
-                <th>Date_created</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{ user.pwd }}</td>
                 <td>{{ user.address }}</td>
                 <td>{{ user.city }}</td>
-                <td>{{ user.dateCreated ? user.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>

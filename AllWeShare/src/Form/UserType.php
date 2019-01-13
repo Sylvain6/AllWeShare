@@ -15,18 +15,12 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, array(
-                'attr' => array('class' => 'large-12 columns')))
-            ->add('lastname', TextType::class, array(
-                'attr' => array('class' => 'large-12 columns')))
-            ->add('email', EmailType::class, array(
-        'attr' => array('class' => 'large-12 columns')))
-            ->add('pwd', PasswordType::class, array(
-                'attr' => array('class' => 'large-12 columns')))
-            ->add('address', TextType::class, array(
-                'attr' => array('class' => 'large-12 columns')))
-            ->add('city', TextType::class, array(
-                'attr' => array('class' => 'large-12 columns')))
+            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('pwd', PasswordType::class)
+            ->add('address', TextType::class)
+            ->add('city', TextType::class)
         ;
     }
 
