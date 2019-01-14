@@ -13,8 +13,10 @@ services:
     - '8081:8080'
 
   php-fpm:
-    build: docker/php/
     container_name: allweshare_php-fpm_1
+    build: docker/php/
+    environment:
+    - 'DATABASE_URL=${DATABASE_DMS}://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_SERVER}:${DATABASE_PORT}/${DATABASE_BDD}'
     volumes:
     - './AllWeShare:/usr/share/nginx/html'
     environment:
