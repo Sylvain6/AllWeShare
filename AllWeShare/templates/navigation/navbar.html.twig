@@ -1,13 +1,20 @@
-<nav>
-    <div class="top-bar u-pt-12 u-pb-12">
-        <div class="top-bar-left u-pl-36">
-            <img src="{{ asset('images/allweshare-logo.png') }}" width="200" height="166">
-        </div>
-        <div class="top-bar-right">
-            <ul class="menu u-pr-36">
-                <li><a class="u-c-b" href="#">Sign in</a></li>
-                <li><a href="#">Sign up</a></li>
-            </ul>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="col-md-2">
+        <a class="navbar-brand" href="{{ path('index') }}">
+            <img src="{{ asset('images/allweshare-logo.png') }}" class="img-fluid"width="166" height="166">
+        </a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <div class="form-inline col-md-2 offset-md-10">
+                <ul class="navbar-nav mr-auto align-center">
+                    <li class="nav-item">
+                        <a class="nav-link u-c-b" href="#">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link primary-color" href="#">Sign up</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
