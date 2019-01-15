@@ -1,0 +1,40 @@
+@import "foundation.css";
+@import "../font/style.css";
+
+body {
+    font-family: Circular Std Bold, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.top-bar, .top-bar ul {
+    background-color: #ffffff !important;
+}
+
+footer {
+
+}
+
+.u-c-b {
+    color:black;
+}
+
+.u-c-b:hover {
+    color:black;
+}
+
+.u-pt-12{
+    padding-top: 12px;
+}
+
+.u-pb-12{
+    padding-bottom: 12px;
+}
+
+.u-pr-36{
+    padding-right: 36px;
+}
+
+.u-pl-36{
+    padding-left: 36px;
+}
