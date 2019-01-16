@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6" id="subscribe_form">
+                <h1>Post index</h1>
+                {% if(app.user) %}
+                    {{ include('Front/post/_form.html.twig') }}
+                {% endif %}
+                &nbsp;
+                {% for post in posts %}
+                    <div class="callout secondary-c">
+                        <h5>{{ post.title }}</h5>
+                        <p>authored by {{ post.author.firstname }}</p>
+                        <p>{{ post.descritpion }}</p>
+                        <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
+                    </div>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

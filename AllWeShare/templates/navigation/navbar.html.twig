@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="col-md-2">
         <a class="navbar-brand" href="{{ path('index') }}">
@@ -5,16 +6,26 @@
         </a>
     </div>
     <div class="collapse navbar-collapse">
-        <div class="form-inline col-md-2 offset-md-10">
-                <ul class="navbar-nav mr-auto align-center">
+        <div class="form-inline col-md-3 offset-md-10">
+            <ul class="navbar-nav mr-auto align-center">
+                {% if(app.user) %}
                     <li class="nav-item">
-                        <a class="nav-link u-c-b" href="#">Sign in</a>
+                        <a class="nav-link u-c-b" href="{{ path('post_index') }} ">What's new ?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link primary-color" href="#">Sign up</a>
+                        <a class="nav-link primary-color" href="{{ path('back_user_index') }} ">Admin</a>
                     </li>
-                </ul>
-            </div>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link u-c-b" href="{{ path('app_front_security_login') }} ">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link primary-color" href="{{ path('app_front_security_registration') }} ">Sign up</a>
+                    </li>
+                {% endif %}
+
+            </ul>
         </div>
     </div>
 </nav>

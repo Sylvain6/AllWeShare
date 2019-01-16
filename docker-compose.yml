@@ -3,9 +3,9 @@ services:
   nginx:
     build: docker/nginx/
     ports:
-    - '8080:4203'
+    - '8082:4203'
     volumes:
-    - './AllWeShare:/usr/share/nginx/html'
+    - './AllWeShare:/usr/share/nginx/html:cached'
 
   adminer:
     image: 'adminer:latest'

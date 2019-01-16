@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscription{% endblock %}
+
+{% block body %}
+
+    <div id="subscribe_form">
+        <h1>Subscribe</h1>
+        {{ include('Front/user/_form.html.twig') }}
+    </div>
+
+
+    {#<a href="{{ path('user_index') }}">back to list</a>#}
+{% endblock %}

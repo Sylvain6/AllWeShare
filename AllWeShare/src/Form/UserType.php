@@ -18,19 +18,31 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('firstname', TextType::class, array(
+                'attr' => ['class' => 'form-control']
+            ))
+            ->add('lastname', TextType::class, array(
+                'attr' => ['class' => 'form-control']
+            ))
+            ->add('email', EmailType::class, array(
+                'attr' => ['class' => 'form-control']
+            ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'Password', 'attr' => ['class' => 'form-control']),
+                'second_options' => array('label' => 'Repeat Password', 'attr' => ['class' => 'form-control']),
+
             ))
-            ->add('address', TextType::class)
-            ->add('city', TextType::class)
+            ->add('address', TextType::class, array(
+                'attr' => ['class' => 'form-control']
+            ))
+            ->add('city', TextType::class, array(
+                'attr' => ['class' => 'form-control']
+            ))
             ->add('termsAccepted', CheckboxType::class, array(
                 'mapped' => false,
                 'constraints' => new IsTrue(),
+                'attr' => ['class' => 'form-check-input m-ipt'],
             ))
         ;
     }
