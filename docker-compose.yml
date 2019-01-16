@@ -19,8 +19,6 @@ services:
     - 'DATABASE_URL=${DATABASE_DMS}://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_SERVER}:${DATABASE_PORT}/${DATABASE_BDD}'
     volumes:
     - './AllWeShare:/usr/share/nginx/html'
-    environment:
-    - 'DATABASE_URL=${DATABASE_DMS}://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_SERVER}:${DATABASE_PORT}/${DATABASE_BDD}'
 
   composer:
     image: 'composer:latest'
