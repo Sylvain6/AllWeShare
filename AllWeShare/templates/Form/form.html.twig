@@ -4,17 +4,22 @@
 {# Widgets #}
 
 {% block form_widget_simple -%}
-    {% if errors|length > 0 -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
-    {% endif %}
-    {{- parent() -}}
+    <div class="form-group">
+        {% if errors|length > 0 -%}
+            {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+        {% endif %}
+        {{- parent() -}}
+    </div>
+
 {%- endblock form_widget_simple %}
 
 {% block textarea_widget -%}
-    {% if errors|length > 0 -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
-    {% endif %}
-    {{- parent() -}}
+    <div class="form-group">
+        {% if errors|length > 0 -%}
+            {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+        {% endif %}
+        {{- parent() -}}
+    </div>
 {%- endblock textarea_widget %}
 
 {% block button_widget -%}
