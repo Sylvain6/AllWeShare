@@ -42,7 +42,7 @@ class UserType extends AbstractType
             ->add('termsAccepted', CheckboxType::class, array(
                 'mapped' => false,
                 'constraints' => new IsTrue(),
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-check-input m-ipt'],
             ))
         ;
     }

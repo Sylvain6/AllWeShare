@@ -14,6 +14,15 @@ body {
     color: #fd8200;
 }
 
+.secondary-color{
+    color: #dddddd;
+}
+
+.secondary-color:hover{
+    color: #b1b1b1;
+}
+
+
 .top-bar, .top-bar ul {
     background-color: #ffffff !important;
 }
@@ -108,4 +117,49 @@ footer {
 .button.alerte:hover, .button.alerte:focus{
     background-color: #b11d1d;
     color: #0a0a0a;
+}
+
+
+.callout {
+    position: relative;
+    margin: 0 0 1rem 0;
+    padding: 1rem;
+    border: 1px solid rgba(10, 10, 10, 0.25);
+    border-radius: 3px;
+    background-color: white;
+    color: #0a0a0a; }
+.callout > :first-child {
+    margin-top: 0; }
+.callout > :last-child {
+    margin-bottom: 0; }
+.callout.primary {
+    background-color: #fff1e2;
+    color: #0a0a0a; }
+.callout.secondary {
+    background-color: #fafafa;
+    color: #0a0a0a; }
+.callout.alert {
+    background-color: #fadfdf;
+    color: #0a0a0a; }
+.callout.success {
+    background-color: #d9fbd7;
+    color: #0a0a0a; }
+.callout.warning {
+    background-color: #fadfdf;
+    color: #0a0a0a; }
+.callout.body-font {
+    background-color: #dedede;
+    color: #0a0a0a; }
+.callout.header {
+    background-color: #dedede;
+    color: #0a0a0a; }
+.callout.small {
+    padding: 0.5rem;
+}
+.callout.large {
+    padding: 3rem;
+}
+
+.m-ipt{
+    margin-left: 5px;
 }
