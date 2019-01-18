@@ -24,6 +24,34 @@ class AdminController extends AbstractController
         return $this->render('Back/user/index.html.twig', ['users' => $userRepository->findAll()]);
     }
 
+
+
+    /**
+     * @Route("/new", name="back_user_new", methods={"GET","POST"})
+     */
+    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encoded);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('back_user_index');
+        }
+
+        return $this->render('Back/user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
     /**
      * @Route("/{id}", name="back_user_show", methods={"GET"})
      */
@@ -66,30 +94,5 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('back_user_index');
-    }
-
-    /**
-     * @Route("/new", name="back_user_new", methods={"GET","POST"})
-     */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $encoded = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($encoded);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_index');
-        }
-
-        return $this->render('Back/user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
     }
 }

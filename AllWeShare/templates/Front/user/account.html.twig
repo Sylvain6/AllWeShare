@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="text-center subscribe_form">
+                &nbsp;
+                <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+
+                &nbsp;
+
+                <img src="{{ asset('images/verified_user.png') }}"  width="128px" height="128px">
+            </div>
+            &nbsp;
+
+
+        </div>
+        &nbsp;
+
+        <div class="row">
+            <table class="table col-md-6 subscribe_form">
+                <tbody>
+                    <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <td class="editableColumns">{{ user.firstname }}</td>
+                            <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                            <th>Lastname</th>
+                            <td class="editableColumns">{{ user.lastname }}</td>
+                            <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td class="editableColumns">{{ user.email }}</td>
+                            <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                            <th>Password</th>
+                            <td class="editableColumns"></td>
+                            <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td class="editableColumns">{{ user.address }}</td>
+                            <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                            <th>City</th>
+                            <td class="editableColumns">{{ user.city }}</td>
+                            <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                        </tr>
+                    </thead>
+            </table>
+            &nbsp;
+            <div class="subscribe_form">
+                <a href="#" class="btn button primary float-right">Update</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $('.editValues').click(function () {
+            $(this).parents('tr').find('td.editableColumns').each(function() {
+                var html = $(this).html();
+
+                var exist_input = $(this).parents('tr').find('input');
+                console.log( exist_input.hasClass( "editableInput") );
+                if(  exist_input.hasClass( "editableInput") === false ){
+                    var input = $('<input class="editableInput form-control" type="text" />');
+                    input.val(html);
+                    $(this).html(input);
+                }
+
+            });
+        });
+    </script>
+
+{% endblock %}
+
+

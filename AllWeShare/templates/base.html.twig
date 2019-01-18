@@ -7,6 +7,7 @@
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('icons/foundation-icons.css') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {% endblock %}
@@ -16,7 +17,9 @@
 {% block body %}{% endblock %}
 {% include 'navigation/footer.html.twig' %}
 {% block javascripts %}
-    {#<script src="{{ asset('js/bootstrap.js"') }}"></script>#}
+
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+
 {% endblock %}
 </body>
 </html>

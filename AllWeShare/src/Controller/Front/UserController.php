@@ -50,4 +50,17 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/account", name="user_account", methods={"GET"})
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function account( Request $request, UserRepository $userRepository ): Response
+    {
+        $user = $this->getUser();
+        //throw new Exception( json_encode( $user ) );
+        return $this->render('Front/user/account.html.twig', ['user' => $user ]);
+
+    }
 }
