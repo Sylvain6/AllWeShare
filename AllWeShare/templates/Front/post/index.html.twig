@@ -16,7 +16,8 @@
                         <h5>{{ post.title }}</h5>
                         <p>authored by {{ post.author.firstname }}</p>
                         <p>{{ post.descritpion }}</p>
-                        <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
+                        <input type="hidden" id="like" value="{{ post.id }}">
+                        <button class="btn primary-color" id="likeButton">{{ post.nbLike }} Like</button>
                     </div>
                 {% else %}
                     <tr>

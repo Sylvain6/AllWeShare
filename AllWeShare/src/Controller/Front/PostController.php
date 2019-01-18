@@ -82,4 +82,16 @@ class PostController extends AbstractController
 
         return $this->redirectToRoute('post_index');
     }
+
+    /**
+     * @Route("/{id}/like/up", name="post_like", methods={"GET"})
+     */
+     public function like(Request $request, Post $post): Response
+      {
+            if($this->isCsrfTokenValid('like'.$post->getId(),  $request->request->get('_token'))){
+                $entityManager = $this->getDoctrine()
+                                ->getRepository(Post::class);
+                $entityManager->increaseLikes($post);
+            }
+      }
 }

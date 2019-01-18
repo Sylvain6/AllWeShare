@@ -36,6 +36,13 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    public function increaseLikes($id): void
+    {
+        $this->getEntityManager()
+             ->createQuery("UPDATE AppBundle\Entity\Post post SET post.nb_like = nb_like + 1 WHERE post.id = ".$id)
+             ->execute();
+    }
+
     /*
     public function findOneBySomeField($value): ?Post
     {
