@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/post")
- */
 class PostController extends AbstractController
 {
     /**
@@ -42,7 +39,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_show", methods={"GET"})
+     * @Route("/post/{id}", name="post_show", methods={"GET"})
      */
     public function show(Post $post): Response
     {
@@ -50,7 +47,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="post_edit", methods={"GET","POST"})
+     * @Route("/post/{id}/edit", name="post_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Post $post): Response
     {
@@ -70,7 +67,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_delete", methods={"DELETE"})
+     * @Route("/post/{id}", name="post_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Post $post): Response
     {

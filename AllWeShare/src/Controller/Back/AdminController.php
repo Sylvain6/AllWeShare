@@ -3,8 +3,11 @@
 namespace App\Controller\Back;
 
 use App\Entity\User;
+use App\Entity\Post;
 use App\Form\UserType;
+use App\Form\PostType;
 use App\Repository\UserRepository;
+use App\Repository\PostRepository;
 use Egulias\EmailValidator\Exception\ExpectingDomainLiteralClose;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -13,27 +16,74 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ * Class AdminController
+ * @package App\Controller\Back
+ * @Route(name="admin")
+ */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/", name="back_user_index", methods={"GET"})
+     * @Route("/", name="_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(Request $request, PostRepository $postRepository): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $post->setAuthor($user);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('post_index');
+        }
+
+        return $this->render('Front/post/index.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+            'posts' => $postRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/users", name="_user_index", methods={"GET"})
+     */
+    public function user_index(UserRepository $userRepository): Response
     {
         return $this->render('Back/user/index.html.twig', ['users' => $userRepository->findAll()]);
     }
 
     /**
-     * @Route("/{id}", name="back_user_show", methods={"GET"})
+     * @Route("/posts", name="_post_index", methods={"GET"})
      */
-    public function show(User $user): Response
+    public function post_index(PostRepository $postRepository): Response
+    {
+        return $this->render('Back/post/index.html.twig', ['posts' => $postRepository->findAll()]);
+    }
+
+
+    /**
+     * @Route("/{id}", name="_user_show", methods={"GET"})
+     */
+    public function user_show(User $user): Response
     {
         return $this->render('Back/user/show.html.twig', ['user' => $user]);
     }
 
     /**
-     * @Route("/{id}/edit", name="back_user_edit", methods={"GET","POST"})
+     * @Route("/{id}", name="_post_show", methods={"GET"})
+     */
+    public function post_show(Post $post): Response
+    {
+        return $this->render('Back/post/show.html.twig', ['post' => $post]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="_user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
@@ -55,7 +105,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="back_user_delete", methods={"DELETE"})
+     * @Route("/{id}", name="_user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {
@@ -69,7 +119,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="back_user_new", methods={"GET","POST"})
+     * @Route("/new", name="_user_new", methods={"GET","POST"})
      */
     public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -84,7 +134,7 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('back_user_index');
+            return $this->redirectToRoute('admin_user_index');
         }
 
         return $this->render('Back/user/new.html.twig', [

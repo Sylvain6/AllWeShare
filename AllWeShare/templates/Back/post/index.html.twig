@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post List{% endblock %}
+
+{% block body %}
+    <h1>Post List</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Nb Likes</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.author.firstname }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.descritpion }}</td>
+                <td>{{ post.nbLike }}</td>
+                <td>
+                    <a class="btn button secondary" href="{{ path('admin_user_show', {'id': post.id}) }}">Show</a>
+                    <a class="btn button primary" href="{{ path('admin_user_edit', {'id': post.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn button success align-right" href="{{ path('admin_index') }}">Create new</a>
+{% endblock %}
