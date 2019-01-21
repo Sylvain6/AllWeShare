@@ -25,8 +25,8 @@
                 <td>{{ post.descritpion }}</td>
                 <td>{{ post.nbLike }}</td>
                 <td>
-                    <a class="btn button secondary" href="{{ path('admin_user_show', {'id': post.id}) }}">Show</a>
-                    <a class="btn button primary" href="{{ path('admin_user_edit', {'id': post.id}) }}">Edit</a>
+                    <a class="btn button secondary" href="{{ path('admin_post_show', {'id': post.id}) }}">Show</a>
+                    <a class="btn button primary" href="{{ path('admin_post_edit', {'id': post.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}

@@ -67,7 +67,7 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="_user_show", methods={"GET"})
+     * @Route("/user/{id}", name="_user_show", methods={"GET"})
      */
     public function user_show(User $user): Response
     {
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="_post_show", methods={"GET"})
+     * @Route("/post/{id}", name="_post_show", methods={"GET"})
      */
     public function post_show(Post $post): Response
     {
@@ -83,9 +83,9 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="_user_edit", methods={"GET","POST"})
+     * @Route("/user/edit/{id}", name="_user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
+    public function user_edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -95,7 +95,7 @@ class AdminController extends AbstractController
             $user->setPassword($encoded);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('back_user_index', ['id' => $user->getId()]);
+            return $this->redirectToRoute('admin_user_index', ['id' => $user->getId()]);
         }
 
         return $this->render('Back/user/edit.html.twig', [
@@ -105,9 +105,29 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="_user_delete", methods={"DELETE"})
+     * @Route("/post/edit/{id}", name="_post_edit", methods={"GET","POST"})
      */
-    public function delete(Request $request, User $user): Response
+    public function post_edit(Request $request, Post $post): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_post_index', ['id' => $post->getId()]);
+        }
+
+        return $this->render('Back/post/edit.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}", name="_user_delete", methods={"DELETE"})
+     */
+    public function user_delete(Request $request, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -115,7 +135,21 @@ class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('back_user_index');
+        return $this->redirectToRoute('admin_user_index');
+    }
+
+    /**
+     * @Route("/post/{id}", name="_post_delete", methods={"DELETE"})
+     */
+    public function post_delete(Request $request, Post $post): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($post);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_post_index');
     }
 
     /**
