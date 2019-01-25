@@ -6,17 +6,32 @@
         </a>
     </div>
     <div class="collapse navbar-collapse">
-        <div class="form-inline col-md-3 offset-md-7">
-            <ul class="navbar-nav mr-auto align-center">
+        <div class="form-inline offset-md-8">
+            <ul class="nav nav-tabs ">
+
                 {% if(app.user) %}
                     <li class="nav-item">
-                        <a class="nav-link u-c-b" href="{{ path('post_index') }} ">What's new ?</a>
+                        <a  class="btn nav-link u-c-b {{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('user_account') }} ">Account</a>
+
+
+                    <li>
+                        <div class="dropdown">
+                            <a class="btn nav-link u-c-b dropdown-toggle {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }}"
+                               id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="btn nav-link u-c-b" href="{{ path('user_account') }}">My profile</a>
+                                <a class="btn nav-link u-c-b" href="#">My groups</a>
+                            </div>
+                        </div>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link primary-color" href="{{ path('back_user_index') }} ">Admin</a>
+
+                        <a class="btn nav-link primary-color {{ ( app.request.attributes.get('_route') == 'back_user_index' ) ? 'active' }}" href="{{ path('back_user_index') }}">Admin</a>
                     </li>
 
                 {% else %}
