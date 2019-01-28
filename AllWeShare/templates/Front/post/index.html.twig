@@ -17,6 +17,7 @@
                         <p>authored by {{ post.author.firstname }}</p>
                         <p>{{ post.descritpion }}</p>
                         <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
+                        <a class="secondary-color" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
                     </div>
                 {% else %}
                     <tr>
@@ -26,7 +27,5 @@
             </div>
         </div>
     </div>
-
-
 
 {% endblock %}
