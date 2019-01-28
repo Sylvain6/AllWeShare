@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\User;
+use App\Form\ChangePassword;
 use App\Form\UserType;
 use App\Form\UserAccountType;
 use App\Repository\UserRepository;
@@ -66,9 +67,20 @@ class UserController extends AbstractController
         $form = $this->createForm(UserAccountType::class, $user);
         $form->handleRequest($request);
 
+        $formPassword = $this->createForm(ChangePassword::class, $user );
+        $formPassword->handleRequest( $request );
+
         if ($form->isSubmitted() && $form->isValid()) {
-            //$encoded = $encoder->encodePassword($user_informations, $user_informations->getPassword());
-            //$user_informations->setPassword($encoded);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_account');
+        }
+
+        if( $formPassword->isSubmitted() && $formPassword->isValid() ){
+            //throw new Exception( json_encode(  $user->getPassword() ) );
+            $encoded = $encoder->encodePassword($user, $user->getToChangePassword());
+            //throw new Exception( json_encode( $encoded ) );
+            $user->setToChangePassword($encoded);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_account');
@@ -77,7 +89,16 @@ class UserController extends AbstractController
         return $this->render('Front/user/account.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'formPwd' => $formPassword->createView(),
         ]);
 
     }
+
+//    /**
+//     * @Route("/account", name="user_change_pwd", methods={"GET", "POST"})
+//     */
+//
+//    public function changePassword(  ){
+//
+//    }
 }

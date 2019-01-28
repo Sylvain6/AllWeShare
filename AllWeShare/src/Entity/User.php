@@ -65,6 +65,11 @@ class User implements UserInterface
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tochangepassword;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -224,6 +229,18 @@ class User implements UserInterface
                 $post->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getToChangePassword(): ?string
+    {
+        return $this->tochangepassword;
+    }
+
+    public function setToChangePassword(?string $tochangepassword): self
+    {
+        $this->tochangepassword = $tochangepassword;
 
         return $this;
     }

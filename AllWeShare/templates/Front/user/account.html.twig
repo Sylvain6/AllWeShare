@@ -70,6 +70,26 @@
                 <button class="btn button primary float-right">{{ button_label|default('Save') }}</button>
 
             {{ form_end(form) }}
+            &nbsp;
+        </div>
+
+        <div class="row">
+
+            <div class="subscribe_form">
+               <hr>
+
+                {{ form_start(formPwd) }}
+                    <div class="form-group" >
+                        {{ form_row(formPwd.tochangepassword.first) }}
+                    </div>
+
+                    <div class="form-group" >
+                        {{ form_row(formPwd.tochangepassword.second) }}
+                    </div>
+
+                    <button class="btn button secondary float-right">{{ button_label|default('Change Password') }}</button>
+                {{ form_end(formPwd) }}
+            </div>
 
         </div>
     </div>
