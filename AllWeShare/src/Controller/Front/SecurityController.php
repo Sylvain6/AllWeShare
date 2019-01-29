@@ -2,6 +2,7 @@
 namespace App\Controller\Front;
 use App\Form\UserType;
 use App\Entity\User;
+use App\Service\MailSending;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +40,7 @@ class SecurityController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, MailSending $mailSending)
     {
         if ($this->getUser() instanceof User) {
             return $this->redirectToRoute('app_front_default_home');
@@ -51,6 +52,12 @@ class SecurityController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setRoles(['ROLE_USER']);
+            $mailSending->sendEmailRegister('Hello New Sharer',
+                $user->getEmail(),
+                'Inscription AllWeShare',
+                'emails/registration.html.twig',
+                $user->getFirstname(),
+                $mailer);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
