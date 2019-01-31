@@ -20,6 +20,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+use App\Service\MailSending;
+
 /**
  * @Route("/user")
  */
@@ -61,7 +63,7 @@ class UserController extends AbstractController
     /**
      * @Route("/account", name="user_account", methods={"GET", "POST"})
      */
-    public function account( Request $request, UserPasswordEncoderInterface $encoder ): Response
+    public function account( Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending ): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserAccountType::class, $user);
@@ -81,7 +83,28 @@ class UserController extends AbstractController
             $encoded = $encoder->encodePassword($user, $user->getToChangePassword());
             //throw new Exception( json_encode( $encoded ) );
             $user->setToChangePassword($encoded);
+
+            $random = rtrim(strtr(base64_encode(random_bytes(64)), '+/', '-_'), '=');
+            $user->setToken( $random );
+
+            $options_mail = array(
+                'name' =>  $user->getFirstname(),
+                'token' => $_SERVER['SERVER_NAME'].':'. $_SERVER['SERVER_PORT'] .'/user/change_password/'.$user->getToken()
+            );
+
+            $mailSending->sendEmailRegister('Password Change',
+                $user->getEmail(),
+                'Change your password on AllWeShare',
+                'emails/forgotPassword.html.twig',
+                $options_mail,
+                $mailer);
+
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'info',
+                'An email as been sent to confirm you new password.'
+            );
 
             return $this->redirectToRoute('user_account');
         }
@@ -94,11 +117,31 @@ class UserController extends AbstractController
 
     }
 
-//    /**
-//     * @Route("/account", name="user_change_pwd", methods={"GET", "POST"})
-//     */
-//
-//    public function changePassword(  ){
-//
-//    }
+    /**
+     * @Route("/change_password/{token}", name="user_change_pwd", methods={"GET", "POST"})
+     */
+
+    public function changePassword( Request $request, User $user , $token ){
+
+        if( !empty( $user->getId() ) && $user->getToken() == $token && $user->getToChangePassword() != null ){
+            $pwd = $user->getToChangePassword();
+            $user->setPassword( $pwd );
+            $user->setToChangePassword(null);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Your password has been changed.'
+            );
+
+            return $this->redirectToRoute('user_account');
+        }else{
+            $this->addFlash(
+                'danger',
+                'Your token is invalid, your password hasn\'t been changed'
+            );
+
+            return $this->redirectToRoute('user_account');
+        }
+    }
 }
