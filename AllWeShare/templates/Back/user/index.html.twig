@@ -30,10 +30,10 @@
                 <td>{{ user.address }}</td>
                 <td>{{ user.city }}</td>
                 <td>
-                    <a class="btn btn-outline-secondary" href="{{ path('back_user_show', {'id': user.id}) }}">Show</a>
+                    <a class="btn btn-outline-secondary" href="{{ path('admin_user_show', {'id': user.id}) }}">Show</a>
                 </td>
                 <td>
-                <a class="btn btn-outline-primary" href="{{ path('back_user_edit', {'id': user.id}) }}">Edit</a>
+                <a class="btn btn-outline-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -44,5 +44,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-outline-success align-right" href="{{ path('back_user_new') }}">Create new</a>
+    <a class="btn btn-outline-success align-right" href="{{ path('admin_user_new') }}">Create new</a>
 {% endblock %}
