@@ -15,6 +15,18 @@
 {% include 'navigation/navbar.html.twig' %}
 <body>
 {% block body %}{% endblock %}
+&nbsp;
+<div class="subscribe_form">
+    <div class="col-md-12">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    <strong>{{ label }}</strong> {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% include 'navigation/footer.html.twig' %}
 {% block javascripts %}
     <script src="{{ asset('js/bootstrap.js') }}"></script>

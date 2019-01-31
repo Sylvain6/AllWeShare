@@ -71,8 +71,19 @@ class User implements UserInterface
     private $tochangepassword;
 
      /** @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+      *
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true} )
+     */
+    private $isActive;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
 
     public function __construct()
     {
@@ -265,7 +276,6 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
-
     }
 
         public function getToChangePassword(): ?string
@@ -278,4 +288,28 @@ class User implements UserInterface
         $this->tochangepassword = $tochangepassword;
         return $this;
     }
+
+        public function getIsActive(): ?bool
+        {
+            return $this->isActive;
+        }
+
+        public function setIsActive(bool $isActive): self
+        {
+            $this->isActive = $isActive;
+
+            return $this;
+        }
+
+        public function getToken(): ?string
+        {
+            return $this->token;
+        }
+
+        public function setToken(?string $token): self
+        {
+            $this->token = $token;
+
+            return $this;
+        }
 }

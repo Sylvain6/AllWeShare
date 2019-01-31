@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Subscription{% endblock %}
+{% block title %}Registration{% endblock %}
 
 {% block body %}
 
@@ -13,11 +13,16 @@
                 </div>
             </div>
 
+            <div class="row">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            <strong>Info!</strong>{{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
         </div>
     </div>
-
-
-
-
-    {#<a href="{{ path('user_index') }}">back to list</a>#}
 {% endblock %}
