@@ -51,7 +51,7 @@ class SecurityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles( '{"roles": "ROLE_USER" }' );
             $mailSending->sendEmailRegister('Hello New Sharer',
                 $user->getEmail(),
                 'Inscription AllWeShare',
