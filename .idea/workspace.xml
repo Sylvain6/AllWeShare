@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3f6f5044-cfec-482a-8fe4-68fc68e13c2a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AllWeShare/templates/Back/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/AllWeShare/templates/Back/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllWeShare/assets/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllWeShare/assets/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,11 +30,12 @@
         <counts>
           <entry key="LICENSE" value="1" />
           <entry key="Makefile" value="1" />
+          <entry key="css" value="3" />
           <entry key="env" value="2" />
-          <entry key="js" value="2" />
-          <entry key="json" value="4" />
+          <entry key="js" value="6" />
+          <entry key="json" value="5" />
           <entry key="php" value="17" />
-          <entry key="twig" value="30" />
+          <entry key="twig" value="34" />
           <entry key="yaml" value="1" />
           <entry key="yarn-integrity" value="1" />
           <entry key="yml" value="1" />
@@ -39,30 +43,35 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="2" />
+          <entry key="CSS" value="3" />
+          <entry key="JSON" value="5" />
+          <entry key="JavaScript" value="6" />
           <entry key="PHP" value="17" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Twig" value="30" />
+          <entry key="Twig" value="34" />
           <entry key="YAML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Makefile" value="90" />
+          <entry key="Makefile" value="125" />
+          <entry key="css" value="1" />
           <entry key="env" value="11" />
+          <entry key="js" value="30" />
           <entry key="json" value="1" />
           <entry key="php" value="342" />
-          <entry key="twig" value="375" />
+          <entry key="twig" value="427" />
           <entry key="yaml" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="CSS" value="1" />
           <entry key="JSON" value="1" />
+          <entry key="JavaScript" value="30" />
           <entry key="PHP" value="342" />
-          <entry key="PLAIN_TEXT" value="101" />
-          <entry key="Twig" value="375" />
+          <entry key="PLAIN_TEXT" value="136" />
+          <entry key="Twig" value="427" />
           <entry key="YAML" value="21" />
         </counts>
       </usages-collector>
@@ -71,83 +80,89 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/user/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/user/new.html.twig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Back/user/show.html.twig">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Back/user/index.html.twig">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/public/build/entrypoints.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+            <state relative-caret-position="180">
+              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/public/build/app.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/public/build/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Makefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/comment/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+            <state relative-caret-position="210">
+              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/config/services.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/base.html.twig">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/navigation/footer.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/assets/css/app.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AllWeShare/assets/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="65" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -183,10 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/AllWeShare/templates/user/edit.html.twig" />
-        <option value="$PROJECT_DIR$/AllWeShare/templates/user/new.html.twig" />
-        <option value="$PROJECT_DIR$/AllWeShare/src/Controller/Back/BackUserController.php" />
-        <option value="$PROJECT_DIR$/AllWeShare/src/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/AllWeShare/public/css/foundation.css" />
         <option value="$PROJECT_DIR$/AllWeShare/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/base.html.twig" />
@@ -202,7 +213,6 @@
         <option value="$PROJECT_DIR$/AllWeShare/templates/Back/user/_delete_form.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Back/user/show.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/src/Controller/Front/UserController.php" />
-        <option value="$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/security/login.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Form/form.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/post/_form.html.twig" />
@@ -218,7 +228,6 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/AllWeShare/public/js/app.js" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/comment/index.html.twig" />
-        <option value="$PROJECT_DIR$/AllWeShare/templates/Front/post/index.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/comment/_form.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/comment/show.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Front/comment/new.html.twig" />
@@ -228,12 +237,18 @@
         <option value="$PROJECT_DIR$/AllWeShare/src/Twig/TimeExtension.php" />
         <option value="$PROJECT_DIR$/AllWeShare/composer.json" />
         <option value="$PROJECT_DIR$/AllWeShare/src/Kernel.php" />
-        <option value="$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/config/services.yaml" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/AllWeShare/src/Controller/Front/CommentController.php" />
         <option value="$PROJECT_DIR$/AllWeShare/templates/Back/user/index.html.twig" />
+        <option value="$PROJECT_DIR$/AllWeShare/assets/js/app.js" />
         <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig" />
+        <option value="$PROJECT_DIR$/AllWeShare/assets/css/app.css" />
+        <option value="$PROJECT_DIR$/AllWeShare/public/build/app.js" />
+        <option value="$PROJECT_DIR$/AllWeShare/templates/Front/post/index.html.twig" />
+        <option value="$PROJECT_DIR$/AllWeShare/templates/navigation/footer.html.twig" />
+        <option value="$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig" />
       </list>
     </option>
   </component>
@@ -364,7 +379,7 @@
       <path value="$PROJECT_DIR$/AllWeShare/vendor/symfony/webpack-encore-bundle" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -386,6 +401,34 @@
               <item name="AllWeShare" type="b2602c69:ProjectViewProjectNode" />
               <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
               <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AllWeShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AllWeShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AllWeShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AllWeShare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="AllWeShare" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="navigation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -447,7 +490,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38577000" />
+    <option name="totallyTimeSpent" value="43750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -469,7 +512,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49928468" visible="true" weight="0.5373494" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49928468" visible="true" weight="0.32048193" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007153" side_tool="true" weight="0.5068154" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -509,50 +552,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AllWeShare/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AllWeShare/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/public/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-10788" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/public/js/app.js" />
-    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="63" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/src/Entity/Account.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-38" />
@@ -632,13 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="109" selection-start-line="19" selection-start-column="109" selection-end-line="19" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/src/Repository/AccountRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -669,13 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/config/bundles.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -696,9 +687,6 @@
           <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/navigation/footer.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/new.html.twig" />
     <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/edit.html.twig">
@@ -738,22 +726,8 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Back/user/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/config/routes.yaml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Back/user/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AllWeShare/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
@@ -771,14 +745,89 @@
     <entry file="file://$PROJECT_DIR$/AllWeShare/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/assets/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="65" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+        <state relative-caret-position="150">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Back/user/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Back/user/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-233">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/assets/css/app.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/public/build/entrypoints.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/public/build/app.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/public/build/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/navigation/navbar.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/navigation/footer.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllWeShare/templates/Front/post/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
