@@ -1,46 +1,65 @@
 <?php
+
 namespace App\Controller\Front;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+
 use App\Form\UserType;
 use App\Entity\User;
+use App\Form\ChangePassword;
+use App\Repository\UserRepository;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Service\MailSending;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Security\LoginFormAuthenticator;
 use Symfony\Component\Config\Definition\Exception\Exception;
+
 
 /**
  * Class UserController
  * @package App\Controller
  * @Route(name="app_front_security_")
  */
+
 class SecurityController extends Controller
 {
     /**
-     * @Route("/login", name="login")
-     */
-    public function login(AuthenticationUtils $helper): Response
+    * @Route("/login", name="login")
+    */
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('Front/security/login.html.twig', [
-            'error' => $helper->getLastAuthenticationError(),
+        'last_username' => $lastUsername,
+        'error' => $error
         ]);
     }
+
+
+
+
     /**
      * @Route("/logout", name="logout")
      * @throws \Exception
      */
+
     public function logout(): void
     {
         throw new Exception('This should never be reached!');
     }
     /**
      * @Route("/register", name="registration")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function registerAction( Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, MailSending $mailSending)
     {
@@ -113,5 +132,27 @@ class SecurityController extends Controller
             return $this->redirectToRoute('app_front_security_login');
         }
     }
+
+    /**
+     * @Route("/forgotPassword" , name="forgot_password", methods={"GET", "POST"})
+     */
+
+    public function forgottenPassword( Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending, UserRepository $userRepository ){
+
+        $user = new User();
+
+        $formPassword = $this->createForm(ChangePassword::class, $user );
+        $formPassword->handleRequest( $request );
+
+        if( $formPassword->isSubmitted() && $formPassword->isValid() ){
+            //var_dump( $users ); die;
+        }
+
+        return $this->render('Front/security/forgotPassword.html.twig', [
+            'user' => $user,
+            'formPwd' => $formPassword->createView(),
+        ]);
+    }
+
 
 }

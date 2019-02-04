@@ -79,6 +79,11 @@
                <hr>
 
                 {{ form_start(formPwd) }}
+
+                    <div class="form-group" >
+                        {{ form_row(formPwd.email) }}
+                    </div>
+
                     <div class="form-group" >
                         {{ form_row(formPwd.tochangepassword.first) }}
                     </div>
