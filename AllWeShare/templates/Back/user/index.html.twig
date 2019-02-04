@@ -12,7 +12,6 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>Show</th>
@@ -26,7 +25,6 @@
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password|length > 10 ? user.password|slice(0, 10) ~ '...' : user.password}}</td>
                 <td>{{ user.address }}</td>
                 <td>{{ user.city }}</td>
                 <td>
