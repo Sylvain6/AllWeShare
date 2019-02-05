@@ -4,6 +4,8 @@ build:
 
 start:
 		docker-compose up -d
+		yarn --cwd ./AllWeShare install
+		yarn --cwd ./AllWeShare encore dev
 
 down:
 		docker-compose down
