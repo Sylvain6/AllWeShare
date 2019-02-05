@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('icons/foundation-icons.css') }}" />
@@ -29,8 +30,10 @@
 </div>
 {% include 'navigation/footer.html.twig' %}
 {% block javascripts %}
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/index.js') }}"></script>
+
+    {{ encore_entry_script_tags('app') }}
+
+    <script src="{{ asset('js/bootstrap.js"') }}"></script>
 {% endblock %}
 </body>
 </html>

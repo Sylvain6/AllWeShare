@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 use App\Form\UserType;
 use App\Entity\User;
-use App\Form\ChangePassword;
+use App\Form\ChangePasswordType;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Service\MailSending;
@@ -46,9 +46,6 @@ class SecurityController extends Controller
         ]);
     }
 
-
-
-
     /**
      * @Route("/logout", name="logout")
      * @throws \Exception
@@ -74,12 +71,13 @@ class SecurityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+
             $user->setIsActive( false );
 
             $generated = $token->generateToken();
             $user->setToken( $generated );
 
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles( '{"roles": "ROLE_USER" }' );
 
             $options_mail = array(
                 'name' =>  $user->getFirstname(),
@@ -137,24 +135,88 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/forgotPassword" , name="forgot_password", methods={"GET", "POST"})
+     * @Route("/forgotPassword" , name="forgot_password")
      */
 
-    public function forgottenPassword( Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending, UserRepository $userRepository ){
+    public function forgottenPassword( Request $request, UserRepository $userRepository, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending , GenerateToken $token){
 
         $user = new User();
 
-        $formPassword = $this->createForm(ChangePassword::class, $user );
-        $formPassword->handleRequest( $request );
+        $formPassword = $this->createForm(ChangePasswordType::class, $user );
+
+        $formPassword->handleRequest($request);
+
+        //dump( $formPassword ); die;
 
         if( $formPassword->isSubmitted() && $formPassword->isValid() ){
-            //var_dump( $users ); die;
+
+            $data = $formPassword->getData();
+            $user_exist = $userRepository->findOneByEmail( $data->getEmail() );
+
+            if( !empty( $user_exist ) ){
+                $encoded = $encoder->encodePassword($user, $data->getPassword() );
+                $user_exist->setToChangePassword( $encoded );
+
+                $generated = $token->generateToken();
+                $user_exist->setToken( $generated );
+
+                $options_mail = array(
+                    'name' =>  $user_exist->getFirstname(),
+                    'token' => $_SERVER['HTTP_HOST'] .'/change_password/'.$user_exist->getToken()
+                );
+                $mailSending->sendEmail('Password Change',
+                    $user->getEmail(),
+                    'Change your password on AllWeShare',
+                    'emails/forgotPassword.html.twig',
+                    $options_mail,
+                    $mailer);
+
+                $this->getDoctrine()->getManager()->flush();
+
+                $this->addFlash(
+                    'info',
+                    'An email as been sent to confirm you new password.'
+                );
+
+                return $this->redirectToRoute('app_front_security_login');
+            }
+            else{
+                #TODO: message d'erreur si le mail n'existe pas ?
+            }
         }
 
         return $this->render('Front/security/forgotPassword.html.twig', [
-            'user' => $user,
             'formPwd' => $formPassword->createView(),
         ]);
+    }
+
+
+    /**
+     * @Route("/change_password/{token}", name="change_password" )
+     */
+
+    public function changePassword( Request $request, User $user , $token ){
+
+        if( !empty( $user->getId() ) && $user->getToken() == $token && $user->getToChangePassword() != null ){
+            $pwd = $user->getToChangePassword();
+            $user->setPassword( $pwd );
+            $user->setToChangePassword(null);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Your password has been changed.'
+            );
+
+            return $this->redirectToRoute('app_front_security_login');
+        }else{
+            $this->addFlash(
+                'danger',
+                'Your token is invalid, your password hasn\'t been changed'
+            );
+
+            return $this->redirectToRoute('app_front_security_login');
+        }
     }
 
 

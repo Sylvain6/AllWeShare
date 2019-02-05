@@ -1,8 +1,8 @@
 security:
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       ROLE_ADMIN
         ROLE_EDIT:        ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_EDIT]
+        ROLE_SUPER_ADMIN: [ROLE_SUPER_ADMIN, ROLE_EDIT]
 
     encoders:
         App\Entity\User:
@@ -39,6 +39,7 @@ security:
             logout:
                 path:   /logout
                 target: /
+                invalidate_session: true
 
             # activate different ways to authenticate
 
@@ -53,5 +54,5 @@ security:
     access_control:
     #- { path: ^/login, roles: ROLE_ANONYMOUS }
     #- { path: ^/register, roles: ROLE_ANONYMOUS }
-    #- { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/admin, roles: ROLE_ADMIN }
     #- { path: ^/, roles: ROLE_USER }

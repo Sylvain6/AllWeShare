@@ -76,6 +76,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/post/{id}", name="_post_show", methods={"GET"})
+
      */
     public function post_show(Post $post): Response
     {

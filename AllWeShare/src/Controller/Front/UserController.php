@@ -3,7 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\User;
-use App\Form\ChangePassword;
+use App\Form\ChangePasswordType;
 use App\Form\UserType;
 use App\Form\UserAccountType;
 use App\Repository\UserRepository;
@@ -70,7 +70,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserAccountType::class, $user);
         $form->handleRequest($request);
 
-        $formPassword = $this->createForm(ChangePassword::class, $user );
+        $formPassword = $this->createForm(ChangePasswordType::class, $user );
         $formPassword->handleRequest( $request );
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -92,8 +92,6 @@ class UserController extends AbstractController
                 'name' =>  $user->getFirstname(),
                 'token' => $_SERVER['HTTP_HOST'] .'/user/change_password/'.$user->getToken()
             );
-
-            //dump( $_SERVER ); die;
             $mailSending->sendEmail('Password Change',
                 $user->getEmail(),
                 'Change your password on AllWeShare',

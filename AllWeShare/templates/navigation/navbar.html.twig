@@ -5,13 +5,14 @@
         </a>
     </div>
     <div class="collapse navbar-collapse">
-        <div class="form-inline offset-md-9">
-            <ul class="nav nav-tabs ">
+
+        <div class="form-inline col-md-3 offset-md-9">
+            <ul class="navbar-nav mr-auto align-center">
+
                 {% if(app.user) %}
                     <li class="nav-item">
-                        <a  class="btn nav-link u-c-b {{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
+                        <a  class="nav-link{{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
                     </li>
-
 
                     <li>
                         <div class="dropdown">
@@ -40,17 +41,16 @@
                         </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link primary-color" href="{{ path('logout') }} ">Deconnection</a>
+                        <a class="nav-link primary-color" href="{{ path('logout') }} ">Log out</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link u-c-b {{ ( app.request.attributes.get('_route') == 'app_front_security_login') ? 'active' }}" href="{{ path('app_front_security_login') }} ">Sign in</a>
+                        <a class="nav-link {{ ( app.request.attributes.get('_route') == 'app_front_security_login') ? 'active' }}" href="{{ path('app_front_security_login') }} ">Sign in</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link primary-color {{ ( app.request.attributes.get('_route') == 'app_front_security_registration') ? 'active' }}" href="{{ path('app_front_security_registration') }} ">Sign up</a>
                     </li>
                 {% endif %}
-
             </ul>
         </div>
     </div>

@@ -3,28 +3,29 @@
 {% block title %}Post{% endblock %}
 
 {% block body %}
-    <h1>Post</h1>
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6" id="subscribe_form">
-                &nbsp;
-                    <div class="callout secondary-c">
-                        <h5>{{ post.title }}</h5>
-                        <p>authored by {{ post.author.firstname }}</p>
-                        <p>{{ post.descritpion }}</p>
-                        <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ post.title }}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">authored by {{ post.author.firstname }} {{ post.createdAt| date }}</h6>
+                        <p class="card-text">{{ post.descritpion }}</p>
+                        <a href="#" class="card-link primary-color">{{ post.nbLike }} J'aime</a>
                     </div>
+                </div>
                 {% if app.user %}
                 {{ include('front/comment/_form.html.twig') }}
                 {% endif %}
                 {% for comment in comments %}
-                <div class="card">
-                    <p>authored by {{ comment.author.firstname }} at {{ comment.createdAt| date }}</p>
-                    <div class="card-body">
-                        <p>{{ comment.content }}</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ comment.createdAt| date }}</h6>
+                            <p class="card-text">{{ comment.content }}</p>
+                        </div>
                     </div>
-                </div>
                 {% else %}
                     <tr>
                         <td colspan="6">no records found</td>

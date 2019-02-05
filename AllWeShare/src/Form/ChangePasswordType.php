@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
-class ChangePassword extends AbstractType
+class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +21,7 @@ class ChangePassword extends AbstractType
             ->add('email', EmailType::class, array(
                 'attr' => ['class' => 'form-control']
             ))
-            ->add('tochangepassword', RepeatedType::class, array(
+            ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password', 'attr' => ['class' => 'form-control']),
                 'second_options' => array('label' => 'Repeat Password', 'attr' => ['class' => 'form-control']),
