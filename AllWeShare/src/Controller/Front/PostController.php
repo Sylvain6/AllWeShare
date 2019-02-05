@@ -42,7 +42,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/post/{id}", name="post_show", methods={"GET"})
+     * @Route("/post/{id}", name="post_show", methods={"GET", "POST"})
      */
     public function show(Request $request, Post $post, CommentRepository $commentRepository): Response
     {

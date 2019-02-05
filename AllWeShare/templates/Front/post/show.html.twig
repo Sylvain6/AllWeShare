@@ -16,7 +16,7 @@
                         <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
                     </div>
                 {% if app.user %}
-                {{ include('front/comment/_form.html.twig') }}
+                {{ include('Front/comment/_form.html.twig') }}
                 {% endif %}
                 {% for comment in comments %}
                 <div class="card">
