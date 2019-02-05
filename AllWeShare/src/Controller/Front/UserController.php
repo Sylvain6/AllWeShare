@@ -7,6 +7,7 @@ use App\Form\ChangePassword;
 use App\Form\UserType;
 use App\Form\UserAccountType;
 use App\Repository\UserRepository;
+use App\Service\GenerateToken;
 use Egulias\EmailValidator\Exception\ExpectingDomainLiteralClose;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -63,7 +64,7 @@ class UserController extends AbstractController
     /**
      * @Route("/account", name="user_account", methods={"GET", "POST"})
      */
-    public function account( Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending ): Response
+    public function account( Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending , GenerateToken $token ): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserAccountType::class, $user);
@@ -84,15 +85,16 @@ class UserController extends AbstractController
             //throw new Exception( json_encode( $encoded ) );
             $user->setToChangePassword($encoded);
 
-            $random = rtrim(strtr(base64_encode(random_bytes(64)), '+/', '-_'), '=');
-            $user->setToken( $random );
+            $generated = $token->generateToken();
+            $user->setToken( $generated );
 
             $options_mail = array(
                 'name' =>  $user->getFirstname(),
-                'token' => $_SERVER['SERVER_NAME'].':'. $_SERVER['SERVER_PORT'] .'/user/change_password/'.$user->getToken()
+                'token' => $_SERVER['HTTP_HOST'] .'/user/change_password/'.$user->getToken()
             );
 
-            $mailSending->sendEmailRegister('Password Change',
+            //dump( $_SERVER ); die;
+            $mailSending->sendEmail('Password Change',
                 $user->getEmail(),
                 'Change your password on AllWeShare',
                 'emails/forgotPassword.html.twig',

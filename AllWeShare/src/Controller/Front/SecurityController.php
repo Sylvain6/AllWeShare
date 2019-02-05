@@ -15,6 +15,7 @@ use App\Form\ChangePassword;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Service\MailSending;
+use App\Service\GenerateToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Security\LoginFormAuthenticator;
@@ -61,7 +62,7 @@ class SecurityController extends Controller
      * @Route("/register", name="registration")
      *
      */
-    public function registerAction( Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, MailSending $mailSending)
+    public function registerAction( Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer, MailSending $mailSending, GenerateToken $token)
     {
         if ($this->getUser() instanceof User) {
             return $this->redirectToRoute('app_front_default_home');
@@ -74,16 +75,18 @@ class SecurityController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setIsActive( false );
-            $random = rtrim(strtr(base64_encode(random_bytes(64)), '+/', '-_'), '=');
-            $user->setToken( $random );
+
+            $generated = $token->generateToken();
+            $user->setToken( $generated );
+
             $user->setRoles(['ROLE_USER']);
 
             $options_mail = array(
                 'name' =>  $user->getFirstname(),
-                'token' => $_SERVER['SERVER_NAME'].':'. $_SERVER['SERVER_PORT'] .'/activate/'.$user->getToken()
+                'token' => $_SERVER['HTTP_HOST'].'/activate/'.$user->getToken()
             );
 
-            $mailSending->sendEmailRegister('Hello New Sharer',
+            $mailSending->sendEmail('Hello New Sharer',
                 $user->getEmail(),
                 'Inscription AllWeShare',
                 'emails/registration.html.twig',
