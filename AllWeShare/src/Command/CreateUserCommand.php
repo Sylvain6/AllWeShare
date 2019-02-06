@@ -10,13 +10,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class CreateUserCommand extends Command
 {
     private $encoder;
-    private $token;
     private $objectManager;
-    public function __construct(ObjectManager $objectManager, GenerateToken $token, UserPasswordEncoderInterface $encoder)
+    public function __construct(ObjectManager $objectManager, UserPasswordEncoderInterface $encoder)
     {
         parent::__construct();
         $this->objectManager = $objectManager;
-        $this->token = $token;
         $this->encoder = $encoder;
     }
     protected function configure()
