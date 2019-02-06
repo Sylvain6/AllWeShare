@@ -12,10 +12,10 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Address</th>
                 <th>City</th>
-                <th>actions</th>
+                <th>Show</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -25,12 +25,13 @@
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.address }}</td>
                 <td>{{ user.city }}</td>
                 <td>
-                    <a class="btn button secondary" href="{{ path('admin_user_show', {'id': user.id}) }}">Show</a>
-                    <a class="btn button primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
+                    <a class="btn btn-outline-secondary" href="{{ path('admin_user_show', {'id': user.id}) }}">Show</a>
+                </td>
+                <td>
+                <a class="btn btn-outline-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +42,5 @@
         </tbody>
     </table>
 
-    <a class="btn button success align-right" href="{{ path('admin_user_new') }}">Create new</a>
+    <a class="btn btn-outline-success align-right" href="{{ path('admin_user_new') }}">Create new</a>
 {% endblock %}
