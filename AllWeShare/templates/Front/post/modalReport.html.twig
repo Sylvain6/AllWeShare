@@ -1,19 +1,24 @@
-<div class="modal" id="postReport_{{ id }}" tabindex="-1" aria-hidden="true">
+<div class="modal" id="report" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Report this post</h5>
+                <h5 class="modal-title">Report this Post</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            {{ form_start(form) }}
             <div class="modal-body">
-                <p>Modal body text goes here. {{ post.id }}</p>
+                <div class="form-group">
+                    {{ form_widget(form) }}
+                    <input type="hidden" id="reportId" name="id" value="" />
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                <button type="submit" class="btn btn-primary">{{ button_label }}</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
+            {{ form_end(form) }}
         </div>
     </div>
 </div>

@@ -21,9 +21,12 @@
                 {% for comment in comments %}
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
+                            <h4 class="card-title">{{ comment.author.   firstname }} {{ comment.author.lastname }}</h4>
                             <h6 class="card-subtitle mb-2 text-muted">{{ comment.createdAt| date }}</h6>
                             <p class="card-text">{{ comment.content }}</p>
+                            {% if(app.user) %}
+                                <button class="secondary-color report_button" value="{{ comment.id }}" data-toggle="modal" data-target="#report">Report</button>
+                            {% endif %}
                         </div>
                     </div>
                 {% else %}
@@ -31,6 +34,10 @@
                         <td colspan="6">no records found</td>
                     </tr>
                 {% endfor %}
+                {% if(app.user) %}
+                    {% include 'Front/post/modalReport.html.twig' with {'form': formReport, 'button_label': 'Send'} %}
+                    {% include 'addFlashMessages/successMessage.html.twig' %}
+                {% endif %}
             </div>
         </div>
     </div>

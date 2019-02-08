@@ -1,1 +1,0 @@
-{{ include('post/_form.html.twig', {'button_label': 'Send report'}) }}

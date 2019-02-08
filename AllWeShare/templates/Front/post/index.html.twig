@@ -18,12 +18,19 @@
                         <p>{{ post.descritpion }}</p>
                         <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
                         <a class="secondary-color" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                        {% if(app.user) %}
+                            <button class="secondary-color report_button" value="{{ post.id }}" data-toggle="modal" data-target="#report">Report</button>
+                        {% endif %}
                     </div>
                 {% else %}
                     <tr>
                         <td colspan="6">no records found</td>
                     </tr>
                 {% endfor %}
+                {% if(app.user) %}
+                    {{ include('Front/post/modalReport.html.twig', {'form': formReport, 'button_label': 'Send'}) }}
+                    {{ include('addFlashMessages/successMessage.html.twig') }}
+                {% endif %}
             </div>
         </div>
     </div>
