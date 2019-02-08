@@ -52,7 +52,7 @@ class LoadUserData extends AbstractFixture
                 'address' => '12 rue georges duhamel',
                 'city' => 'paris',
                 'password' => 'azertyuiop',
-                'roles' => 'ROLE_ADMIN',
+                'roles' => '{ "roles": "ROLE_ADMIN" }',
                 'isActive' => true,
             ],
             [
@@ -62,7 +62,7 @@ class LoadUserData extends AbstractFixture
                 'address' => '17 passage barrault',
                 'city' => 'paris',
                 'password' => 'azertyuiop',
-                'roles' => 'ROLE_ADMIN',
+                'roles' => '{ "roles": "ROLE_ADMIN" }',
                 'isActive' => true,
             ],
             [
@@ -72,7 +72,7 @@ class LoadUserData extends AbstractFixture
                 'address' => '18 rue paloindorsay',
                 'city' => 'orsay',
                 'password' => 'azertyuiop',
-                'roles' => 'ROLE_ADMIN',
+                'roles' => '{ "roles": "ROLE_ADMIN" }',
                 'isActive' => true,
             ],
             [
@@ -82,7 +82,7 @@ class LoadUserData extends AbstractFixture
                 'address' => '7 rue bis ter complique',
                 'city' => 'marseille',
                 'password' => 'azertyuiop',
-                'roles' => 'ROLE_USER',
+                'roles' => '{ "roles": "ROLE_USER" }',
                 'isActive' => true,
             ],
         ];
