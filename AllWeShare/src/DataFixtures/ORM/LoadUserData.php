@@ -53,6 +53,7 @@ class LoadUserData extends AbstractFixture
                 'city' => 'paris',
                 'password' => 'azertyuiop',
                 'roles' => 'ROLE_ADMIN',
+                'isActive' => true,
             ],
             [
                 'firstName' => 'Antoine',
@@ -62,6 +63,7 @@ class LoadUserData extends AbstractFixture
                 'city' => 'paris',
                 'password' => 'azertyuiop',
                 'roles' => 'ROLE_ADMIN',
+                'isActive' => true,
             ],
             [
                 'firstName' => 'Jonathan',
@@ -71,6 +73,7 @@ class LoadUserData extends AbstractFixture
                 'city' => 'orsay',
                 'password' => 'azertyuiop',
                 'roles' => 'ROLE_ADMIN',
+                'isActive' => true,
             ],
             [
                 'firstName' => 'Hubert',
@@ -80,6 +83,7 @@ class LoadUserData extends AbstractFixture
                 'city' => 'marseille',
                 'password' => 'azertyuiop',
                 'roles' => 'ROLE_USER',
+                'isActive' => true,
             ],
         ];
     }
