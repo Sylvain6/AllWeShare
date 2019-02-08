@@ -103,7 +103,7 @@ class PostController extends AbstractController
         return $this->render('Front/post/show.html.twig', [
             'post' => $post,
             'comment' => $comment,
-            'comments' => $commentRepository->findBy(['post' => $post]),
+            'comments' => $commentRepository->findBy(['post' => $post], ['createdAt' => 'ASC']),
             'form' => $form->createView(),
             'formReport' => $formReport->createView(),
             ]);
@@ -114,6 +114,7 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post): Response
     {
+        $this->denyAccessUnlessGranted('edit', $post);
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -134,6 +135,7 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post): Response
     {
+        $this->denyAccessUnlessGranted('delete', $post);
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($post);

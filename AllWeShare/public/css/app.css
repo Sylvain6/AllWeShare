@@ -69,7 +69,7 @@ footer {
 .u-pl-36 {
     padding-left: 36px;
 }
-#subscribe_form{
+.subscribe_form{
     width: 50% !important;
     margin-left: auto;
     margin-right: auto;
@@ -163,3 +163,8 @@ footer {
 .m-ipt{
     margin-left: 5px;
 }
+
+/*.active-navbar{*/
+    /*color: #ffa13d;*/
+    /*background-color: #b1b1b1;*/
+/*}*/

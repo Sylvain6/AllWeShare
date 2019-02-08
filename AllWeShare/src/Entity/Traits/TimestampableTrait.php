@@ -17,28 +17,12 @@ trait TimestampableTrait
     private $createdAt;
 
     /**
-     * @var User|null $createdBy
-     *
-     * @Gedmo\Blameable(on="create")
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     */
-    private $createdBy;
-
-    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetimetz", options={"default"="CURRENT_TIMESTAMP"})
      */
     private $updatedAt;
-
-    /**
-     * @var User|null $updatedBy
-     *
-     * @Gedmo\Blameable(on="update")
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     */
-    private $updatedBy;
 
     /**
      * @return \DateTime
@@ -56,25 +40,6 @@ trait TimestampableTrait
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
-     * @return User|null
-     */
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * @param User|null $createdBy
-     *
-     * @return TimestampableTrait
-     */
-    public function setCreatedBy(?User $createdBy): self
-    {
-        $this->createdBy = $createdBy;
         return $this;
     }
 
@@ -97,22 +62,4 @@ trait TimestampableTrait
         return $this;
     }
 
-    /**
-     * @return User|null
-     */
-    public function getUpdatedBy(): ?User
-    {
-        return $this->updatedBy;
-    }
-
-    /**
-     * @param User|null $updatedBy
-     *
-     * @return TimestampableTrait
-     */
-    public function setUpdatedBy(?User $updatedBy): self
-    {
-        $this->updatedBy = $updatedBy;
-        return $this;
-    }
 }
