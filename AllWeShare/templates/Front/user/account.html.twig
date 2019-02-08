@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="text-center subscribe_form">
+                &nbsp;
+                <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+                &nbsp;
+                <img src="{{ asset('images/verified_user.png') }}"  width="128px" height="128px">
+            </div>
+        </div>
+
+        <div class="row">
+
+            {{ form_start(form, {attr: {class: 'col-md-6 subscribe_form'} }) }}
+                <table class="table">
+                    <tbody>
+                    <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <td class="editableColumns" id="firstname">{{ user.firstname }}</td>
+                        <td id="form_firstname" style="display: none;">
+                            <div class="form-group" >
+                                {{ form_widget(form.firstname) }}
+                            </div>
+                        </td>
+                        <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                    </tr>
+                    <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                        <th>Lastname</th>
+                        <td class="editableColumns" id="lastname">{{ user.lastname }}</td>
+                        <td style="display: none;" id="form_lastname">
+                            <div class="form-group">
+                                {{ form_widget(form.lastname) }}
+                            </div>
+                        </td>
+                        <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td id="address">{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td class="editableColumns" id="address">{{ user.address }}</td>
+                        <td style="display: none;" id="form_address">
+                            <div class="form-group">
+                                {{ form_widget(form.address) }}
+                            </div>
+                        </td>
+                        <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                    </tr>
+                    <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                        <th>City</th>
+                        <td class="editableColumns" id="city">{{ user.city }}</td>
+                        <td style="display: none;" id="form_city">
+                            <div class="form-group">
+                                {{ form_widget(form.city) }}
+                            </div>
+                        </td>
+                        <td><input class="editValues btn button secondary" type="button" value="Edit"></td>
+                    </tr>
+                    </thead>
+                </table>
+
+                <button class="btn button primary float-right">{{ button_label|default('Save') }}</button>
+
+            {{ form_end(form) }}
+            &nbsp;
+        </div>
+
+        <div class="row">
+
+            <div class="subscribe_form">
+               <hr>
+
+                {{ form_start(formPwd) }}
+
+                    <div class="form-group" >
+                        {{ form_row(formPwd.email) }}
+                    </div>
+
+                    <div class="form-group" >
+                        {{ form_row(formPwd.password.first) }}
+                    </div>
+
+                    <div class="form-group" >
+                        {{ form_row(formPwd.password.second) }}
+                    </div>
+
+                    <button class="btn button secondary float-right">{{ button_label|default('Change Password') }}</button>
+                {{ form_end(formPwd) }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+

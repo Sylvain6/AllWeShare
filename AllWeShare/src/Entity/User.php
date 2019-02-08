@@ -66,9 +66,24 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tochangepassword;
+
+     /** @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+      *
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true} )
+     */
+    private $isActive;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
 
     public function __construct()
     {
@@ -158,10 +173,12 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles[] = $this->roles;
+        //$roles = $this->roles
+        $roles = json_decode( $this->roles, true );
+        //dump( $roles ); die;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-        return array_unique($roles);
+        //$roles[] = 'ROLE_USER';
+        return array_unique( $roles );
     }
     public function setRoles( string $roles ): self
     {
@@ -261,7 +278,40 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+    }
 
+        public function getToChangePassword(): ?string
+    {
+        return $this->tochangepassword;
+    }
+
+        public function setToChangePassword(?string $tochangepassword): self
+    {
+        $this->tochangepassword = $tochangepassword;
         return $this;
     }
+
+        public function getIsActive(): ?bool
+        {
+            return $this->isActive;
+        }
+
+        public function setIsActive(bool $isActive): self
+        {
+            $this->isActive = $isActive;
+
+            return $this;
+        }
+
+        public function getToken(): ?string
+        {
+            return $this->token;
+        }
+
+        public function setToken(?string $token): self
+        {
+            $this->token = $token;
+
+            return $this;
+        }
 }

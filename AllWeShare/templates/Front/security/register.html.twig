@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="subscribe_form">
+    <div class="subscribe_form">
         <div class="col-md-12">
             {{ form_start(form) }}
             <div class="form-group">
@@ -29,11 +29,11 @@
                 {{ form_row(form.termsAccepted) }}
             </div>
 
-            <button class="btn button primary" type="submit">S'inscrire !</button>
+            <button class="btn btn-primary" type="submit">S'inscrire !</button>
             {{ form_end(form) }}
         </div>
     </div>
 
 
-
 {% endblock %}
+

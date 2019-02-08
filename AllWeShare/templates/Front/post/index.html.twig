@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6" id="subscribe_form">
+            <div class="col-md-6" class="subscribe_form">
                 <h1>Post index</h1>
                 {% if(app.user) %}
                     {{ include('Front/post/_form.html.twig') }}
