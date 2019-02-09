@@ -79,7 +79,8 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Report", mappedBy="reporter", orphanRemoval=true)
      */
     private $reports;
-  
+
+    /**
      * @ORM\Column(type="boolean", options={"default":true} )
      */
     private $isActive;
