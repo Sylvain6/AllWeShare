@@ -11,6 +11,7 @@
 body {
     background-size: cover;
     background: url("https://travelandleisureindia.in/wp-content/uploads/2018/09/Netflix-Originals-for-travel.jpg") no-repeat fixed;
+    background-color: #1b1e21;
     min-height: 100%;
     font-family: Circular Std Bold, sans-serif;
     height: 119vh !important;
@@ -26,8 +27,10 @@ html {
     -webkit-background-size: cover;
     background-size: cover;
     background: url("../images/blur_bg.jpg") no-repeat fixed;
+    /*background-color: #1b1e21;*/
 }
 .blurred-bg.tinted {
+    /*background-color: #1b1e21;*/
     background-image: url("../images/blur_bg.jpg");
     background-size: 100%;
     background-image: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");
@@ -35,6 +38,7 @@ html {
     background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");
 }
 .blurred-bg.shaded {
+    /*background-color: #1b1e21;*/
     background-image: url("../images/blur_bg.jpg");
     background-size: 100%;
     background-image: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/blur_bg.jpg");
@@ -105,12 +109,13 @@ p.related a:hover {
  */
 
 .subscribe_form{
-    width: 50% !important;
     margin-left: auto;
     margin-right: auto;
+    width: 50% !important;
     background-color: #fff;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
 
 }
 .register{
@@ -180,6 +185,24 @@ p.related a:hover {
 
 .margin-card{
     margin-left: 5rem;
+}
+
+.card-shadow {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card-shadow:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-grey{
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /*
@@ -319,10 +342,27 @@ footer {
     margin-top: 10px;
 }
 
-.m-top{
+.m-top-5{
     margin-top: 5px;
+}
+
+.m-top-10{
+    margin-top: 10px;
 }
 
 .m-bot{
     margin-bottom: 5px;
+}
+
+.pad-top-10{
+    padding-top: 10px;
+}
+
+
+.active{
+    color: #78C2AD;
+}
+
+.bell-red{
+    color: red;
 }

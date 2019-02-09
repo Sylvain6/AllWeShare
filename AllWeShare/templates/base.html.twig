@@ -9,25 +9,25 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('icons/foundation-icons.css') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/body.css') }}">
     {% endblock %}
 </head>
 
+<body>
 
 
 
     <div id="main">
         {% include 'navigation/navbar.html.twig' %}
 
-        {% block body %}
+        {% block body %}{% endblock %}
 
-        {% endblock %}
         {% for label, messages in app.flashes %}
             <div class="div-center">
-                <div class="m-top">
+                <div class="m-top-5">
 
                     {% for message in messages %}
                         <div class="alert alert-{{ label }}">
@@ -38,9 +38,9 @@
                 </div>
             </div>
         {% endfor %}
+
         {% include 'navigation/footer.html.twig' %}
     </div>
-
 
 {% block javascripts %}
 

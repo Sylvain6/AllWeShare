@@ -74,7 +74,6 @@ class UserController extends AbstractController
         $formPassword->handleRequest( $request );
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_account');

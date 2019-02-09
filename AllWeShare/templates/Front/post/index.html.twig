@@ -6,7 +6,6 @@
     <div class="container-fluid">
         <div class="row">
 
-
             {% if(app.user) %}
                  <div class="col-md-12">
                     <!-- Trigger the modal with a button -->
@@ -43,14 +42,16 @@
                     &nbsp;
                 </div>
 
-
                 {% for post in posts %}
-                    <div class="callout secondary-c col-md-5 d-inline-block margin-card">
-                        <h5>{{ post.title }}</h5>
+                    <div class="callout secondary-c col-md-5 d-inline-block margin-card card-shadow">
+                        <h5 class="text-center">{{ post.title }}</h5>
+                        <hr>
                         <p>authored by {{ post.author.firstname }}</p>
                         <p>{{ post.descritpion }}</p>
-                        <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
-                        <a class="secondary-color" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                        <hr>
+                        <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
+                        <a class="primary-color" href="#"> J'aime</a>
+                        <a class="btn btn-outline-secondary pull-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
                     </div>
                 {% else %}
                     <tr>

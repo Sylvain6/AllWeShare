@@ -178,6 +178,8 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
+            $user->setRoles( '{"roles": "ROLE_USER" }' );
+            $user->setIsActive(true);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
