@@ -4402,8 +4402,8 @@ input[type="button"].btn-block {
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #78C2AD;
+  color: #ffa13d;
+  background-color: #000;
 }
 
 .nav-fill .nav-item {
@@ -5222,8 +5222,8 @@ input[type="button"].btn-block {
   margin-left: -1px;
   line-height: 1.25;
   color: #fff;
-  background-color: #78C2AD;
-  border: 1px solid #78C2AD;
+  background-color: #fd8200;
+  border: 1px solid #fd8200;
 }
 
 .page-link:hover {
@@ -5267,8 +5267,8 @@ input[type="button"].btn-block {
   color: #fff;
   pointer-events: none;
   cursor: auto;
-  background-color: #CCE8E0;
-  border-color: #CCE8E0;
+  background-color: #ffa13d;
+  border-color: #ffa13d;
 }
 
 .pagination-lg .page-link {
@@ -15850,8 +15850,8 @@ input[type="button"].btn-block {
   margin-left: -1px;
   line-height: 1.25;
   color: #fff;
-  background-color: #78C2AD;
-  border: 1px solid #78C2AD;
+  background-color: #fd8200;
+  border: 1px solid #fd8200;
 }
 
 .page-link:hover {
@@ -15895,8 +15895,8 @@ input[type="button"].btn-block {
   color: #fff;
   pointer-events: none;
   cursor: auto;
-  background-color: #CCE8E0;
-  border-color: #CCE8E0;
+  background-color: #ffa13d;
+  border-color: #ffa13d;
 }
 
 .pagination-lg .page-link {
@@ -26478,8 +26478,8 @@ input[type="button"].btn-block {
   margin-left: -1px;
   line-height: 1.25;
   color: #fff;
-  background-color: #78C2AD;
-  border: 1px solid #78C2AD;
+  background-color: #fd8200;
+  border: 1px solid #fd8200;
 }
 
 .page-link:hover {
@@ -26523,8 +26523,8 @@ input[type="button"].btn-block {
   color: #fff;
   pointer-events: none;
   cursor: auto;
-  background-color: #CCE8E0;
-  border-color: #CCE8E0;
+  background-color: #ffa13d;
+  border-color: #ffa13d;
 }
 
 .pagination-lg .page-link {

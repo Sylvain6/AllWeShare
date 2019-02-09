@@ -8,18 +8,46 @@
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('icons/foundation-icons.css') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/body.css') }}">
     {% endblock %}
 </head>
-{% include 'navigation/navbar.html.twig' %}
-<body>
-{% block body %}{% endblock %}
-{% include 'navigation/footer.html.twig' %}
+
+
+
+
+    <div id="main">
+        {% include 'navigation/navbar.html.twig' %}
+
+        {% block body %}
+
+        {% endblock %}
+        {% for label, messages in app.flashes %}
+            <div class="div-center">
+                <div class="m-top">
+
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            <strong>{{ label }}</strong> {{ message }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        {% endfor %}
+        {% include 'navigation/footer.html.twig' %}
+    </div>
+
+
 {% block javascripts %}
+
     {{ encore_entry_script_tags('app') }}
 
-    <script src="{{ asset('js/bootstrap.js"') }}"></script>
+
+    <script src="{{ asset('js/index.js') }}"></script>
 {% endblock %}
 </body>
 </html>

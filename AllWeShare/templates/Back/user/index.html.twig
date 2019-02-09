@@ -3,44 +3,59 @@
 {% block title %}User List{% endblock %}
 
 {% block body %}
-    <h1>User List</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Show</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.city }}</td>
-                <td>
-                    <a class="btn btn-outline-secondary" href="{{ path('admin_user_show', {'id': user.id}) }}">Show</a>
-                </td>
-                <td>
-                <a class="btn btn-outline-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a class="btn btn-outline-success align-right" href="{{ path('admin_user_new') }}">Create new</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="tab_admin">
+                <h1>User List</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" >#</th>
+                        <th scope="col" >Firstname</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Show</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.address }}</td>
+                            <td>{{ user.city }}</td>
+                            <td>
+                                <a class="btn btn-outline-secondary" href="{{ path('admin_user_show', {'id': user.id}) }}">Show</a>
+                            </td>
+                            <td>
+                                {{ include('Back/user/_delete_form.html.twig') }}
+                                {#<a class="btn btn-outline-primary" href="{{ path('admin_user_edit', {'id': user.id}) }}">Delete</a>#}
+
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a class="btn btn-outline-success pull-left register" href="{{ path('admin_user_new') }}">Create new</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
 {% endblock %}

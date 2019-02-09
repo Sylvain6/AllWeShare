@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Form\UserType;
 use App\Form\PostType;
+use App\Form\UserAccountType;
 use App\Repository\UserRepository;
 use App\Repository\PostRepository;
 use Egulias\EmailValidator\Exception\ExpectingDomainLiteralClose;
@@ -67,15 +68,28 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/user/{id}", name="_user_show", methods={"GET"})
+     * @Route("/user/{id}/show", name="_user_show" )
      */
-    public function user_show(User $user): Response
+    public function user_show(User $user, Request $request ): Response
     {
-        return $this->render('Back/user/show.html.twig', ['user' => $user]);
+
+        $form = $this->createForm(UserAccountType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //$encoded = $encoder->encodePassword($user, $user->getPassword());
+            //$user->setPassword($encoded);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_user_index', ['id' => $user->getId()]);
+        }
+
+        return $this->render('Back/user/show.html.twig', ['user' => $user, 'form' => $form->createView()]);
     }
 
     /**
      * @Route("/post/{id}", name="_post_show", methods={"GET"})
+
      */
     public function post_show(Post $post): Response
     {
@@ -87,7 +101,7 @@ class AdminController extends AbstractController
      */
     public function user_edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserAccountType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -125,7 +139,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}", name="_user_delete", methods={"DELETE"})
+     * @Route("/user/{id}/delete", name="_user_delete", methods={"DELETE"})
      */
     public function user_delete(Request $request, User $user): Response
     {
@@ -139,7 +153,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/post/{id}", name="_post_delete", methods={"DELETE"})
+     * @Route("/post/{id}/delete", name="_post_delete", methods={"DELETE"})
      */
     public function post_delete(Request $request, Post $post): Response
     {
@@ -176,4 +190,5 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 }

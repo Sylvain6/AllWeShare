@@ -3,39 +3,49 @@
 {% block title %}Post List{% endblock %}
 
 {% block body %}
-    <h1>Post List</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Author</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Nb Likes</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.author.firstname }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.descritpion }}</td>
-                <td>{{ post.nbLike }}</td>
-                <td>
-                    <a class="btn button secondary" href="{{ path('admin_post_show', {'id': post.id}) }}">Show</a>
-                    <a class="btn button primary" href="{{ path('admin_post_edit', {'id': post.id}) }}">Edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a class="btn button success align-right" href="{{ path('admin_index') }}">Create new</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="tab_admin">
+            <h1 class="text-center">Post list</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Nb Likes</th>
+                    <th>Show</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.author.firstname }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.descritpion }}</td>
+                        <td>{{ post.nbLike }}</td>
+                        <td>
+                            <a class="btn btn-outline-secondary" href="{{ path('admin_post_show', {'id': post.id}) }}">Show</a>
+
+                        </td>
+                        <td> <a class="btn btn-outline-primary" href="{{ path('admin_post_edit', {'id': post.id}) }}">Delete</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-outline-success register align-right" href="{{ path('admin_index') }}">Create new</a>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

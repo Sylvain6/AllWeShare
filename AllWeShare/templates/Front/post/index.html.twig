@@ -5,14 +5,47 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6" id="subscribe_form">
-                <h1>Post index</h1>
-                {% if(app.user) %}
-                    {{ include('Front/post/_form.html.twig') }}
-                {% endif %}
-                &nbsp;
+
+
+            {% if(app.user) %}
+                 <div class="col-md-12">
+                    <!-- Trigger the modal with a button -->
+                    &nbsp;
+                    <div class="col-md-2 float-right margin-top-modal">
+                        <button type="button" class="btn btn-outline-primary btn" data-toggle="modal" data-target="#myModal">New Advertisement</button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create your personal advertisement</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ include('Front/post/_form.html.twig') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h1>Post index</h1>
+                    &nbsp;
+                </div>
+
+
                 {% for post in posts %}
-                    <div class="callout secondary-c">
+                    <div class="callout secondary-c col-md-5 d-inline-block margin-card">
                         <h5>{{ post.title }}</h5>
                         <p>authored by {{ post.author.firstname }}</p>
                         <p>{{ post.descritpion }}</p>
@@ -26,6 +59,34 @@
                 {% endfor %}
             </div>
         </div>
+
+        {#<div class="row">
+            <div class="col-md-6 align-content-center subscribe_form">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">&laquo;</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">4</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">5</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>#}
     </div>
 
 {% endblock %}

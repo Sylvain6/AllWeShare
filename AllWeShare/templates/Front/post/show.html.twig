@@ -6,8 +6,11 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6" id="subscribe_form">
-                <div class="card">
+
+            <div class="col-md-6 subscribe_form">
+
+                <div class="card m-top">
+
                     <div class="card-body">
                         <h4 class="card-title">{{ post.title }}</h4>
                         <h6 class="card-subtitle mb-2 text-muted">authored by {{ post.author.firstname }} {{ post.createdAt| date }}</h6>
@@ -15,11 +18,12 @@
                         <a href="#" class="card-link primary-color">{{ post.nbLike }} J'aime</a>
                     </div>
                 </div>
+
                 {% if app.user %}
-                {{ include('Front/comment/_form.html.twig') }}
+                    {{ include('Front/comment/_form.html.twig') }}
                 {% endif %}
                 {% for comment in comments %}
-                    <div class="card">
+                    <div class="card m-bot">
                         <div class="card-body">
                             <h4 class="card-title">{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
                             <h6 class="card-subtitle mb-2 text-muted">{{ comment.createdAt| date }}</h6>
@@ -31,11 +35,13 @@
                         <td colspan="6">no records found</td>
                     </tr>
                 {% endfor %}
+                <a class="btn btn-outline-info float-right register" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
             </div>
+
         </div>
     </div>
 
 
-    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+
 
 {% endblock %}

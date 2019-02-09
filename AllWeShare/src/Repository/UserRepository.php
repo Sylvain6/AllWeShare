@@ -36,15 +36,31 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
+    public function isActive( $email ){
+
+        $user = $this->createQueryBuilder( 'u' )
+            ->andWhere('u.email = :mail' )
+            ->setParameter( 'mail', $email )
+            ->getQuery()
+            ->getResult();
+
+        if( isset( $user ) && $user->getIsActive() == 1 ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    public function findOneByEmail( $email ): ?User
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('u.email = :val')
+            ->setParameter('val', $email)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

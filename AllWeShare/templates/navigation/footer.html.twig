@@ -1,67 +1,81 @@
-<footer class="footer u-pt-24 bg-light">
+{#
+<footer class="footer">
     <div class="container">
-        <div class="d-flex flex-row">
-            <div class="col-sm-4">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
+            <div class="col-sm-4 d-inline-block">
                 <label>©  2018 AllWeShare. All Rights Reserved.</label>
             </div>
-            <div class="col-md-4">
-                <div class="u-pb-48">
+            <div class="col-md-3 d-inline-block">
+                <div>
                     <div class="d-inline-block">
                         <i class="fi-marker"></i>
-                    </div>
-                    <div class="d-inline-block">
                         <label>242 rue du Faubourg Saint-Antoine</label>
                     </div>
                 </div>
-                <div class="u-pb-48">
+                <div>
                     <div class="d-inline-block">
                         <i class="fi-mail"></i>
-                    </div>
-                    <div class="d-inline-block">
                         <label>support.allweshare@gmail.com</label>
                     </div>
                 </div>
-                <div class="u-pb-48">
+                <div>
                     <div class="d-inline-block">
                         <i class="fi-telephone"></i>
-                    </div>
-                    <div class="d-inline-block">
                         <label>+338 00 00 00 00</label>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="u-pb-16">
+            <div class="col-sm-5 d-inline-block">
+                <div>
                     <div class="d-inline-block">
                         <a href="#" class="primary-color"><label>About</label></a>
                     </div>
                 </div>
-                <div class="u-pb-16">
-                    <div class="d-inline-block">
-                        <a href="{{ path('post_index') }}" class="primary-color"><label>Accueil</label></a>
-                    </div>
-                </div>
-                <div class="u-pb-16">
-                    <div class="d-inline-block">
-                        <a href="{{ path('app_front_security_registration') }}" class="primary-color"><label>Subscription</label></a>
-                    </div>
-                </div>
-                <div class="u-pb-16">
+                <div>
                     <div class="d-inline-block">
                         <a href="#" class="primary-color"><label>Contacts</label></a>
                     </div>
                 </div>
-                <div class="u-pb-16">
+                <div>
                     <div class="d-inline-block">
-                        <a href="#" class="primary-color"><label>Conditions Générales d'utilidation</label></a>
+                        <a href="{{ path('cgu') }}" class="primary-color"><label>Conditions Générales d'utilidation</label></a>
                     </div>
                 </div>
             </div>
         </div>
+</footer>#}
+
+<footer>
+    <div class="footer-right d-inline-block">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-github"></i></a>
+
     </div>
+
+    <div class="footer-middle d-inline-block">
+        <i class="fi-marker"></i>
+        <label>242 rue du Faubourg Saint-Antoine</label>
+        <br>
+        <i class="fi-mail"></i>
+        <label>support.allweshare@gmail.com</label>
+        <br>
+        <i class="fi-telephone"></i>
+        <label>+338 00 00 00 00</label>
+    </div>
+
+
+    <div class="footer-left d-inline-block">
+
+        <p class="footer-links">
+            <a href="#" class="primary-color">About</a>
+            ·
+            <a href="#" class="primary-color">Contacts</a>
+            ·
+            <a href="{{ path('cgu') }}" class="primary-color">Conditions Générales d'utilidation</a>
+        </p>
+
+        <p>©  2018 AllWeShare. All Rights Reserved.</p>
+    </div>
+
 </footer>
