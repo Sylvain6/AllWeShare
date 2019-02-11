@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -23,17 +24,15 @@ class PostVoter extends Voter
      */
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
         if (!in_array($attribute, [self::DELETE, self::EDIT])) {
             return false;
         }
 
-        // only vote on Post objects inside this voter
-        if (!$subject instanceof Post) {
-            return false;
+        if ($subject instanceof Post or $subject instanceof Comment) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -47,45 +46,38 @@ class PostVoter extends Voter
         $user = $token->getUser();
 
         if (!$user instanceof User) {
-            // the user must be logged in; if not, deny access
             return false;
         }
 
-        // you know $subject is a Post object, thanks to supports
-        /** @var Post $post */
-        $post = $subject;
-
         switch ($attribute) {
             case self::DELETE:
-                return $this->canDelete($post, $user);
+                return $this->canDelete($subject, $user);
             case self::EDIT:
-                return $this->canEdit($post, $user);
+                return $this->canEdit($subject, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
     /**
-     * @param Post $post
      * @param User $user
      * @return bool
      */
-    private function canDelete(Post $post, User $user)
+    private function canDelete($subject, User $user)
     {
-        if ($this->canEdit($post, $user)) {
+        if ($this->canEdit($subject, $user)) {
             return true;
         }
 
-        return $user === $post->getAuthor();
+        return $user === $subject->getAuthor();
     }
 
     /**
-     * @param Post $post
      * @param User $user
      * @return bool
      */
-    private function canEdit(Post $post, User $user)
+    private function canEdit($subject, User $user)
     {
-        return $user === $post->getAuthor();
+        return $user === $subject->getAuthor();
     }
 }
