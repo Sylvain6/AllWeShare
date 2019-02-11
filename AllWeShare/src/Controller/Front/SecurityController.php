@@ -82,6 +82,7 @@ class SecurityController extends Controller
             $options_mail = array(
                 'name' =>  $user->getFirstname(),
                 'token' => 'http://' . $_SERVER['HTTP_HOST'].'/activate/'.$user->getToken()
+
             );
 
             $mailSending->sendEmail('Hello New Sharer',
@@ -163,6 +164,7 @@ class SecurityController extends Controller
                 $options_mail = array(
                     'name' =>  $user_exist->getFirstname(),
                     'token' => 'http://' . $_SERVER['HTTP_HOST'] .'/change_password/'.$user_exist->getToken()
+
                 );
                 $mailSending->sendEmail('Password Change',
                     $user->getEmail(),
