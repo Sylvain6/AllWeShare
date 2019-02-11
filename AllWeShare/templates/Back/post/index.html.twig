@@ -13,7 +13,8 @@
             <th>Title</th>
             <th>Description</th>
             <th>Nb Likes</th>
-            <th>actions</th>
+            <th>Show</th>
+            <th>Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -25,8 +26,10 @@
                 <td>{{ post.descritpion }}</td>
                 <td>{{ post.nbLike }}</td>
                 <td>
-                    <a class="btn button secondary" href="{{ path('admin_post_show', {'id': post.id}) }}">Show</a>
-                    <a class="btn button primary" href="{{ path('admin_post_edit', {'id': post.id}) }}">Edit</a>
+                    <a class="btn btn-outline-danger" href="{{ path('admin_post_show', {'id': post.id}) }}">Show</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ path('admin_post_edit', {'id': post.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +40,5 @@
         </tbody>
     </table>
 
-    <a class="btn button success align-right" href="{{ path('admin_index') }}">Create new</a>
+    <a class="btn btn-outline-success align-right" href="{{ path('admin_index') }}">Create new</a>
 {% endblock %}

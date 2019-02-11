@@ -90,7 +90,7 @@ class UserController extends AbstractController
 
             $options_mail = array(
                 'name' =>  $user->getFirstname(),
-                'token' => $_SERVER['HTTP_HOST'] .'/user/change_password/'.$user->getToken()
+                'token' => 'http://'.$_SERVER['HTTP_HOST'] .'/user/change_password/'.$user->getToken()
             );
             $mailSending->sendEmail('Password Change',
                 $user->getEmail(),

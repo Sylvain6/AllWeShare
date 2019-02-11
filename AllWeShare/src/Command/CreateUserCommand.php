@@ -53,8 +53,7 @@ class CreateUserCommand extends Command
         $user->setPassword($encoded);
         $user->setCity($input->getArgument('city'));
         $user->setAddress($input->getArgument('address'));
-        // TODO : uncomment the next line when mail merged
-        //$user->setIsActive(true);
+        $user->setIsActive(true);
         $user->setRoles("{\"roles\": \"ROLE_USER\" }");
         $this->objectManager->persist($user);
         $this->objectManager->flush();
