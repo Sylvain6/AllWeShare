@@ -28,7 +28,7 @@ class PostVoter extends Voter
             return false;
         }
 
-        if ($subject instanceof Post or $subject instanceof Comment) {
+        if ($subject instanceof Post || $subject instanceof Comment) {
             return true;
         }
 
