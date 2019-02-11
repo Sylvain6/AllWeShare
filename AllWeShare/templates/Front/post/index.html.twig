@@ -18,6 +18,7 @@
                         <p>{{ post.descritpion }}</p>
                         <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
                         <a class="secondary-color" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ post.createdAt| date }}</h6>
                         {% if(app.user) %}
                             <button class="secondary-color report_button" value="{{ post.id }}" data-toggle="modal" data-target="#report">Report</button>
                         {% endif %}

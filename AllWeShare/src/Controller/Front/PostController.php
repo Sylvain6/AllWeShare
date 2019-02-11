@@ -58,8 +58,7 @@ class PostController extends AbstractController
         return $this->render('Front/post/index.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
-            'formReport' => $formReport->createView(),
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 
