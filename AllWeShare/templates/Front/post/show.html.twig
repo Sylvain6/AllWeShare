@@ -18,7 +18,9 @@
                                 <hr>
                                 <h6 class="card-subtitle mb-2 text-muted">authored by {{ post.author.firstname }} {{ post.createdAt| date }}</h6>
                                 <p class="card-text">{{ post.descritpion }}</p>
-                                <a href="#" class="card-link primary-color">{{ post.nbLike }} J'aime</a>
+                                <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
+                                <a class="primary-color" href="#"> J'aime</a>
+
                             </div>
 
                         </div>
@@ -27,7 +29,6 @@
                             <div class="row">
                                 <div class="container-fluid">
                                     <a class="btn btn-outline-primary m-top-10 pull-left" href="{{ path('post_edit', {'id': post.id}) }}">Edit this post</a>
-
                                     {{ include('Front/post/_delete_form.html.twig') }}
                                 </div>
 
