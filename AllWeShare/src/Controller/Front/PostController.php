@@ -4,8 +4,10 @@ namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\EventListener\NotificationEvent;
 use App\Form\CommentType;
 use App\Form\PostType;
+use App\Service\NotificationService;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,7 +46,7 @@ class PostController extends AbstractController
     /**
      * @Route("/post/{id}", name="post_show", methods={"GET", "POST"})
      */
-    public function show(Request $request, Post $post, CommentRepository $commentRepository): Response
+    public function show(Request $request, Post $post, CommentRepository $commentRepository, NotificationService $notif ): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -54,6 +56,22 @@ class PostController extends AbstractController
             $comment->setPost($post);
             $user = $this->getUser();
             $comment->setAuthor($user);
+
+            $notification = $notif->setNotifications( $user->getId(), $post->getAuthor()->getId() , $user->getFirstname() . " as commented your post." );
+
+
+
+            $notifEvent = new NotificationEvent( $notification );
+
+            $notif = $this->get('event_dispatcher')->dispatch('notification.add', $notifEvent)->getNotification();
+
+
+            //todo : setNotification
+            // comment_author as id_sender
+            // post_author as receiver
+            // content to define : xxxx as commented your post
+            //is_seen = false
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();

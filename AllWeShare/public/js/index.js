@@ -10,3 +10,15 @@ $('.editValues').click(function () {
         td_base.hide();
     });
 });
+
+function notif() {
+    $.ajax({
+        url : 'notif.php',
+        success : function(data) {
+            if(data) {
+                $('#notif').html("<a href='#' class='nav-link'><i class='fas fa-bell fa-lg bell-red'></i></a>");
+            }
+        }
+    });
+    setTimeout("notif()", 1000);
+}

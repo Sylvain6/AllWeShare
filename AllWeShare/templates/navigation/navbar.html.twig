@@ -6,12 +6,20 @@
     </div>
     <div class="collapse navbar-collapse">
 
-        <div class="form-inline col-md-3 offset-md-9">
+        <div class="form-inline col-md-5 offset-md-7">
             <ul class="navbar-nav mr-auto align-center">
+
+                {% if( app.user ) %}
+
+                    <li class="nav-item" id='notif'>
+                        <a href="#"class="nav-link" style="color: black;"><i class="fas fa-bell fa-lg"></i></a>
+                    </li>
+                    &nbsp;
+                {% endif %}
 
                 {% if(app.user) %}
                     <li class="nav-item">
-                        <a  class="nav-link{{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
+                        <a  class="nav-link {{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
                     </li>
 
                     <li>
