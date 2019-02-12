@@ -9,10 +9,20 @@
         <div class="form-inline col-md-3 offset-md-9">
             <ul class="navbar-nav mr-auto align-center">
 
-                {% if(app.user) %}
-                    <li class="nav-item">
-                        <a  class="nav-link{{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
+                {% if( app.user ) %}
+
+                    <li class="nav-item" id='notif'>
+                        <a href="#"class="nav-link"><i class="fas fa-bell fa-lg"></i></a>
                     </li>
+                    &nbsp;
+                {% endif %}
+
+                <li class="nav-item">
+                    <a  class="nav-link{{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
+                </li>
+
+
+                {% if(app.user) %}
 
                     <li>
                         <div class="dropdown">
