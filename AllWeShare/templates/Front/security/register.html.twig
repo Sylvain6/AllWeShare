@@ -1,37 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="subscribe_form">
-        <div class="col-md-12">
-            {{ form_start(form) }}
-            <div class="form-group">
-                {{ form_row(form.firstname) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(form.lastname) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(form.address) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(form.city) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(form.email) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(form.password.first) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(form.password.second) }}
-            </div>
-            <div class="form-check">
-                {{ form_row(form.termsAccepted) }}
-            </div>
 
-            <button class="btn btn-primary" type="submit">S'inscrire !</button>
-            {{ form_end(form) }}
+    <div class="subscribe_form container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="text-center">Subscribe</h1>
+                <hr>
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.lastname) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.address) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.city) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.password.first) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.password.second) }}
+                </div>
+                <div class="form-check">
+                    {{ form_row(form.termsAccepted) }}
+                </div>
+
+                <button class="btn btn-primary register pull-right" type="submit">Register</button>
+                {{ form_end(form) }}
+            </div>
         </div>
+
     </div>
 
 

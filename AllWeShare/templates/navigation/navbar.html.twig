@@ -6,7 +6,7 @@
     </div>
     <div class="collapse navbar-collapse">
 
-        <div class="form-inline col-md-3 offset-md-9">
+        <div class="form-inline col-md-5 offset-md-7">
             <ul class="navbar-nav mr-auto align-center">
 
                 {% if( app.user ) %}
@@ -18,26 +18,25 @@
                 {% endif %}
 
                 <li class="nav-item">
-                    <a  class="nav-link{{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
+                    <a  class="nav-link {{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
                 </li>
-
-
                 {% if(app.user) %}
 
-                    <li>
-                        <div class="dropdown">
-                            <a class="btn nav-link u-c-b dropdown-toggle {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }}"
+                    <li class="nav-item">
+                        <div class="dropdown nav-item">
+                            <a class="dropdown-toggle nav-link  {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }}"
                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Account
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="btn nav-link u-c-b" href="{{ path('user_account') }}">My profile</a>
-                                <a class="btn nav-link u-c-b" href="#">My groups</a>
+                            <div class="dropdown-menu nav-item" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link" href="{{ path('user_account') }}">My profile</a>
+                                <a class="nav-link" href="#">My groups</a>
+
                             </div>
                         </div>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li>
+                        <li class="nav-item">
                             <div class="dropdown">
                                 <a class="btn nav-link primary-color dropdown-toggle {{ ( app.request.attributes.get('_route') == 'back_user_index') ? 'active' }}"
                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

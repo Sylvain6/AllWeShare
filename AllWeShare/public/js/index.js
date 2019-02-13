@@ -6,6 +6,7 @@ $('.editValues').click(function () {
 
         var td_base = $(this).closest('tr').find('td.editableColumns');
         var id = td_base[0].id;
+
         $("#form_"+id).show();
         td_base.hide();
     });
@@ -13,10 +14,10 @@ $('.editValues').click(function () {
 
 function notif() {
     $.ajax({
-        url : 'notif.php',
+        url : 'notif',
         success : function(data) {
             if(data) {
-                $('#notif').html("<a href='#' class='nav-link'><i class='fas fa-bell fa-lg bell-red'></i></a>");
+                $('#notif').html("<a href='#' class='nav-link'><i class='fas fa-bell fa-lg g bell-red'></i></a>");
             }
         }
     });

@@ -14,7 +14,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content', TextType::class
-                , array('attr' => ['class' => 'form-control']))
+                , array('attr' => ['class' => 'form-control m-bot']))
         ;
     }
 

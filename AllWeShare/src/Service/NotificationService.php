@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class NotificationService extends AbstractController
 {
 
+
     public function setNotification( $id_sender, $id_receiver, $content, $id_feature ){
 
         $notif = new Notifications();
@@ -29,5 +30,6 @@ class NotificationService extends AbstractController
         $entityManager->persist( $notif );
         $entityManager->flush();
     }
+
 
 }

@@ -18,56 +18,56 @@
 
             {{ form_start(form, {attr: {class: 'col-md-6 subscribe_form'} }) }}
                 <table class="table">
+                    <h3 class="text-center">Informations</h3>
+                    <hr>
                     <tbody>
-                    <thead>
-                    <tr>
-                        <th>Firstname</th>
-                        <td class="editableColumns" id="firstname">{{ user.firstname }}</td>
-                        <td id="form_firstname" style="display: none;">
-                            <div class="form-group" >
-                                {{ form_widget(form.firstname) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-primary" type="button" value="Edit"></td>
-                    </tr>
-                    <tr  style="background-color: rgba(0, 0, 0, 0.05);">
-                        <th>Lastname</th>
-                        <td class="editableColumns" id="lastname">{{ user.lastname }}</td>
-                        <td style="display: none;" id="form_lastname">
-                            <div class="form-group">
-                                {{ form_widget(form.lastname) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-primary" type="button" value="Edit"></td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td id="address">{{ user.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td class="editableColumns" id="address">{{ user.address }}</td>
-                        <td style="display: none;" id="form_address">
-                            <div class="form-group">
-                                {{ form_widget(form.address) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-primary" type="button" value="Edit"></td>
-                    </tr>
-                    <tr  style="background-color: rgba(0, 0, 0, 0.05);">
-                        <th>City</th>
-                        <td class="editableColumns" id="city">{{ user.city }}</td>
-                        <td style="display: none;" id="form_city">
-                            <div class="form-group">
-                                {{ form_widget(form.city) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-primary" type="button" value="Edit"></td>
-                    </tr>
-                    </thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <td class="editableColumns" id="firstname">{{ user.firstname }}</td>
+                            <td id="form_firstname" style="display: none;">
+                                <div class="form-group" >
+                                    {{ form_widget(form.firstname) }}
+                                </div>
+                            </td>
+                            <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                            <th>Lastname</th>
+                            <td class="editableColumns" id="lastname">{{ user.lastname }}</td>
+                            <td style="display: none;" id="form_lastname">
+                                <div class="form-group">
+                                    {{ form_widget(form.lastname) }}
+                                </div>
+                            </td>
+                            <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td id="address">{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td class="editableColumns" id="address">{{ user.address }}</td>
+                            <td style="display: none;" id="form_address">
+                                <div class="form-group">
+                                    {{ form_widget(form.address) }}
+                                </div>
+                            </td>
+                            <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
+                        </tr>
+                        <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                            <th>City</th>
+                            <td class="editableColumns" id="city">{{ user.city }}</td>
+                            <td style="display: none;" id="form_city">
+                                <div class="form-group">
+                                    {{ form_widget(form.city) }}
+                                </div>
+                            </td>
+                            <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
+                        </tr>
+                    </tbody>
                 </table>
-
-                <button class="btn btn-primary float-right">{{ button_label|default('Save') }}</button>
+                <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
 
             {{ form_end(form) }}
             &nbsp;
@@ -75,8 +75,10 @@
 
         <div class="row">
 
-            <div class="subscribe_form">
-               <hr>
+            <div class="subscribe_form container-fluid">
+
+                <h3 class="text-center">Change your password</h3>
+                <hr>
 
                 {{ form_start(formPwd) }}
 
@@ -92,7 +94,7 @@
                         {{ form_row(formPwd.password.second) }}
                     </div>
 
-                    <button class="btn button secondary float-right">{{ button_label|default('Change Password') }}</button>
+                    <button class="btn btn-outline-danger register float-right">{{ button_label|default('Change Password') }}</button>
                 {{ form_end(formPwd) }}
             </div>
 

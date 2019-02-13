@@ -11,31 +11,41 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/body.css') }}">
     {% endblock %}
 </head>
-{% include 'navigation/navbar.html.twig' %}
+
 <body>
-{% block body %}{% endblock %}
-&nbsp;
-<div class="subscribe_form">
-    <div class="col-md-12">
+
+
+
+    <div id="main">
+        {% include 'navigation/navbar.html.twig' %}
+
+        {% block body %}{% endblock %}
+
         {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    <strong>{{ label }}</strong> {{ message }}
+            <div class="div-center">
+                <div class="m-top-5">
+
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            <strong>{{ label }}</strong> {{ message }}
+                        </div>
+                    {% endfor %}
+
                 </div>
-            {% endfor %}
+            </div>
         {% endfor %}
+
+        {% include 'navigation/footer.html.twig' %}
     </div>
-</div>
-{% include 'navigation/footer.html.twig' %}
+
 {% block javascripts %}
 
     {{ encore_entry_script_tags('app') }}
-
     <script src="{{ asset('js/index.js') }}"></script>
+    <script> notif(); </script>";
 {% endblock %}
 </body>
 </html>
