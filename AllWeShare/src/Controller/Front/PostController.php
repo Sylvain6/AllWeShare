@@ -4,8 +4,10 @@ namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\Report;
 use App\Form\CommentType;
 use App\Form\PostType;
+use App\Form\ReportType;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +26,10 @@ class PostController extends AbstractController
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
+        $report = new Report();
+        $formReport = $this->createForm(ReportType::class, $report);
+        $formReport->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $post->setAuthor($user);
@@ -32,6 +38,21 @@ class PostController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('post_index');
+        }
+
+        if($formReport->isSubmitted() && $formReport->isValid()){
+            $user = $this->getUser();
+            //dump( $request->request ); die;
+            $postReportedId = $request->request->get('id');
+            $postReported = $postRepository->find($postReportedId);
+            $report->setPost($postReported);
+            $report->setReporter($user);
+            //dump( $report ); die;
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($report);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Thanks you for your report');
         }
 
         return $this->render('Front/post/index.html.twig', [
@@ -50,6 +71,10 @@ class PostController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+        $report = new Report();
+        $formReport = $this->createForm(ReportType::class, $report);
+        $formReport->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
             $user = $this->getUser();
@@ -60,11 +85,28 @@ class PostController extends AbstractController
 
             return $this->redirectToRoute('post_show', array('id' => $post->getId()));
         }
+
+        if($formReport->isSubmitted() && $formReport->isValid()){
+            $user = $this->getUser();
+            $commentReportedId = $request->request->get('id');
+            $commentReported = $commentRepository->find($commentReportedId);
+            $report->setComment($commentReported);
+            $report->setReporter($user);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($report);
+            $entityManager->flush();
+
+
+            $this->addFlash('success', 'Thanks you for your report');
+        }
+
+
         return $this->render('Front/post/show.html.twig', [
             'post' => $post,
             'comment' => $comment,
             'comments' => $commentRepository->findBy(['post' => $post], ['createdAt' => 'ASC']),
             'form' => $form->createView(),
+            'formReport' => $formReport->createView(),
             ]);
     }
 
