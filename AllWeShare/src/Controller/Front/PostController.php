@@ -42,12 +42,10 @@ class PostController extends AbstractController
 
         if($formReport->isSubmitted() && $formReport->isValid()){
             $user = $this->getUser();
-            //dump( $request->request ); die;
             $postReportedId = $request->request->get('id');
             $postReported = $postRepository->find($postReportedId);
             $report->setPost($postReported);
             $report->setReporter($user);
-            //dump( $report ); die;
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($report);
             $entityManager->flush();
