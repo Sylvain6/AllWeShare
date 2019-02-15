@@ -393,23 +393,32 @@ Notif
     color: white;
 }
 
-.alert {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-}
 
 .closebtn {
     margin-left: 15px;
-    color: white;
+    color: black;
     font-weight: bold;
     float: right;
     font-size: 22px;
-    line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .closebtn:hover {
-    color: black;
+    color: gray;
+}
+
+.list-notif{
+   list-style-type: none;
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-size: 90%;
+    width:100%;
+}
+
+.notif_second_id:hover{
+    color: red;
 }

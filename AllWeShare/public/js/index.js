@@ -18,16 +18,20 @@ function notif() {
         success : function(data) {
             if(data.counter > 0 ) {
                 $('.notif_second_id').html("<i class='fas fa-bell fa-lg'></i><span class='badge-notif'>"+data.counter +"</span></a>");
-
+                var content_notif = "";
                 $.each( data.notifs, function( i, notif ){
-                        $('#list-notif').html(
-                            "<li class='list-group-item alert'>" +
-                            "<span class='closebtn' onclick='dismiss("+ notif[0]+");'>&times;</span>" +
-                             notif[1] +
+                       // $('#list-notif').append(
+                            content_notif +="<li class='list-notif'>" +
+                            "<span class='closebtn' onclick='dismiss("+ data.notifs[i][0]+");'>&times;</span>" +
+                            data.notifs[i][1] +
                             "</li>"
-                        );
+                       // );
+
+
                     }
                 )
+
+                $('#list-notif').html( content_notif );
 
             }
             else{
