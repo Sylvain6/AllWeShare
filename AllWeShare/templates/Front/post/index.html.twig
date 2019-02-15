@@ -5,20 +5,54 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6" class="subscribe_form">
-                <h1>Post index</h1>
-                {% if(app.user) %}
-                    {{ include('Front/post/_form.html.twig') }}
-                {% endif %}
-                &nbsp;
+
+            {% if(app.user) %}
+                 <div class="col-md-12">
+                    <!-- Trigger the modal with a button -->
+                    &nbsp;
+                    <div class="col-md-2 float-right margin-top-modal">
+                        <button type="button" class="btn btn-outline-primary btn" data-toggle="modal" data-target="#myModal">New Advertisement</button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create your personal advertisement</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ include('Front/post/_form.html.twig') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h1>Post index</h1>
+                    &nbsp;
+                </div>
+
                 {% for post in posts %}
-                    <div class="callout secondary-c">
-                        <h5>{{ post.title }}</h5>
+                    <div class="callout secondary-c col-md-5 d-inline-block margin-card card-shadow">
+                        <h5 class="text-center">{{ post.title }}</h5>
+                        <hr>
                         <p>authored by {{ post.author.firstname }}</p>
                         <p>{{ post.descritpion }}</p>
-                        <a class="primary-color" href="#">{{ post.nbLike }} J'aime</a>
-                        <a class="secondary-color" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ post.createdAt| date }}</h6>
+                        <hr>
+                        <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
+                        <a class="primary-color" href="#"> J'aime</a>
+                        <a class="btn btn-outline-secondary pull-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+
                     </div>
                 {% else %}
                     <tr>

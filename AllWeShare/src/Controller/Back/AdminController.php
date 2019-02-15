@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Form\UserType;
 use App\Form\PostType;
+use App\Form\UserAccountType;
 use App\Repository\UserRepository;
 use App\Repository\PostRepository;
 use Egulias\EmailValidator\Exception\ExpectingDomainLiteralClose;
