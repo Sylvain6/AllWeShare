@@ -45,7 +45,11 @@
 
     {{ encore_entry_script_tags('app') }}
     <script src="{{ asset('js/index.js') }}"></script>
-    <script> notif(); </script>";
+    <script>
+        {% if( app.user ) %}
+            notif();
+        {% endif %}
+    </script>
 {% endblock %}
 </body>
 </html>

@@ -14,12 +14,39 @@ $('.editValues').click(function () {
 
 function notif() {
     $.ajax({
-        url : 'notif',
+        url : "/notif" ,
         success : function(data) {
-            if(data) {
-                $('#notif').html("<a href='#' class='nav-link'><i class='fas fa-bell fa-lg g bell-red'></i></a>");
+            if(data.counter > 0 ) {
+                $('.notif_second_id').html("<i class='fas fa-bell fa-lg'></i><span class='badge-notif'>"+data.counter +"</span></a>");
+
+                $.each( data.notifs, function( i, notif ){
+                        $('#list-notif').html(
+                            "<li class='list-group-item alert'>" +
+                            "<span class='closebtn' onclick='dismiss("+ notif[0]+");'>&times;</span>" +
+                             notif[1] +
+                            "</li>"
+                        );
+                    }
+                )
+
+            }
+            else{
+                $('.notif_second_id').html("<i class='fas fa-bell fa-lg'></i></a>");
             }
         }
     });
-    setTimeout("notif()", 1000);
+    setTimeout("notif()", 30000);
 }
+
+function dismiss( id ){
+    //element.parentElement.style.display='none';
+
+    $.ajax({
+        url : "/notif_dismiss" ,
+        type: 'POST',
+        data: 'id=' + id,
+        success : function () {
+
+        }
+    });
+};

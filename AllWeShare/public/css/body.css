@@ -366,3 +366,50 @@ footer {
 .bell-red{
     color: red;
 }
+
+
+/*
+Notif
+ */
+
+.notification {
+    //color: red;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+
+.notification .badge-notif {
+    position: absolute;
+    font-size: 60%;
+    top: 5px;
+    right: 1px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
