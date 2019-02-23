@@ -30,9 +30,6 @@ class LoadUserData extends AbstractFixture
                 if ('password' === $key) {
                     $value = $this->encoder->encodePassword($user, $value);
                 }
-                if ('shared_account' === $key) {
-                    $value = $this->getReference('GROUP_' . $data['shared_account']);
-                }
 
                 $user->$setter($value);
             }
