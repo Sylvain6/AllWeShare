@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Request index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="tab_admin">
+            <h1 class="text-center">Demands</h1>
+        {% for request in requests %}
+            {% if request.status == 'PENDING' %}
+            <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+                {% elseif request.status == 'ACCEPTED' %}
+                    <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                        {% elseif request.status == "REJECTED" %}
+                            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                                {% endif %}
+            <div class="card-header">REQUEST ({{ request.status }})</div>
+            <div class="card-body">
+                <p class="card-text">You wanted to integrate the group from this post :
+                    "{{ request.post.title }}", owner is {{ request.post.author.firstname }} {{ request.post.author.lastname }}</p>
+
+            </div>
+        </div>
+        {% else %}
+            <p> no request</p>
+        {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

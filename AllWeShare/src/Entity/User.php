@@ -85,10 +85,16 @@ class User implements UserInterface
      */
     private $token;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="owner", orphanRemoval=true)
+     */
+    private $groups;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -310,6 +316,37 @@ class User implements UserInterface
         public function setToken(?string $token): self
         {
             $this->token = $token;
+
+            return $this;
+        }
+
+        /**
+         * @return Collection|Group[]
+         */
+        public function getGroups(): Collection
+        {
+            return $this->groups;
+        }
+
+        public function addGroup(Group $group): self
+        {
+            if (!$this->groups->contains($group)) {
+                $this->groups[] = $group;
+                $group->setOwner($this);
+            }
+
+            return $this;
+        }
+
+        public function removeGroup(Group $group): self
+        {
+            if ($this->groups->contains($group)) {
+                $this->groups->removeElement($group);
+                // set the owning side to null (unless already changed)
+                if ($group->getOwner() === $this) {
+                    $group->setOwner(null);
+                }
+            }
 
             return $this;
         }

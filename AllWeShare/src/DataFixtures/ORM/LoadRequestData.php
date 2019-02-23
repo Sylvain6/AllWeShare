@@ -4,33 +4,29 @@ declare(strict_types=1);
 
 namespace App\DataFixtures\ORM;
 
-use App\Entity\Comment;
-use App\Entity\Post;
-use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\ORMFixtureInterface;
+use App\Entity\Request;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadCommentData extends AbstractFixture implements DependentFixtureInterface
+class LoadRequestData extends AbstractFixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getCommentDatas() as $data) {
-            $comment = new Comment();
+        foreach ($this->getRequestDatas() as $data) {
+            $request = new Request();
 
             foreach ($data as $key => $value) {
                 $setter = sprintf('set%s', ucfirst($key));
-                if ('author' === $key) {
-                    $value = $this->getReference('USER_' . $data['author']);
+                if ('applicant' === $key) {
+                    $value = $this->getReference('USER_' . $data['applicant']);
                 }
                 if ('post' === $key) {
                     $value = $this->getReference('POST_' . $data['post']);
                 }
-
-                $comment->$setter($value);
+                $request->$setter($value);
             }
-            $manager->persist($comment);
+            $manager->persist($request);
         }
 
         $manager->flush();
@@ -39,23 +35,27 @@ class LoadCommentData extends AbstractFixture implements DependentFixtureInterfa
     public function getDependencies(): array
     {
         return [
-            LoadUserData::class,
             LoadPostData::class,
         ];
     }
 
-    private function getCommentDatas(): array
+    private function getRequestDatas(): array
     {
         return [
             [
-                'content' => 'I want to share with youuuu',
-                'author' => 3,
-                'post' => 2,
+                'status' => 'PENDING',
+                'post' => 1,
+                'applicant' => 4,
             ],
             [
-                'content' => 'yo mec',
-                'author' => 2,
+                'status' => 'ACCEPTED',
                 'post' => 1,
+                'applicant' => 2,
+            ],
+            [
+                'status' => 'REJECTED',
+                'post' => 1,
+                'applicant' => 1,
             ],
         ];
     }

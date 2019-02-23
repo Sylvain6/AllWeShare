@@ -34,7 +34,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('Front/post/index.html.twig', [
+        return $this->render('Front/post/index_owner.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
             'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
