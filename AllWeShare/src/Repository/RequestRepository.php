@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Repository\PostRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Service\ArrayFlatten;
 
 /**
  * @method Request|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,6 +21,7 @@ class RequestRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Request::class);
     }
+
 
     // /**
     //  * @return Request[] Returns an array of Request objects
@@ -38,15 +40,16 @@ class RequestRepository extends ServiceEntityRepository
     }
     */
     public function findByOwner(User $user){
+        $arrayflatten = new ArrayFlatten();
         $postRepository = $this
             ->getEntityManager()
             ->getRepository('App\Entity\Post');
         $posts = $postRepository->findBy(['author' => $user]);
-        $requests = [];
         foreach ($posts as $post){
-            $requests = $this->findBy(['post' => $post]);
+            $requests[] = $this->findBy(['post' => $post]);
         }
-        return $requests;
+        $result=$arrayflatten->arrayFlatten($requests);
+        return $result;
     }
     /*
     public function findOneBySomeField($value): ?Request

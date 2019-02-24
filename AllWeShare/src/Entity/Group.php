@@ -42,17 +42,22 @@ class Group
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="groups")
      */
-    private $user_1;
+    private $user1;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="groups")
      */
-    private $user_2;
+    private $user2;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="groups")
      */
-    private $user_3;
+    private $user3;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     public function getId(): ?int
     {
@@ -109,67 +114,48 @@ class Group
 
     public function getUser1(): ?User
     {
-        return $this->user_1;
+        return $this->user1;
     }
 
-    public function setUser1(?User $user_1): self
+    public function setUser1(?User $user1): self
     {
-        $this->user_1 = $user_1;
+        $this->user1 = $user1;
 
         return $this;
     }
 
     public function getUser2(): ?User
     {
-        return $this->user_2;
+        return $this->user2;
     }
 
-    public function setUser2(?User $user_2): self
+    public function setUser2(?User $user2): self
     {
-        $this->user_2 = $user_2;
+        $this->user2 = $user2;
 
         return $this;
     }
 
     public function getUser3(): ?User
     {
-        return $this->user_3;
+        return $this->user3;
     }
 
-    public function setUser3(?User $user_3): self
+    public function setUser3(?User $user3): self
     {
-        $this->user_3 = $user_3;
+        $this->user3 = $user3;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Request[]
-     */
-    public function getRequests(): Collection
+    public function getName(): ?string
     {
-        return $this->requests;
+        return $this->name;
     }
 
-    public function addRequest(Request $request): self
+    public function setName(string $name): self
     {
-        if (!$this->requests->contains($request)) {
-            $this->requests[] = $request;
-            $request->setSharedAccount($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRequest(Request $request): self
-    {
-        if ($this->requests->contains($request)) {
-            $this->requests->removeElement($request);
-            // set the owning side to null (unless already changed)
-            if ($request->getSharedAccount() === $this) {
-                $request->setSharedAccount(null);
-            }
-        }
+        $this->name = $name;
 
         return $this;
     }

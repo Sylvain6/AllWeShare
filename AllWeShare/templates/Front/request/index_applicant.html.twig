@@ -7,13 +7,16 @@
         <div class="row">
             <div class="tab_admin">
             <h1 class="text-center">Demands</h1>
-        {% for request in requests %}
-            {% if request.status == 'PENDING' %}
-            <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
-                {% elseif request.status == 'ACCEPTED' %}
-                    <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                        {% elseif request.status == "REJECTED" %}
-                            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div style="
+                    flex-wrap: wrap;
+                     display: inline-flex;">
+                    {% for request in requests %}
+                    {% if request.status == 'PENDING' %}
+                    <div class="card text-white bg-warning mb-3" style="max-width: 20rem;order: 1;margin:5px;">
+                        {% elseif request.status == 'ACCEPTED' %}
+                        <div class="card text-white bg-success mb-3" style="max-width: 20rem; order: 2;margin:5px;">
+                            {% elseif request.status == "REJECTED" %}
+                            <div class="card text-white bg-danger mb-3" style="max-width: 20rem; order: 3;margin:5px;">
                                 {% endif %}
             <div class="card-header">REQUEST ({{ request.status }})</div>
             <div class="card-body">
@@ -25,6 +28,7 @@
         {% else %}
             <p> no request</p>
         {% endfor %}
+            </div>
             </div>
         </div>
     </div>

@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Group;
+use App\Entity\User;
+use App\Service\ArrayFlatten;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,6 +19,19 @@ class GroupRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Group::class);
+    }
+
+    public function findGroupsContains(User $user){
+        $groups = $this->findBy(['owner' => $user]);
+        $arrayFlatten = New ArrayFlatten();
+        foreach (range(1, 3) as $i) {
+            if($this->findBy(['user'.$i => $user])) {
+                $groups2[] = $this->findBy(['user' . $i => $user]);
+            }
+        }
+        $flatten = $arrayFlatten->arrayFlatten($groups2);
+        $mergedGroup = array_merge($groups, $flatten);
+        return $mergedGroup;
     }
 
     // /**

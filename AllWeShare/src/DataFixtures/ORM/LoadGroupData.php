@@ -23,6 +23,15 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
                 if ('owner' === $key) {
                     $value = $this->getReference('USER_' . $data['owner']);
                 }
+                if ('user1' === $key) {
+                    $value = $this->getReference('USER_' . $data['user1']);
+                }
+                if ('user2' === $key) {
+                    $value = $this->getReference('USER_' . $data['user2']);
+                }
+                if ('user3' === $key) {
+                    $value = $this->getReference('USER_' . $data['user3']);
+                }
                 $group->$setter($value);
             }
             $manager->persist($group);
@@ -44,18 +53,24 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
     {
         return [
             [
+                'name' => 'NetGroup',
                 'username' => 'sylvain.coutrot@hotmail.fr',
                 'password' => 'azertyuiop',
-                'place' => 3,
+                'place' => 2,
                 'owner' => 1,
+                'user1' => 3,
             ],
             [
+                'name' => 'WeshGrp',
                 'username' => 'dumont.antoine27@gmail.com',
                 'password' => 'azertyuiop',
-                'place' => 3,
+                'place' => 1,
                 'owner' => 2,
+                'user1' => 1,
+                'user2' => 3,
             ],
             [
+                'name' => 'TqtGroup',
                 'username' => 'jonathrakoto91400@gmail.com',
                 'password' => 'azertyuiop',
                 'place' => 3,
