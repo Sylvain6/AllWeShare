@@ -62,6 +62,10 @@ class RequestController extends AbstractController
 
             return $this->redirectToRoute('request_owner');
         }
+        $this->addFlash(
+            'info',
+            'There is no more place in this group'
+        );
         $request->setStatus('PENDING');
         return $this->redirectToRoute('request_owner');
     }
@@ -85,6 +89,11 @@ class RequestController extends AbstractController
     public function new(Post $post): Response
     {
         if ($post->getOrganization()->getPlace() == 0){
+            $this->addFlash('info', 'No more place in this group');
+            return $this->redirectToRoute('post_index');
+        }
+        if ($post->getOrganization()->getOwner() == $this->getUser()){
+            $this->addFlash('info', 'You can\'t request to your own post');
             return $this->redirectToRoute('post_index');
         }
         $request = new RequestObject();

@@ -92,7 +92,7 @@ class GroupController extends AbstractController
         $form = $this->createForm(GroupType::class, $group);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValvid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('group_index', [
