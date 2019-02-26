@@ -53,7 +53,7 @@ class Post
     private $organization;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Request", mappedBy="shared_account", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Request", mappedBy="post", orphanRemoval=true)
      */
     private $requests;
 

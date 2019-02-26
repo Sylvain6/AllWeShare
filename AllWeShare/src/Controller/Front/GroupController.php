@@ -5,6 +5,7 @@ namespace App\Controller\Front;
 use App\Entity\Group;
 use App\Form\GroupType;
 use App\Repository\GroupRepository;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +32,21 @@ class GroupController extends AbstractController
     public function indexOwner(GroupRepository $groupRepository): Response
     {
         return $this->render('Front/group/index.html.twig', [
-            'groups' => $groupRepository->findGroupsContains($this->getUser()),
+            'groups' => $this->getUser()->getGroups(),
+            'groupsOwn' => $groupRepository->findBy(['owner' => $this->getUser()]),
         ]);
+    }
+
+    /**
+     * @Route("/leave/{id}", name="group_leave", methods={"GET"})
+     */
+    public function leave(Group $group): Response
+    {
+        $group->removeUser($this->getUser());
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($group);
+        $entityManager->flush();
+        return $this->redirectToRoute('group_me');
     }
 
     /**
@@ -61,7 +75,7 @@ class GroupController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="group_show", methods={"GET"})
+     * @Route("/{id}/show", name="group_show", methods={"GET"})
      */
     public function show(Group $group): Response
     {
@@ -95,14 +109,15 @@ class GroupController extends AbstractController
     /**
      * @Route("/{id}", name="group_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Group $group): Response
+    public function delete(Request $request, Group $group, GroupRepository $groupRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$group->getId(), $request->request->get('_token'))) {
+            $groupRepository->deletePosts($group);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($group);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('group_index');
+        return $this->redirectToRoute('group_me');
     }
 }

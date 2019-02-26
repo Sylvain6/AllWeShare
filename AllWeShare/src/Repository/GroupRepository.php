@@ -21,19 +21,15 @@ class GroupRepository extends ServiceEntityRepository
         parent::__construct($registry, Group::class);
     }
 
-    public function findGroupsContains(User $user){
-        $groups = $this->findBy(['owner' => $user]);
-        $arrayFlatten = New ArrayFlatten();
-        foreach (range(1, 3) as $i) {
-            if($this->findBy(['user'.$i => $user])) {
-                $groups2[] = $this->findBy(['user' . $i => $user]);
-            }
+    public function deletePosts(Group $group) {
+        $postRepository = $this
+            ->getEntityManager()
+            ->getRepository('App\Entity\Post');
+        $posts = $postRepository->findBy(['organization' => $group]);
+        foreach ($posts as $post) {
+            $postRepository->delete($post);
         }
-        $flatten = $arrayFlatten->arrayFlatten($groups2);
-        $mergedGroup = array_merge($groups, $flatten);
-        return $mergedGroup;
     }
-
     // /**
     //  * @return Group[] Returns an array of Group objects
     //  */

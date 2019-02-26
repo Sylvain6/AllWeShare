@@ -51,11 +51,18 @@ class RequestController extends AbstractController
      */
     public function accept(RequestObject $request): Response
     {
-        $request->setStatus('ACCEPTED');
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($request);
-        $entityManager->flush();
+        $place = $request->getPost()->getOrganization()->getPlace();
+        $applicant = $request->getApplicant();
+        if ($place > 0){
+            $request->setStatus('ACCEPTED');
+            $request->getPost()->getOrganization()->addUser($applicant);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($request);
+            $entityManager->flush();
 
+            return $this->redirectToRoute('request_owner');
+        }
+        $request->setStatus('PENDING');
         return $this->redirectToRoute('request_owner');
     }
 
@@ -77,6 +84,9 @@ class RequestController extends AbstractController
      */
     public function new(Post $post): Response
     {
+        if ($post->getOrganization()->getPlace() == 0){
+            return $this->redirectToRoute('post_index');
+        }
         $request = new RequestObject();
         $user = $this->getUser();
         $request->setStatus('PENDING');
@@ -86,7 +96,7 @@ class RequestController extends AbstractController
         $entityManager->persist($request);
         $entityManager->flush();
 
-        return $this->redirectToRoute('post_index');
+        return $this->redirectToRoute('request_applicant');
 
     }
 

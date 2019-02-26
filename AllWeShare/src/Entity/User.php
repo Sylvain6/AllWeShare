@@ -86,9 +86,10 @@ class User implements UserInterface
     private $token;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="owner", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
      */
     private $groups;
+
 
     public function __construct()
     {
@@ -332,7 +333,7 @@ class User implements UserInterface
         {
             if (!$this->groups->contains($group)) {
                 $this->groups[] = $group;
-                $group->setOwner($this);
+                $group->addUser($this);
             }
 
             return $this;
@@ -342,10 +343,7 @@ class User implements UserInterface
         {
             if ($this->groups->contains($group)) {
                 $this->groups->removeElement($group);
-                // set the owning side to null (unless already changed)
-                if ($group->getOwner() === $this) {
-                    $group->setOwner(null);
-                }
+                $group->removeUser($this);
             }
 
             return $this;

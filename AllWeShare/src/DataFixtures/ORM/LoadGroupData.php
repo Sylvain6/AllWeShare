@@ -19,20 +19,19 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
             $group = new Group();
 
             foreach ($data as $key => $value) {
-                $setter = sprintf('set%s', ucfirst($key));
-                if ('owner' === $key) {
-                    $value = $this->getReference('USER_' . $data['owner']);
+                if ('user' === $key) {
+                    $users = $data['user'];
+                    foreach ($users as $user){
+                        $theUser = $this->getReference('USER_' . $user);
+                        $group->addUser($theUser);
+                    }
+                } else {
+                    $setter = sprintf('set%s', ucfirst($key));
+                    if ('owner' === $key) {
+                        $value = $this->getReference('USER_' . $data['owner']);
+                    }
+                    $group->$setter($value);
                 }
-                if ('user1' === $key) {
-                    $value = $this->getReference('USER_' . $data['user1']);
-                }
-                if ('user2' === $key) {
-                    $value = $this->getReference('USER_' . $data['user2']);
-                }
-                if ('user3' === $key) {
-                    $value = $this->getReference('USER_' . $data['user3']);
-                }
-                $group->$setter($value);
             }
             $manager->persist($group);
             $this->setReference('GROUP_' . $i, $group);
@@ -56,18 +55,17 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
                 'name' => 'NetGroup',
                 'username' => 'sylvain.coutrot@hotmail.fr',
                 'password' => 'azertyuiop',
-                'place' => 2,
+                'place' => 1,
                 'owner' => 1,
-                'user1' => 3,
+                'user' => [3, 2],
             ],
             [
                 'name' => 'WeshGrp',
                 'username' => 'dumont.antoine27@gmail.com',
                 'password' => 'azertyuiop',
-                'place' => 1,
+                'place' => 2,
                 'owner' => 2,
-                'user1' => 1,
-                'user2' => 3,
+                'user' => [1] ,
             ],
             [
                 'name' => 'TqtGroup',

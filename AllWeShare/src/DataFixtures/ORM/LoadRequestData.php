@@ -54,8 +54,18 @@ class LoadRequestData extends AbstractFixture implements DependentFixtureInterfa
             ],
             [
                 'status' => 'ACCEPTED',
-                'post' => 1,
+                'post' => 3,
+                'applicant' => 3,
+            ],
+            [
+                'status' => 'ACCEPTED',
+                'post' => 3,
                 'applicant' => 2,
+            ],
+            [
+                'status' => 'ACCEPTED',
+                'post' => 2,
+                'applicant' => 1,
             ],
         ];
     }

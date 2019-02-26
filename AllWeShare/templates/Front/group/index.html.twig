@@ -10,70 +10,63 @@
             <div style="
                     flex-wrap: wrap;
                      display: inline-flex;">
+                {% for groupOwned in groupsOwn %}
+                <div class="card text-black-50 bg-light mb-3" style="max-width: 20rem; order: 3;margin:5px;">
+                    <div class="card-header">{{ groupOwned.name }}</div>
+                    <div class="card-body">
+                        <p class="card-text">Group composed by : </p>
+                        <ul>
+                                <li>
+                                    You (Owner)
+                                </li>
+                            {% for user in groupOwned.users %}
+                                {% if(user) %}
+                                        <li>
+                                            {{ user.firstname }} {{ user.lastname }}
+                                        </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                        <a class="btn btn-warning" href="">Update</a>
+                        {{ include('Front/group/_delete_form.html.twig') }}
+                    </div>
+                </div>
+                        {% endfor %}
                 {% for group in groups %}
                         <div class="card text-black-50 bg-light mb-3" style="max-width: 20rem; order: 3;margin:5px;">
-                            {% if(group.owner == app.user) %}
-                                <div class="card-header">Group that you're owning</div>
-                            {% else %}
-                                <div class="card-header">Group of {{ group.owner.firstname }} {{ group.owner.lastname }}</div>
-                            {% endif %}
+                                <div class="card-header">{{ group.name }}</div>
                             <div class="card-body">
                                 <p class="card-text">Group composed by : </p>
                                 <ul>
                                     {% if(group.owner == app.user) %}
                                         <li>
-                                           You (Owner)
+                                            You (Owner)
                                         </li>
                                     {% else %}
                                         <li>
                                             {{ group.owner.firstname }} {{ group.owner.lastname }} (Owner)
                                         </li>
                                     {% endif %}
-                                    {% if(group.user1) %}
-                                        {% if(group.user1 == app.user) %}
+                                    {% for user in group.users %}
+                                        {% if(user) %}
+                                            {% if(user == app.user) %}
+                                                <li>
+                                                    You
+                                                </li>
+                                           {% else %}
                                             <li>
-                                                You
+                                                {{ user.firstname }} {{ user.lastname }}
                                             </li>
-                                        {% else %}
-                                        <li>
-                                            {{ group.user1.firstname }} {{ group.user1.lastname }}
-                                        </li>
-                                        {% endif %}
-                                    {% endif %}
-                                    {% if(group.user2) %}
-                                        {% if(group.user2 == app.user) %}
-                                            <li>
-                                                You
-                                            </li>
-                                        {% else %}
-                                            <li>
-                                                {{ group.user2.firstname }} {{ group.user2.lastname }}
-                                            </li>
-                                        {% endif %}
-                                    {% endif %}
-                                    {% if(group.user3) %}
-                                        {% if(group.user3 == app.user) %}
-                                            <li>
-                                                You
-                                            </li>
-                                        {% else %}
-                                            <li>
-                                                {{ group.user3.firstname }} {{ group.user3.lastname }}
-                                            </li>
-                                        {% endif %}
-                                    {% endif %}
+                                           {% endif %}
+                                         {% endif %}
+                                    {% endfor %}
                                 </ul>
 
-                                <a class="btn btn-warning" href="}">Update</a>
-                    {% if(group.owner == app.user) %}
-                        {{ include('Front/group/_delete_form.html.twig') }}
-                        {% else %}
-                            <a class="btn btn-danger" href="">Leave</a>
-                {% endif %}
+                                <a class="btn btn-warning" href="{{ path('group_show', {'id': group.id}) }}">See</a>
+                            <a class="btn btn-danger" href="{{ path('group_leave', {'id': group.id}) }}">Leave</a>
                             </div>
                         </div>
-                        {% else %}
-                            <p> no request</p>
                         {% endfor %}
                     </div>
                 </div>

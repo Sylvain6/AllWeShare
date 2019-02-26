@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,24 +41,19 @@ class Group
     private $owner;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="groups")
-     */
-    private $user1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="groups")
-     */
-    private $user2;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="groups")
-     */
-    private $user3;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="groups")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,42 +108,6 @@ class Group
         return $this;
     }
 
-    public function getUser1(): ?User
-    {
-        return $this->user1;
-    }
-
-    public function setUser1(?User $user1): self
-    {
-        $this->user1 = $user1;
-
-        return $this;
-    }
-
-    public function getUser2(): ?User
-    {
-        return $this->user2;
-    }
-
-    public function setUser2(?User $user2): self
-    {
-        $this->user2 = $user2;
-
-        return $this;
-    }
-
-    public function getUser3(): ?User
-    {
-        return $this->user3;
-    }
-
-    public function setUser3(?User $user3): self
-    {
-        $this->user3 = $user3;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -156,6 +116,32 @@ class Group
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
 
         return $this;
     }

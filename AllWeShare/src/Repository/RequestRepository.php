@@ -45,8 +45,9 @@ class RequestRepository extends ServiceEntityRepository
             ->getEntityManager()
             ->getRepository('App\Entity\Post');
         $posts = $postRepository->findBy(['author' => $user]);
+        $requests = [];
         foreach ($posts as $post){
-            $requests[] = $this->findBy(['post' => $post]);
+            $requests = $this->findBy(['post' => $post]);
         }
         $result=$arrayflatten->arrayFlatten($requests);
         return $result;

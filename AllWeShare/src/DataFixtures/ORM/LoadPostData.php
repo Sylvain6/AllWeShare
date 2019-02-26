@@ -54,7 +54,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'descritpion' => 'I have a streaming platform account that i want to share',
                 'nblike' => 34,
                 'author' => 3,
-                'organization' => 1,
+                'organization' => 3,
             ],
             [
                 'title' => '1 pace left',
@@ -68,7 +68,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'descritpion' => 'VASY VENEZ',
                 'nblike' => 0,
                 'author' => 1,
-                'organization' => 3,
+                'organization' => 1,
             ],
         ];
     }
