@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Notifications;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -36,15 +37,15 @@ class NotificationsRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Notifications
+
+    public function getAllNotificationFromUser( User $user )
     {
         return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('n.id_receiver = :user_id AND n.is_seen = false')
+            ->setParameter( 'user_id', $user->getId() )
+            ->orderBy('n.id', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
-    */
 }

@@ -36,6 +36,11 @@ class Notifications
      */
     private $is_seen;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $id_post;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,17 @@ class Notifications
     public function setIsSeen(bool $is_seen): self
     {
         $this->is_seen = $is_seen;
+
+        return $this;
+    }
+    public function getIdPost(): ?int
+    {
+        return $this->id_post;
+    }
+
+    public function setIdPost(?int $id_post): self
+    {
+        $this->id_post = $id_post;
 
         return $this;
     }

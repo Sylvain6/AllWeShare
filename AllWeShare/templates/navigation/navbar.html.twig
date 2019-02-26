@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="col-md-2">
         <a class="navbar-brand" href="{{ path('post_index') }}">
-            <img src="{{ asset('images/allweshare-logo.png') }}" class="img-fluid"width="166" height="166">
+            <img src="{{ asset('images/allweshare-logo.png') }}" class="img-fluid"width="100" height="100">
         </a>
     </div>
     <div class="collapse navbar-collapse">
@@ -11,31 +11,41 @@
 
                 {% if( app.user ) %}
 
-                    <li class="nav-item" id='notif'>
-                        <a href="#"class="nav-link" style="color: black;"><i class="fas fa-bell fa-lg"></i></a>
+                    <li class="nav-item">
+                        <div class="dropdown nav-item">
+                                <a href="#" class="nav-link notif_second_id notification" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-lg"></i></a>
+                            <div class="nav-item dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <ul class="list-group" id="list-notif">
+                                    <li class='list-notif'>no notifications</li>
+                                </ul>
+
+                            </div>
+                        </div>
                     </li>
                     &nbsp;
                 {% endif %}
 
+                <li class="nav-item">
+                    <a  class="nav-link {{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
+                </li>
                 {% if(app.user) %}
-                    <li class="nav-item">
-                        <a  class="nav-link {{ ( app.request.attributes.get('_route') == 'post_index' ) ? 'active' }}" href="{{ path('post_index') }}">What's new ?</a>
-                    </li>
 
-                    <li>
-                        <div class="dropdown">
-                            <a class="btn nav-link u-c-b dropdown-toggle {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }}"
+                    <li class="nav-item">
+                        <div class="dropdown nav-item">
+                            <a class="dropdown-toggle nav-link  {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }}"
                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Account
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="btn nav-link u-c-b" href="{{ path('user_account') }}">My profile</a>
-                                <a class="btn nav-link u-c-b" href="#">My groups</a>
+                            <div class="dropdown-menu nav-item" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link" href="{{ path('user_account') }}">My profile</a>
+                                <a class="nav-link" href="#">My groups</a>
+
                             </div>
                         </div>
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li>
+                        <li class="nav-item">
                             <div class="dropdown">
                                 <a class="btn nav-link primary-color dropdown-toggle {{ ( app.request.attributes.get('_route') == 'back_user_index') ? 'active' }}"
                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -4,10 +4,9 @@ namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Entity\Post;
-use App\EventListener\NotificationEvent;
 use App\Form\CommentType;
-use App\Form\PostType;
 use App\Service\NotificationService;
+use App\Form\PostType;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,14 +38,15 @@ class PostController extends AbstractController
         return $this->render('Front/post/index.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 
     /**
      * @Route("/post/{id}", name="post_show", methods={"GET", "POST"})
      */
-    public function show(Request $request, Post $post, CommentRepository $commentRepository, NotificationService $notif ): Response
+    public function show(Request $request, Post $post, CommentRepository $commentRepository, NotificationService $notificationService ): Response
+
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -55,22 +55,12 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
             $user = $this->getUser();
-            $comment->setAuthor($user);
+            $comment->setAuthor( $user );
 
-            $notification = $notif->setNotifications( $user->getId(), $post->getAuthor()->getId() , $user->getFirstname() . " as commented your post." );
+            $notificationService->setNotification( $user->getId(), $post->getAuthor()->getId(),
+                $user->getFirstname() . ' has commented your post.', $post->getId()
+                );
 
-
-
-            $notifEvent = new NotificationEvent( $notification );
-
-            $notif = $this->get('event_dispatcher')->dispatch('notification.add', $notifEvent)->getNotification();
-
-
-            //todo : setNotification
-            // comment_author as id_sender
-            // post_author as receiver
-            // content to define : xxxx as commented your post
-            //is_seen = false
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
