@@ -1,16 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
-<<<<<<< HEAD
- * User: antoine
- * Date: 10/02/2019
- * Time: 18:07
-=======
- * User: Finelia
- * Date: 11/02/2019
- * Time: 15:43
->>>>>>> 340034712aa5eeeae3f063cc5713bdfb9795c038
- */
 
 namespace App\Service;
 
