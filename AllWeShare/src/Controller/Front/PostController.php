@@ -8,6 +8,7 @@ use App\Form\CommentType;
 use App\Service\NotificationService;
 use App\Form\PostType;
 use App\Repository\CommentRepository;
+use App\Repository\GroupRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class PostController extends AbstractController
     /**
      * @Route("/", name="post_index", methods={"GET","POST"})
      */
-    public function new(Request $request, PostRepository $postRepository): Response
+    public function new(Request $request, PostRepository $postRepository, GroupRepository $groupRepository): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -39,6 +40,7 @@ class PostController extends AbstractController
             'post' => $post,
             'form' => $form->createView(),
             'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
+            'groups' => $groupRepository->findBy(['owner' => $this->getUser()]),
         ]);
     }
 
@@ -54,6 +56,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
+
             $user = $this->getUser();
             $comment->setAuthor( $user );
 

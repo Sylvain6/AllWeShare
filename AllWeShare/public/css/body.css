@@ -426,3 +426,19 @@ Notif
 .list-notif:last-child{
     border-bottom: none;
 }
+
+.card-for-group{
+    width: 20rem;
+    margin:5px;
+}
+
+.list-group-bottom{
+    bottom: 0;
+}
+
+.logo-group{
+    width:30%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: -90px;
+}
