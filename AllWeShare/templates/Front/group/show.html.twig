@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Group{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+
+    <h1>Group</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ group.name }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ group.username }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ group.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

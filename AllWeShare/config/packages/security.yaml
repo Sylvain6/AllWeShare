@@ -22,6 +22,7 @@ security:
             security: false
         main:
             anonymous: true
+            switch_user: true
 
             #form_login:
             #    check_path: app_front_security_login

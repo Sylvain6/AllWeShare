@@ -9,6 +9,7 @@ use App\Form\CommentType;
 use App\Form\PostType;
 use App\Form\ReportType;
 use App\Repository\CommentRepository;
+use App\Repository\GroupRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ class PostController extends AbstractController
     /**
      * @Route("/", name="post_index", methods={"GET","POST"})
      */
-    public function new(Request $request, PostRepository $postRepository): Response
+    public function new(Request $request, PostRepository $postRepository, GroupRepository $groupRepository): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -57,6 +58,7 @@ class PostController extends AbstractController
             'post' => $post,
             'form' => $form->createView(),
             'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
+            'groups' => $groupRepository->findBy(['owner' => $this->getUser()]),
         ]);
     }
 
