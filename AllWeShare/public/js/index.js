@@ -24,3 +24,8 @@ function notif() {
     });
     setTimeout("notif()", 1000);
 }
+
+$('.report_button').click(function () {
+    $("#reportId").val($(this).val());
+    console.log( $(this).val() );
+});

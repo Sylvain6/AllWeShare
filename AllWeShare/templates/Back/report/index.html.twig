@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Report List{% endblock %}
+
+{% block body %}
+    <h1>Report List</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Type</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <td>{{ report.id }}</td>
+                <td>{{ report.post.id is defined ? 'Post' : 'Comment' }}</td>
+                <td>{{ report.type }}</td>
+                <td>{{ report.description }}</td>
+                <td>
+                    <a class="btn button secondary" href="{{ path('admin_report_show', {'id': report.id}) }}">Show content</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

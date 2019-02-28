@@ -52,6 +52,10 @@
                         <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
                         <a class="primary-color" href="#"> J'aime</a>
                         <a class="btn btn-outline-secondary pull-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ post.createdAt| date }}</h6>
+                        {% if(app.user) %}
+                            <button class="secondary-color report_button" value="{{ post.id }}" data-toggle="modal" data-target="#report">Report</button>
+                        {% endif %}
                         {% if app.user and app.user != post.author %}
                             <a class="btn btn-outline-primary pull-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
                         {% endif %}
@@ -61,6 +65,10 @@
                         <td colspan="6">no records found</td>
                     </tr>
                 {% endfor %}
+                {% if(app.user) %}
+                    {{ include('Front/post/modalReport.html.twig', {'form': formReport, 'button_label': 'Send'}) }}
+                    {{ include('addFlashMessages/successMessage.html.twig') }}
+                {% endif %}
             </div>
         </div>
     </div>

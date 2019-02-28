@@ -76,6 +76,11 @@ class User implements UserInterface
     private $comments;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Report", mappedBy="reporter", orphanRemoval=true)
+     */
+    private $reports;
+
+    /**
      * @ORM\Column(type="boolean", options={"default":true} )
      */
     private $isActive;
@@ -95,6 +100,7 @@ class User implements UserInterface
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->reports = new ArrayCollection();
         $this->groups = new ArrayCollection();
     }
 
@@ -297,6 +303,37 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Report[]
+     */
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): self
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports[] = $report;
+            $report->setReporter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): self
+    {
+        if ($this->reports->contains($report)) {
+            $this->reports->removeElement($report);
+            // set the owning side to null (unless already changed)
+            if ($report->getReporter() === $this) {
+                $report->setReporter(null);
+            }
+        }
+
+        return $this;
+    }
+  
         public function getIsActive(): ?bool
         {
             return $this->isActive;
