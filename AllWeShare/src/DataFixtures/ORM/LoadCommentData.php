@@ -22,10 +22,10 @@ class LoadCommentData extends AbstractFixture implements DependentFixtureInterfa
             foreach ($data as $key => $value) {
                 $setter = sprintf('set%s', ucfirst($key));
                 if ('author' === $key) {
-                    $value = $this->getReference('USER_' . rand(1, 4));
+                    $value = $this->getReference('USER_' . $data['author']);
                 }
                 if ('post' === $key) {
-                    $value = $this->getReference('POST_' . rand(1, 3));
+                    $value = $this->getReference('POST_' . $data['post']);
                 }
 
                 $comment->$setter($value);

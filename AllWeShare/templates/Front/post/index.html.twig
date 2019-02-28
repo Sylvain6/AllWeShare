@@ -52,7 +52,9 @@
                         <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
                         <a class="primary-color" href="#"> J'aime</a>
                         <a class="btn btn-outline-secondary pull-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
-
+                        {% if app.user and app.user != post.author %}
+                            <a class="btn btn-outline-primary pull-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
+                        {% endif %}
                     </div>
                 {% else %}
                     <tr>

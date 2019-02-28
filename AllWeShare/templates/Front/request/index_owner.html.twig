@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Request index{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="tab_admin" >
+            <h1 class="text-center">Requests</h1>
+                <div style="
+                    flex-wrap: wrap;
+                     display: inline-flex;">
+        {% for request in requests %}
+            {% if request.status == 'PENDING' %}
+            <div class="card text-white bg-warning mb-3" style="max-width: 20rem;order: 1;margin:5px;">
+                {% elseif request.status == 'ACCEPTED' %}
+                    <div class="card text-white bg-success mb-3" style="max-width: 20rem; order: 2;margin:5px;">
+                        {% elseif request.status == "REJECTED" %}
+                            <div class="card text-white bg-danger mb-3" style="max-width: 20rem; order: 3;margin:5px;">
+                                {% endif %}
+            <div class="card-header">REQUEST ({{ request.status }})</div>
+            <div class="card-body">
+                <p class="card-text">{{ request.applicant.firstname }} {{ request.applicant.lastname }}
+                    wants to integrate your group from the post : "{{ request.post.title }}"</p>
+
+                {% if request.status == 'PENDING' %}
+                <a class="btn btn-success" href="{{ path('request_accept', {'id': request.id}) }}">accept</a>
+                <a class="btn btn-danger" href="{{ path('request_reject', {'id': request.id}) }}">reject</a>
+                            {% endif %}
+            </div>
+        </div>
+        {% else %}
+            <p> no request</p>
+        {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
