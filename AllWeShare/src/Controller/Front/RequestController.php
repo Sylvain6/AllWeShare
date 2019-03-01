@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\Request as RequestObject;
 use App\Form\RequestType;
 use App\Repository\RequestRepository;
+use App\Service\NotificationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,13 +50,19 @@ class RequestController extends AbstractController
     /**
      * @Route("/accept/{id}", name="request_accept", methods={"GET"})
      */
-    public function accept(RequestObject $request): Response
+    public function accept(RequestObject $request,  NotificationService $notificationService ): Response
     {
         $place = $request->getPost()->getOrganization()->getPlace();
         $applicant = $request->getApplicant();
         if ($place > 0){
             $request->setStatus('ACCEPTED');
+            $user = $this->getUser();
             $request->getPost()->getOrganization()->addUser($applicant);
+
+            $notificationService->setNotification( $user->getId(), $applicant->getId(),
+                $user->getFirstname() . ' has approved your request to join the group.', $request->getPost()->getId()
+            );
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($request);
             $entityManager->flush();
@@ -73,9 +80,17 @@ class RequestController extends AbstractController
     /**
      * @Route("/reject/{id}", name="request_reject", methods={"GET"})
      */
-    public function reject(RequestObject $request): Response
+    public function reject(RequestObject $request, NotificationService $notificationService ): Response
     {
         $request->setStatus('REJECTED');
+
+        $user = $this->getUser();
+        $applicant = $request->getApplicant();
+
+        $notificationService->setNotification( $user->getId(), $applicant->getId(),
+            $user->getFirstname() . ' has rejected your request to join the group.', $request->getPost()->getId()
+        );
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($request);
         $entityManager->flush();
@@ -86,7 +101,7 @@ class RequestController extends AbstractController
     /**
      * @Route("/new/{id}", name="request_new", methods={"GET","POST"})
      */
-    public function new(Post $post): Response
+    public function new(Post $post, NotificationService $notificationService ): Response
     {
         if ($post->getOrganization()->getPlace() == 0){
             $this->addFlash('info', 'No more place in this group');
@@ -98,6 +113,11 @@ class RequestController extends AbstractController
         }
         $request = new RequestObject();
         $user = $this->getUser();
+
+        $notificationService->setNotification( $user->getId(), $post->getAuthor()->getId(),
+            $user->getFirstname() . ' has made a request to join your group.', $post->getId()
+        );
+
         $request->setStatus('PENDING');
         $request->setApplicant($user);
         $request->setPost($post);

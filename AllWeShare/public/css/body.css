@@ -366,3 +366,79 @@ footer {
 .bell-red{
     color: red;
 }
+
+
+/*
+Notif
+ */
+
+.notification {
+    //color: red;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+
+.notification .badge-notif {
+    position: absolute;
+    font-size: 60%;
+    top: 5px;
+    right: 1px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+}
+
+
+.closebtn {
+    margin-left: 15px;
+    color: black;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: gray;
+}
+
+.list-notif{
+   list-style-type: none;
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-size: 90%;
+    width:100%;
+}
+
+.notif_second_id:hover{
+    color: red;
+}
+
+.list-notif:last-child{
+    border-bottom: none;
+}
+
+.card-for-group{
+    width: 20rem;
+    margin:5px;
+}
+
+.list-group-bottom{
+    bottom: 0;
+}
+
+.logo-group{
+    width:30%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: -90px;
+}

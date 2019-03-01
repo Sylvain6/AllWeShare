@@ -6,6 +6,7 @@ use App\Entity\Group;
 use App\Form\GroupType;
 use App\Repository\GroupRepository;
 use App\Repository\PostRepository;
+use App\Service\NotificationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,9 +41,17 @@ class GroupController extends AbstractController
     /**
      * @Route("/leave/{id}", name="group_leave", methods={"GET"})
      */
-    public function leave(Group $group): Response
+    public function leave(Group $group , NotificationService $notificationService ): Response
     {
         $group->removeUser($this->getUser());
+
+        $owner = $group->getOwner();
+        $user = $this->getUser();
+
+        $notificationService->setNotification( $user->getId(), $owner->getId(),
+            $user->getFirstname() . ' has left the group ' . $group->getName(). ' .', $group->getId()
+        );
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($group);
         $entityManager->flush();

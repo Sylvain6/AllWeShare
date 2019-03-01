@@ -11,7 +11,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/body.css') }}">
     {% endblock %}
 </head>
@@ -46,6 +45,13 @@
 
     {{ encore_entry_script_tags('app') }}
     <script src="{{ asset('js/index.js') }}"></script>
+
+        {% if( app.user ) %}
+            <script>
+                notif();
+            </script>
+        {% endif %}
+
 {% endblock %}
 </body>
 </html>

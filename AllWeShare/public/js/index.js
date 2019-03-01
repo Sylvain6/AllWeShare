@@ -12,15 +12,46 @@ $('.editValues').click(function () {
     });
 });
 
-
 function notif() {
     $.ajax({
-        url : 'notif.php',
+
+        url : "/notif" ,
         success : function(data) {
-            if(data) {
-                $('#notif').html("<a href='#' class='nav-link'><i class='fas fa-bell fa-lg bell-red'></i></a>");
+            if(data.counter > 0 ) {
+                $('.notif_second_id').html("<i class='fas fa-bell fa-lg'></i><span class='badge-notif'>"+data.counter +"</span></a>");
+                var content_notif = "";
+                $.each( data.notifs, function( i, notif ){
+                       // $('#list-notif').append(
+                            content_notif +="<li class='list-notif'>" +
+                            "<span class='closebtn' onclick='dismiss("+ data.notifs[i][0]+");'>&times;</span>" +
+                            data.notifs[i][1] +
+                            "</li>"
+                       // );
+
+
+                    }
+                );
+
+                $('#list-notif').html( content_notif );
+
+            }
+            else{
+                $('.notif_second_id').html("<i class='fas fa-bell fa-lg'></i></a>");
             }
         }
     });
-    setTimeout("notif()", 1000);
+    //setTimeout("notif()", 30000);
 }
+
+function dismiss( id ){
+    //element.parentElement.style.display='none';
+
+    $.ajax({
+        url : "/notif_dismiss" ,
+        type: 'POST',
+        data: 'id=' + id,
+        success : function () {
+
+        }
+    });
+};

@@ -5,6 +5,7 @@ namespace App\Controller\Front;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Service\NotificationService;
 use App\Form\PostType;
 use App\Repository\CommentRepository;
 use App\Repository\GroupRepository;
@@ -46,7 +47,8 @@ class PostController extends AbstractController
     /**
      * @Route("/post/{id}", name="post_show", methods={"GET", "POST"})
      */
-    public function show(Request $request, Post $post, CommentRepository $commentRepository): Response
+    public function show(Request $request, Post $post, CommentRepository $commentRepository, NotificationService $notificationService ): Response
+
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -54,8 +56,15 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
+
             $user = $this->getUser();
-            $comment->setAuthor($user);
+            $comment->setAuthor( $user );
+
+            $notificationService->setNotification( $user->getId(), $post->getAuthor()->getId(),
+                $user->getFirstname() . ' has commented your post.', $post->getId()
+                );
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();

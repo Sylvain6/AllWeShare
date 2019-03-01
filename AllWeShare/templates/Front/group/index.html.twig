@@ -11,51 +11,54 @@
                     flex-wrap: wrap;
                      display: inline-flex;">
                 {% for groupOwned in groupsOwn %}
-                <div class="card text-black-50 bg-light mb-3" style="max-width: 20rem; order: 3;margin:5px;">
-                    <div class="card-header">{{ groupOwned.name }}</div>
+                <div class="card text-black-50 bg-light mb-3 card-for-group" style="order: 3;">
+                    <div class="card-header text-center">{{ groupOwned.name }}</div>
                     <div class="card-body">
                         <p class="card-text">Group composed by : </p>
-                        <ul>
-                                <li>
+                        <ul class="list-group">
+                                <li class="list-notif">
                                     You (Owner)
                                 </li>
                             {% for user in groupOwned.users %}
                                 {% if(user) %}
-                                        <li>
+                                        <li class="list-notif">
                                             {{ user.firstname }} {{ user.lastname }}
                                         </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
-
-                        <a class="btn btn-warning" href="">Update</a>
-                        {{ include('Front/group/_delete_form.html.twig') }}
+                        <a class="btn btn-outline-success float-left" href="">Update</a>
+                        <div class="float-right list-group-bottom">
+                            {{ include('Front/group/_delete_form.html.twig') }}
+                        </div>
                     </div>
+
                 </div>
+
                         {% endfor %}
                 {% for group in groups %}
-                        <div class="card text-black-50 bg-light mb-3" style="max-width: 20rem; order: 3;margin:5px;">
-                                <div class="card-header">{{ group.name }}</div>
+                        <div class="card text-black-50 bg-light mb-3 card-for-group" style="order: 3;">
+                                <div class="card-header text-center">{{ group.name }}</div>
                             <div class="card-body">
                                 <p class="card-text">Group composed by : </p>
-                                <ul>
+                                <ul class="list-group">
                                     {% if(group.owner == app.user) %}
-                                        <li>
+                                        <li class="list-notif">
                                             You (Owner)
                                         </li>
                                     {% else %}
-                                        <li>
+                                        <li class="list-notif">
                                             {{ group.owner.firstname }} {{ group.owner.lastname }} (Owner)
                                         </li>
                                     {% endif %}
                                     {% for user in group.users %}
                                         {% if(user) %}
                                             {% if(user == app.user) %}
-                                                <li>
+                                                <li class="list-notif">
                                                     You
                                                 </li>
                                            {% else %}
-                                            <li>
+                                            <li class="list-notif">
                                                 {{ user.firstname }} {{ user.lastname }}
                                             </li>
                                            {% endif %}
@@ -63,8 +66,8 @@
                                     {% endfor %}
                                 </ul>
 
-                                <a class="btn btn-warning" href="{{ path('group_show', {'id': group.id}) }}">See</a>
-                            <a class="btn btn-danger" href="{{ path('group_leave', {'id': group.id}) }}">Leave</a>
+                                <a class="btn btn-outline-info float-left list-group-bottom" href="{{ path('group_show', {'id': group.id}) }}">See</a>
+                            <a class="btn btn-outline-danger float-right list-group-bottom" href="{{ path('group_leave', {'id': group.id}) }}">Leave</a>
                             </div>
                         </div>
                         {% endfor %}

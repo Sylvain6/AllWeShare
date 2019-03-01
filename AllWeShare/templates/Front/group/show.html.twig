@@ -6,9 +6,30 @@
 <div class="container-fluid">
     <div class="row">
 
-    <h1>Group</h1>
+            <div class="subscribe_form card" style="margin-top: 5rem; width: 30%; padding-bottom: 2rem;">
+                <img src="{{ asset('images/netflix-n-logo-png.png') }}" alt="logo-group" class="logo-group">
 
-    <table class="table">
+                <div class="container">
+                    <br>
+                    <h2 class="text-center"><b>{{ group.name }}</b></h2>
+                    <br>
+                    <h4 class="text-center">Informations</h4>
+
+                    <table class="tab_admin text-center">
+                        <tr>
+                            <th>Username</th>
+                            <td>{{ group.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Password</th>
+                            <td>{{ group.password }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+    {#<table class="tab_admin">
         <tbody>
             <tr>
                 <th>Name</th>
@@ -23,7 +44,7 @@
                 <td>{{ group.password }}</td>
             </tr>
         </tbody>
-    </table>
+    </table>#}
     </div>
 </div>
 {% endblock %}
