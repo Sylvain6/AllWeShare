@@ -14,27 +14,39 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="container-fluid">
-                                <h4 class="card-title text-center">{{ post.title }}</h4>
+                                {# TODO: Put the right logo on the cards here #}
+                                <img src="{{ "/images/netflix-n-logo-png.png" }}" class="col-2 col-lg-2" style="border-radius: 100px;">
+                                <h4 class="d-inline-block card-title text-center col-8 col-lg-8">{{ post.title }}</h4>
                                 <hr>
-                                <h6 class="card-subtitle mb-2 text-muted">authored by {{ post.author.firstname }} {{ post.createdAt| date }}</h6>
-                                <p class="card-text">{{ post.descritpion }}</p>
-                                <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
-                                <a class="primary-color" href="#"> J'aime</a>
-
-                            </div>
-
-                        </div>
-
-                        {% if app.user is same as(post.author) %}
-                            <div class="row">
-                                <div class="container-fluid">
-                                    <a class="btn btn-outline-primary m-top-10 pull-left" href="{{ path('post_edit', {'id': post.id}) }}">Edit this post</a>
-                                    {{ include('Front/post/_delete_form.html.twig') }}
+                                <div class="card-body-perso">
+                                    <div class="col-12 col-lg-12 col-sm-12">
+                                        <p class="card-text text-center">{{ post.descritpion }}</p>
+                                        <br>
+                                        <h6 class="card-subtitle float-left m-top-10 col-6 col-lg-6 col-sm-6">{{ post.createdAt| date }}</h6>
+                                        <h6 class="card-subtitle float-right m-top-10 col-6 col-lg-6 col-sm-6 text-right">Authored by {{ post.author.firstname }}</h6>
+                                    </div>
                                 </div>
+                                <hr class="col-11 col-lg-11 col-sm-11">
+                                <div class="card-body-perso">
+                                    <div class="col-12 col-lg-12 col-sm-12">
+                                        <span class="d-inline-block likes">{{ post.nbLike }}</span>
+                                        {# TODO: if user have liked the post, load <img src="{{ "/images/like-full.png" }} #}
+                                        {% if app.user  %}
+                                            <a class="primary-color text-decoration-none" href="#"> <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> </a> -
+                                        {% else %}
+                                            <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> -
+                                        {% endif %}
+                                        <a class="primary-color request-btn" href="#"> Report</a>
+                                        {% if app.user is same as(post.author) %}
+                                            <a class="float-right edit-button" href="{{ path('post_edit', {'id': post.id}) }}"><i class="fas fa-pen fa-lg"></i></a>
 
+                                            {{ include('Front/post/_delete_form.html.twig') }}
+
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
-
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,7 +92,7 @@
                                 <h6 class="date-comment">{{ comment.createdAt| date }}</h6>
                                 <p class="">{{ comment.content }}</p>
                                 {% if app.user is same as(comment.author) %}
-                                    <a class="card-link btn btn-outline-success" href="{{ path('comment_edit', {'id': comment.id}) }}">Edit</a>
+                                    <a class="card-link float-right edit-button" href="{{ path('comment_edit', {'id': comment.id}) }}"><i class="fas fa-pen fa-lg"></i></a>
                                     {{ include('Front/comment/_delete_form.html.twig') }}
                                 {% endif %}
                             </div>
@@ -91,9 +103,9 @@
                         {% endfor %}
                         {% include "navigation/pagination.html.twig" %}
                         <div class="m-top-5 m-bot">
-                            <a class="btn btn-info m-bot" href="{{ path('post_index') }}">Back to list</a>
+                            <a class="btn btn-outline-info m-bot" href="{{ path('post_index') }}">Back to list</a>
                             {% if app.user %}
-                                <a class="btn btn-outline-danger float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
+                                {#<a class="btn btn-outline-secondary float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>#}
                             {% endif %}
                         </div>
                     </div>

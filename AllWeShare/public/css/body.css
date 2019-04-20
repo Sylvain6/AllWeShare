@@ -710,3 +710,23 @@ Notif
     left: 58%;
     position: absolute;
 }
+
+.trash-button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #5D656C;
+}
+
+.trash-button:hover{
+    color: #AD1C11;
+}
+
+.edit-button{
+    color: #FFA13D;
+}
+
+
+.m-left-10{
+    margin-left: 15px;
+}
