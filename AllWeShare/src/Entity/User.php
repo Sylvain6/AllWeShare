@@ -21,13 +21,14 @@ class User implements UserInterface
      */
     private $id;
 
+
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $lastname;
 
@@ -46,7 +47,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $address;
 
@@ -56,7 +57,7 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $city;
 
@@ -85,10 +86,17 @@ class User implements UserInterface
      */
     private $token;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
+     */
+    private $groups;
+
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,7 +181,7 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        //$roles = $this->roles
+        $roles = $this->roles;
         $roles = json_decode( $this->roles, true );
         // guarantee every user at least has ROLE_USER
         //$roles[] = 'ROLE_USER';
@@ -310,6 +318,34 @@ class User implements UserInterface
         public function setToken(?string $token): self
         {
             $this->token = $token;
+
+            return $this;
+        }
+
+        /**
+         * @return Collection|Group[]
+         */
+        public function getGroups(): Collection
+        {
+            return $this->groups;
+        }
+
+        public function addGroup(Group $group): self
+        {
+            if (!$this->groups->contains($group)) {
+                $this->groups[] = $group;
+                $group->addUser($this);
+            }
+
+            return $this;
+        }
+
+        public function removeGroup(Group $group): self
+        {
+            if ($this->groups->contains($group)) {
+                $this->groups->removeElement($group);
+                $group->removeUser($this);
+            }
 
             return $this;
         }

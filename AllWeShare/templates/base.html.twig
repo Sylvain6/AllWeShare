@@ -2,26 +2,37 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}AllWeShare!{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
+        <link rel="icon" type="image/x-icon" href="{{ asset('/images/favicon.ico') }}" />
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('icons/foundation-icons.css') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/body.css') }}">
     {% endblock %}
 </head>
 
-<body>
+<body onload="assignDefaultForm()">
 
 
 
     <div id="main">
         {% include 'navigation/navbar.html.twig' %}
+
+        <!--<div class="polygon"></div>-->
+        {#<svg viewBox="0 0 120 40" height="500" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <linearGradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#F9C956"></stop>
+                    <stop offset="100%" stop-color="#F0704B"></stop>
+                </linearGradient>
+            </defs>
+            <polygon points="0,0 0,40 1400,500" fill="url(#Gradient1)"></polygon>
+        </svg>#}
 
         {% block body %}{% endblock %}
 
@@ -46,6 +57,32 @@
 
     {{ encore_entry_script_tags('app') }}
     <script src="{{ asset('js/index.js') }}"></script>
+    <script src="{{ asset("js/error.js") }}" type="text/javascript"></script>
+
+        {% if( app.user ) %}
+            <script>
+                notif();
+            </script>
+        {% endif %}
+    <script>
+        function assignDefaultForm() {
+
+
+            target = $("#signin");
+            $.ajax({
+
+                url : "/register" ,
+                success : function(data) {
+
+                    $('.tab-content').append(data);
+
+                }
+            });
+
+            $('.tab-content > form').not(target).hide();
+        }
+    </script>
+
 {% endblock %}
 </body>
 </html>

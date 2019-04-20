@@ -5,20 +5,25 @@ namespace App\Controller\Front;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Service\NotificationService;
+use App\Service\PaginationService;
 use App\Form\PostType;
 use App\Repository\CommentRepository;
+use App\Repository\GroupRepository;
 use App\Repository\PostRepository;
+use PHPUnit\Runner\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class PostController extends AbstractController
 {
     /**
-     * @Route("/", name="post_index", methods={"GET","POST"})
+     * @Route("/", name="post_index", methods={"POST", "GET"} )
      */
-    public function new(Request $request, PostRepository $postRepository): Response
+    public function new(Request $request, PostRepository $postRepository, GroupRepository $groupRepository, PaginationService $paginationService): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -34,17 +39,37 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
+        $page = $request->get("page");
+        if( empty( $page) ){
+            $page = 1;
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $posts = $paginationService->finWithPagination( $page, 4,
+            $entityManager->getRepository(Post::class ),
+            'CURRENT_DATE() >= p.createdAt', 'p', 'p.createdAt', 'DESC' );
+
+        $pagination = array(
+            'page' => $page,
+            'nbPages' => ceil(count($posts) / 4),
+            'nomRoute' => 'post_index',
+            'paramsRoute' => array()
+        );
+
         return $this->render('Front/post/index.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
-            'posts' => $postRepository->findBy([], ['createdAt' => 'DESC']),
+            'posts' => $posts,
+            'pagination' => $pagination,
+            'groups' => $groupRepository->findBy(['owner' => $this->getUser()]),
         ]);
     }
 
     /**
      * @Route("/post/{id}", name="post_show", methods={"GET", "POST"})
      */
-    public function show(Request $request, Post $post, CommentRepository $commentRepository): Response
+    public function show(Request $request, Post $post, CommentRepository $commentRepository, NotificationService $notificationService, PaginationService $paginationService ): Response
+
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -52,18 +77,45 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
+
             $user = $this->getUser();
-            $comment->setAuthor($user);
+            $comment->setAuthor( $user );
+
+            $notificationService->setNotification( $user->getId(), $post->getAuthor()->getId(),
+                $user->getFirstname() . ' has commented your post.', $post->getId()
+                );
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
 
             return $this->redirectToRoute('post_show', array('id' => $post->getId()));
         }
+
+        $page = $request->get("page");
+        if( empty( $page) ){
+            $page = 1;
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $comments = $paginationService->finWithPagination( $page, 4,
+            $entityManager->getRepository(Comment::class ),
+            'c.post = :post_id', 'c', 'c.createdAt', 'ASC', [ 0 =>'post_id', 1 => $post->getId() ] );
+
+        $pagination = array(
+            'page' => $page,
+            'nbPages' => ceil(count($comments) / 4),
+            'nomRoute' => 'post_show',
+            'paramsRoute' => array('id' => $post->getId())
+        );
+
         return $this->render('Front/post/show.html.twig', [
             'post' => $post,
             'comment' => $comment,
-            'comments' => $commentRepository->findBy(['post' => $post], ['createdAt' => 'ASC']),
+            'pagination' => $pagination,
+            'comments' => $comments,
             'form' => $form->createView(),
             ]);
     }

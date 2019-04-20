@@ -9,41 +9,41 @@
  */
 
 body {
-    background-size: cover;
-    background: url("https://travelandleisureindia.in/wp-content/uploads/2018/09/Netflix-Originals-for-travel.jpg") no-repeat fixed;
-    background-color: #1b1e21;
     min-height: 100%;
     font-family: Circular Std Bold, sans-serif;
     height: 119vh !important;
 }
 
+.svg-blob {
+    margin-top: 2rem;
+    margin-left: -10rem;
+
+}
 
 html {
     height: 1vh !important; }
 
 .blurred-bg {
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background: url("../images/blur_bg.jpg") no-repeat fixed;
-    /*background-color: #1b1e21;*/
+    /*background: #485355;*/
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
 }
 .blurred-bg.tinted {
-    /*background-color: #1b1e21;*/
-    background-image: url("../images/blur_bg.jpg");
+    /*background-color: #485355;*/
+    /*background-image: url("../images/blur_bg.jpg");*/
     background-size: 100%;
-    background-image: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");
+    /*background-image: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");
     background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");
-    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url("../images/blur_bg.jpg");*/
 }
 .blurred-bg.shaded {
     /*background-color: #1b1e21;*/
-    background-image: url("../images/blur_bg.jpg");
+    /*background-image: url("../images/blur_bg.jpg");*/
     background-size: 100%;
-    background-image: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/blur_bg.jpg");
+   /* background-image: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/blur_bg.jpg");
     background-image: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/blur_bg.jpg");
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/blur_bg.jpg");
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/blur_bg.jpg");*/
 }
 
 .box {
@@ -102,6 +102,7 @@ p.related a:hover {
     padding-bottom: 10rem !important;
 }
 
+
 /*
 ===================================
 =========== FORM SYLES ============
@@ -130,6 +131,11 @@ p.related a:hover {
     margin-left: auto;
     margin-right: auto;
     width: 50% !important;
+}
+
+.title-center{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -178,6 +184,47 @@ p.related a:hover {
     padding: 3rem;
 }
 
+.request-btn{
+    margin-right: 5px;
+}
+
+.date-comment{
+    float: right;
+    display: inline-block;
+}
+
+.container-comment {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.container-comment::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+
+.container-comment img {
+    float: left;
+    max-width: 60px;
+    margin-right: 20px;
+}
+
+#content-comments .container-comment:nth-child(2n){
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.name-user-comment{
+    display: inline-block;
+    font-size: 1rem;
+    margin-left: 1rem;
+}
 
 .margin-top-modal{
     margin-top: 0.5rem;
@@ -186,6 +233,8 @@ p.related a:hover {
 .margin-card{
     margin-left: 5rem;
 }
+
+
 
 .card-shadow {
     /* Add shadows to create the "card" effect */
@@ -252,7 +301,7 @@ footer {
     clear: left;
     left: 0;
     padding: 0.5rem;
-    background-color: #f8f9fa;
+    background-color: white;
 }
 
 
@@ -360,9 +409,304 @@ footer {
 
 
 .active{
-    color: #78C2AD;
+    color: #FFA13D;
 }
 
 .bell-red{
     color: red;
+}
+
+
+/*
+Notif
+ */
+
+.notification {
+    //color: red;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+
+.notification .badge-notif {
+    position: absolute;
+    font-size: 60%;
+    top: 5px;
+    right: 1px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+}
+
+
+.closebtn {
+    margin-left: 15px;
+    color: black;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: gray;
+}
+
+.list-notif{
+   list-style-type: none;
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-size: 90%;
+    width:100%;
+}
+
+.notif_second_id:hover{
+    color: red;
+}
+
+.list-notif:last-child{
+    border-bottom: none;
+}
+
+.card-for-group{
+    width: 20rem;
+    margin:5px;
+}
+
+.list-group-bottom{
+    bottom: 0;
+}
+
+.logo-group{
+    width:30%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: -90px;
+}
+
+
+/*
+===================================
+========== NAVBAR SYLES ===========
+===================================
+ */
+
+.navbar-perso{
+   /*border-bottom: 1px solid #C0C0C0;*/
+    background-color: white !important;
+}
+
+/*
+===================================
+========== TESTS LOGIN ===========
+===================================
+ */
+
+
+.login-box{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 20px rgba(51, 51, 51, 0.1);
+    border-radius: 5px;
+    padding: 2rem;
+}
+
+.box-login-content{
+}
+
+.form-login{
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.btns-login{
+    border-radius: 5px 0 0 5px;
+    text-decoration:none;
+    padding:10px;
+    cursor:pointer;
+    transition:.5s ease;
+}
+
+.buttons-login{
+    padding-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons-login .inactive{
+    color: #FFA13D !important;
+}
+
+.buttons-login .inactive:hover{
+    color: white !important;
+}
+
+.btn-login-right{
+    margin-left: -5px;
+    border-radius: 0 5px 5px 0;
+}
+
+.signIn-btn{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.svg-login{
+    position: absolute;
+    display: inline-block;
+    top: 13rem;
+    left: 6rem;
+    z-index: -1;
+    width: 500px;
+}
+
+.forgotPwd{
+    text-align: center;
+}
+
+.forgotPwd:hover{
+    color: #FFA13D;
+}
+
+.active-login{
+    background-color: #FFA13D !important;
+    border-color: #FFA13D;
+    color: white !important;
+}
+
+.inactive-login{
+    border-color: #FFA13D;
+    color: #FFA13D;
+    background-color: white;
+}
+
+.tab-content:after{
+}
+
+.tab-content > div:last-child {
+    display:none;
+}
+
+.signinPseudoAndMail{
+    padding: 0;
+    display: inline-block;
+}
+
+.pseudoRegister{
+    padding: 0 15px 0 0;
+}
+.mailRegister{
+    padding: 0 0 0 15px;
+}
+
+
+/*
+===================================
+========== SEARCH BAR  ===========
+===================================
+ */
+
+#search_articles {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 100px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../images/search.png');
+    background-position: 10px 5px;
+    background-size: 25px;
+    background-repeat: no-repeat;
+    padding: 5px 20px 5px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+#search_articles:focus {
+    width: 100%;
+    border-radius: 100px;
+    outline: unset !important;
+}
+
+.search{
+    padding: 0;
+}
+
+.likes{
+    color: #AD1C11;
+}
+
+.card-body-perso{
+    webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding-bottom: 1.25rem;
+}
+
+.pagination-perso{
+    display: inherit!important;
+    margin-top: 2rem!important;
+}
+.pagination-perso a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination-perso a.active {
+    background-color: #FFA13D;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: white;
+    display: inline-block;
+}
+
+
+.inputfile + label {
+    cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+#user_profile_pic  {
+    display: inline-block;
+    position: relative;
+}
+
+#edit_user_profile_pic  {
+    z-index: 1;
+    display: inline-block;
+    /* bottom: 0; */
+    margin-top: -3rem;
+    left: 58%;
+    position: absolute;
 }

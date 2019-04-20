@@ -1,46 +1,31 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-
-    <div class="subscribe_form container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-
-                <h1 class="text-center">Subscribe</h1>
-                <hr>
-                {{ form_start(form) }}
-                <div class="form-group">
-                    {{ form_row(form.firstname) }}
-                </div>
-                <div class="form-group">
-                    {{ form_row(form.lastname) }}
-                </div>
-                <div class="form-group">
-                    {{ form_row(form.address) }}
-                </div>
-                <div class="form-group">
-                    {{ form_row(form.city) }}
-                </div>
-                <div class="form-group">
-                    {{ form_row(form.email) }}
-                </div>
-                <div class="form-group">
-                    {{ form_row(form.password.first) }}
-                </div>
-                <div class="form-group">
-                    {{ form_row(form.password.second) }}
-                </div>
-                <div class="form-check">
-                    {{ form_row(form.termsAccepted) }}
-                </div>
-
-                <button class="btn btn-primary register pull-right" type="submit">Register</button>
-                {{ form_end(form) }}
-            </div>
+{{ form_start(form, {attr: {class: 'form-login col-md-10 col-lg-10', id: 'signin', action: '/register'} } ) }}
+    <div class="">
+        <div class="form-group col-md-6 col-lg-6 col-xs-5 pseudoRegister float-left">
+            {{ form_row(form.firstname) }}
         </div>
-
+        <div class="form-group col-md-6 col-lg-6 col-xs-5 mailRegister float-right">
+            {{ form_row(form.email) }}
+        </div>
     </div>
 
+    <div class="form-group">
+        {{ form_row(form.password.first) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.password.second) }}
+    </div>
 
-{% endblock %}
+    <div class="checkbox mb-3">
+        <label>
+            {{ form_row(form.termsAccepted) }}
+        </label>
+    </div>
+
+    <div class="signIn-btn col-lg-5 col-md-5 col-xs-6">
+        <button type="submit" class="btn btn-outline-primary col-lg-12 col-md-12 col-xs-12">
+            Register
+        </button>
+    </div>
+{{ form_end(form) }}
+
 

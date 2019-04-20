@@ -31,15 +31,14 @@ class CommentController extends AbstractController
      */
     public function edit(Request $request, Comment $comment): Response
     {
+        $this->denyAccessUnlessGranted('edit', $comment);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('comment_index', [
-                'id' => $comment->getId(),
-            ]);
+            $post = $comment->getPost();
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
         return $this->render('front/comment/edit.html.twig', [
@@ -53,12 +52,13 @@ class CommentController extends AbstractController
      */
     public function delete(Request $request, Comment $comment): Response
     {
+        $this->denyAccessUnlessGranted('delete', $comment);
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
             $entityManager->flush();
         }
-
-        return $this->redirectToRoute('comment_index');
+        $post = $comment->getPost();
+        return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
     }
 }

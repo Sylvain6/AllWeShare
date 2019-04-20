@@ -3,6 +3,7 @@
 namespace App\Controller\Back;
 
 use App\Entity\User;
+use App\Form\UserAccountType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,9 @@ class UserController extends AbstractController
      */
     public function user_index(UserRepository $userRepository): Response
     {
-        return $this->render('Back/user/index.html.twig', ['users' => $userRepository->findAll()]);
+        return $this->render('Back/user/index.html.twig', [
+            'users' => $userRepository->findAll()
+        ]);
     }
 
     /**
@@ -31,7 +34,9 @@ class UserController extends AbstractController
      */
     public function user_show(User $user): Response
     {
-        return $this->render('Back/user/show.html.twig', ['user' => $user]);
+        $user = $this->getUser();
+        $form = $this->createForm(UserAccountType::class, $user);
+        return $this->render('Back/user/show.html.twig', ['user' => $user, 'form' => $form->createView()]);
     }
 
     /**

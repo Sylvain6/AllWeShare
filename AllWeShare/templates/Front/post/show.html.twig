@@ -37,7 +37,6 @@
                         {% endif %}
                     </div>
                 </div>
-
             </div>
 &nbsp;
 
@@ -45,54 +44,59 @@
 
         <div class="row m-top-10">
             <div class="col-md-8 div-center m-top-5">
-                <div class="card-grey m-top-5 card-shadow pad-top-10">
-                    {% if app.user %}
-                        <div>
-                            <!-- Trigger the modal with a button -->
-                            &nbsp;
-                            <div class="float-right margin-top-modal ">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Comment</button>
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal" id="myModal">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Leave a comment</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{ include('Front/comment/_form.html.twig') }}
+                <div class="card m-top-5 card-shadow pad-top-10">
+                    <div class="card-body" id="content-comments">
+                        {% if app.user %}
+                            <div>
+                                <!-- Trigger the modal with a button -->
+                                &nbsp;
+                                <div class="float-right margin-top-modal ">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Comment</button>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal" id="myModal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Leave a comment</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ include('Front/comment/_form.html.twig') }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        &nbsp;
-                    {% endif %}
-
-                    {% for comment in comments %}
-                        <div class="card m-bot m-top-10">
-                            <div class="card-body">
-                                <h4 class="card-title">{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ comment.createdAt| date }}</h6>
-                                <p class="card-text">{{ comment.content }}</p>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="card m-bot m-top-10">
-                            <p class="text-center">No comments founds</p>
-                        </div>
-                    {% endfor %}
-                    <div class="m-top-5 m-bot">
-                        <a class="btn btn-info m-bot" href="{{ path('post_index') }}">Back to list</a>
-                        {% if app.user %}
-                            <a class="btn btn-outline-danger float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
+                            &nbsp;
                         {% endif %}
-                    </div>
 
+                        {% for comment in comments %}
+                            <div class="container-comment">
+                                <img src="{{ asset('images/verified_user.png') }}">
+                                <h4 class="name-user-comment">{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
+                                <h6 class="date-comment">{{ comment.createdAt| date }}</h6>
+                                <p class="">{{ comment.content }}</p>
+                                {% if app.user is same as(comment.author) %}
+                                    <a class="card-link btn btn-outline-success" href="{{ path('comment_edit', {'id': comment.id}) }}">Edit</a>
+                                    {{ include('Front/comment/_delete_form.html.twig') }}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="card m-bot m-top-10">
+                                <p class="text-center">No comments founds</p>
+                            </div>
+                        {% endfor %}
+                        {% include "navigation/pagination.html.twig" %}
+                        <div class="m-top-5 m-bot">
+                            <a class="btn btn-info m-bot" href="{{ path('post_index') }}">Back to list</a>
+                            {% if app.user %}
+                                <a class="btn btn-outline-danger float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

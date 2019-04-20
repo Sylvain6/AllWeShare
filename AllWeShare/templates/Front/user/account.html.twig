@@ -10,7 +10,17 @@
                 &nbsp;
                 <h1>{{ user.firstname }} {{ user.lastname }}</h1>
                 &nbsp;
-                <img src="{{ asset('images/verified_user.png') }}"  width="128px" height="128px">
+                <input type="file" name="file" id="file" class="inputfile" />
+                <label for="file">
+                    <div id="user_profile_pic">
+                        <img src="{{ asset('images/verified_user.png') }}"  width="128px" height="128px">
+                    </div>
+                    <div id="edit_user_profile_pic">
+                        <img src="{{ asset('images/pen.png') }}"  width="20px" height="20px"></label>
+                    </div>
+
+
+
             </div>
         </div>
 

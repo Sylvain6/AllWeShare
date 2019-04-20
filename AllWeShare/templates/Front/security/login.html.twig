@@ -2,11 +2,15 @@
 
 {% block body %}
 
-    <div class="div-center">
-        <div class="row">
-            <div class="col-md-12 box blurred-bg tinted">
-                <form method="post">
 
+    {#<img class="img-fluid svg-blob col-md-7" src={{ asset( "images/blob.svg") }}>#}
+
+    {#<div class="div-center">
+        <div class="row">
+
+            <div class="col-md-12 box blurred-bg tinted">
+
+                <form method="post">
 
                     <h1 class="h3 text-center">Log in </h1>
                     <hr>
@@ -24,7 +28,7 @@
                            value="{{ csrf_token('authenticate') }}"
                     >
 
-                    {#
+                    #}{#
                         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
                         See https://symfony.com/doc/current/security/remember_me.html
 
@@ -33,14 +37,16 @@
                                 <input type="checkbox" name="_remember_me"> Remember me
                             </label>
                         </div>
-                    #}
+                    #}{#
 
                     <button type="submit" class="btn btn-primary">
-                       Sign In
+                        Sign In
                     </button>
                 </form>
                 <a href="{{ path('app_front_security_forgot_password') }}">Forgotten password ?</a>
+
             </div>
+
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -49,8 +55,128 @@
                 {% endif %}
             </div>
         </div>
+    </div>#}
+
+    <div class="row">
+        <div class="container-fluid">
+            <div class="login-box col-md-6 col-lg-6 col-xs-10">
+
+                <div class="box-login-content">
+                    <div class="buttons-login col-md-10 col-lg-10">
+                        <a class="btn btn-outline-primary col-lg-6 col-md-6 col-xs-6 btns-login active-login" id="_signin">Sign In</a>
+                        <a class="btn btn-primary col-lg-6 col-md-6 col-xs-6 btns-login btn-login-right inactive-login" id="_login">Log In</a>
+                    </div>
+                    <div class="tab-content">
+
+                        <form method="post" class="form-login col-md-10 col-lg-10" id="login">
+                            <div class="form-group">
+                                <label for="inputEmail" class="sr-only">Email</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email *" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password *" required>
+                            </div>
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+
+                            {#
+                                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                See https://symfony.com/doc/current/security/remember_me.html
+
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me"> Remember me
+                                    </label>
+                                </div>
+
+                                #}
+
+
+                            <div class="signIn-btn col-lg-5 col-md-5 col-xs-6">
+                                <button type="submit" class="btn btn-outline-primary col-lg-12 col-md-12 col-xs-12">
+                                    Sign In
+                                </button>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <a href="{{ path('app_front_security_forgot_password') }}" class="forgotPwd">Forgotten password ?</a>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <img src="{{ asset("/images/share_icon.svg") }}" class="svg-login">
+        </div>
     </div>
 
+
+    <script>
+
+        $('.buttons-login a').on('click load', function (e) {
+
+            $(this).addClass('active-login');
+            $(this).removeClass('inactive-login');
+            $(this).siblings().removeClass('active-login');
+            $(this).siblings().addClass('inactive-login');
+
+
+            target = '#'+ $(this).attr('id').slice(1);
+
+            console.log( target );
+            if( target === 'signin' ){
+                $.ajax({
+
+                    url : "/register" ,
+                    success : function(data) {
+
+
+                        if( $('#signin') !== undefined ){
+                            $("#signin").remove();
+                            //console.log($("signin")) ;
+                        }
+                        $('.tab-content').append(data);
+                        $('.tab-content > form').not(target).hide();
+
+                        $(target).fadeIn(600);
+                    }
+                });
+            }
+            else{
+                $('.tab-content > form').not(target).hide();
+
+                $(target).fadeIn(600);
+            }
+        });
+
+        $('.buttons-login').find('a').on('keyup blur focus', function (e) {
+
+            var $this = $(this),
+                label = $this.prev('label');
+
+            if (e.type === 'keyup') {
+                if ($this.val() === '') {
+                    label.removeClass('active');
+                } else {
+                    label.addClass('active ');
+                }
+            } else if (e.type === 'blur') {
+                if( $this.val() === '' ) {
+                    label.removeClass('active ');
+                } else {
+                    label.removeClass('');
+                }
+            }
+
+        });
+    </script>
 
 
 {% endblock %}
