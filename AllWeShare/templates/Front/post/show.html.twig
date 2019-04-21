@@ -87,7 +87,11 @@
 
                         {% for comment in comments %}
                             <div class="container-comment">
-                                <img src="{{ asset('images/verified_user.png') }}">
+                                {% if comment.author.picture %}
+                                    <img src="{{ asset('uploads/pictures/' ~ comment.author.picture) }}" class="pofil_pic_comment">
+                                {% else %}
+                                    <img src="{{ asset('images/verified_user.png') }}">
+                                {% endif %}
                                 <h4 class="name-user-comment">{{ comment.author.firstname }} {{ comment.author.lastname }}</h4>
                                 <h6 class="date-comment">{{ comment.createdAt| date }}</h6>
                                 <p class="">{{ comment.content }}</p>

@@ -736,7 +736,9 @@ Notif
 
 .profil_pic{
     width: 128px;
-    height: 128px;
-    border: solid 1px black;
-    border-radius: 25px;
+}
+
+.pofil_pic_comment{
+    width: 60px;
+    height:60px;
 }

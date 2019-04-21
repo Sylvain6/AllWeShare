@@ -56,6 +56,11 @@
                             {# TODO: Put the right logo on the cards here #}
                             <img src="{{ "/images/netflix-n-logo-png.png" }}" class="col-2 col-lg-2" style="border-radius: 100px;">
                             <h5 class="d-inline-block card-title text-center col-7 col-lg-7">{{ post.title }}</h5>
+                            {% if post.author.picture %}
+                                <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="pofil_pic col-2 col-lg-2 float-right">
+                            {% else %}
+                                <img src="{{ asset('images/verified_user.png') }}" class="profil_pic col-2 col-lg-2 float-right">
+                            {% endif %}
                             <hr>
                             <div class="card-body-perso">
 

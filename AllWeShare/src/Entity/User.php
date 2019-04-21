@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,7 +21,6 @@ class User implements UserInterface
      * @ORM\Column(name="id", type="integer")
      */
     private $id;
-
 
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
@@ -71,8 +71,8 @@ class User implements UserInterface
      */
     private $tochangepassword;
 
-     /** @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
-      *
+    /** @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+     *
      */
     private $comments;
 
@@ -91,6 +91,16 @@ class User implements UserInterface
      */
     private $groups;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ProfilePicture", cascade={"persist"})
+     */
+    private $picture;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $pseudo;
 
     public function __construct()
     {
@@ -287,66 +297,103 @@ class User implements UserInterface
         }
     }
 
-        public function getToChangePassword(): ?string
+    public function getToChangePassword(): ?string
     {
         return $this->tochangepassword;
     }
 
-        public function setToChangePassword(?string $tochangepassword): self
+    public function setToChangePassword(?string $tochangepassword): self
     {
         $this->tochangepassword = $tochangepassword;
         return $this;
     }
 
-        public function getIsActive(): ?bool
-        {
-            return $this->isActive;
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->addUser($this);
         }
 
-        public function setIsActive(bool $isActive): self
-        {
-            $this->isActive = $isActive;
+        return $this;
+    }
 
-            return $this;
+    public function removeGroup(Group $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            $group->removeUser($this);
         }
 
-        public function getToken(): ?string
-        {
-            return $this->token;
-        }
+        return $this;
+    }
 
-        public function setToken(?string $token): self
-        {
-            $this->token = $token;
+    /**
+     * @return mixed
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
 
-            return $this;
-        }
+    /**
+     * @param mixed $pseudo
+     * @return User
+     */
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+        return $this;
+    }
 
-        /**
-         * @return Collection|Group[]
-         */
-        public function getGroups(): Collection
-        {
-            return $this->groups;
-        }
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
 
-        public function addGroup(Group $group): self
-        {
-            if (!$this->groups->contains($group)) {
-                $this->groups[] = $group;
-                $group->addUser($this);
-            }
+    /**
+     * @param mixed $picture
+     * @return User
+     */
+    public function setPicture( ProfilePicture $picture = null )
+    {
+        $this->picture = $picture;
+        return $this;
+    }
 
-            return $this;
-        }
-
-        public function removeGroup(Group $group): self
-        {
-            if ($this->groups->contains($group)) {
-                $this->groups->removeElement($group);
-                $group->removeUser($this);
-            }
-
-            return $this;
-        }
 }
