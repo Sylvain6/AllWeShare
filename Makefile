@@ -3,7 +3,7 @@ build:
 		composer install -d ./AllWeShare
 
 start:
-		docker-compose up -d
+		docker-compose up -d --build
 		yarn --cwd ./AllWeShare install
 		yarn --cwd ./AllWeShare encore dev
 
