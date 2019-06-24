@@ -23,7 +23,6 @@
                             </div>
                         </div>
                     </li>
-                    &nbsp;
                 {% endif %}
 
                 <li class="nav-item">
@@ -50,7 +49,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a class="btn nav-link primary-color dropdown-toggle {{ ( app.request.attributes.get('_route') == 'back_user_index') ? 'active' }}"
+                                <a class="nav-link primary-color dropdown-toggle {{ ( app.request.attributes.get('_route') == 'back_user_index') ? 'active' }}"
                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Admin
                                 </a>

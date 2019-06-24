@@ -28,7 +28,7 @@ class Post
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $descritpion;
+    private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -47,7 +47,7 @@ class Post
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $organization;
@@ -56,6 +56,11 @@ class Post
      * @ORM\OneToMany(targetEntity="App\Entity\Request", mappedBy="post", orphanRemoval=true)
      */
     private $requests;
+
+    /**
+     * @ORM\Column(type="string", nullable=false, options={"default":"netflix"})
+     */
+    private $type_post;
 
     public function __construct()
     {
@@ -80,14 +85,14 @@ class Post
         return $this;
     }
 
-    public function getDescritpion(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descritpion;
+        return $this->description;
     }
 
-    public function setDescritpion(string $descritpion): self
+    public function setDescription(string $description): self
     {
-        $this->descritpion = $descritpion;
+        $this->description = $description;
 
         return $this;
     }
@@ -189,4 +194,25 @@ class Post
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTypePost()
+    {
+        return $this->type_post;
+    }
+
+    /**
+     * @param mixed $type_post
+     * @return Post
+     */
+    public function setTypePost($type_post)
+    {
+        $this->type_post = $type_post;
+
+        return $this;
+    }
+
+
 }

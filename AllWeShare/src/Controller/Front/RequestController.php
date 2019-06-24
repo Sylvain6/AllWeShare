@@ -33,7 +33,7 @@ class RequestController extends AbstractController
     public function showByApplicant(RequestRepository $requestRepository): Response
     {
         return $this->render('Front/request/index_applicant.html.twig', [
-            'requests' => $requestRepository->findBy(['applicant' => $this->getUser()]),
+            'requests' => $requestRepository->findBy(['applicant' => $this->getUser(), 'status' => 'PENDING']),
         ]);
     }
 

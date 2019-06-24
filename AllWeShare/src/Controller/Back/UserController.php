@@ -2,10 +2,15 @@
 
 namespace App\Controller\Back;
 
+use App\Entity\ProfilePicture;
 use App\Entity\User;
+use App\Form\ProfilPictureType;
 use App\Form\UserAccountType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\GenerateToken;
+use App\Service\MailSending;
+use App\Service\UploadFilesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,13 +35,41 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="_user_show", methods={"GET"})
+     * @Route("/{id}", name="_user_show", methods={"GET", "POST"})
      */
-    public function user_show(User $user): Response
+    public function user_show( Request $request, UploadFilesService $uploadFilesService, User $user ): Response
     {
-        $user = $this->getUser();
+
+        $pic = new ProfilePicture();
+
+
         $form = $this->createForm(UserAccountType::class, $user);
-        return $this->render('Back/user/show.html.twig', ['user' => $user, 'form' => $form->createView()]);
+        $form->handleRequest($request);
+        $form_picture = $this->createForm( ProfilPictureType::class, $pic);
+        $form_picture->handleRequest($request);
+
+        if( $form_picture->isSubmitted() && $form_picture->isValid() ){
+
+            $file = $pic->getPicture();
+            $fileName = $uploadFilesService->upload($file);
+
+            $pic->setPicture($fileName);
+            $user->setPicture( $pic );
+
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        if ($form->isSubmitted() && $form->isValid() ) {
+
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render('Back/user/show.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+            'formPic' => $form_picture->createView(),
+        ]);
+
     }
 
     /**

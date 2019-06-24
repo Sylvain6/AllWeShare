@@ -70,7 +70,7 @@ class GroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $group->setOwner($this->getUser());
-            $group->setPlace(3);
+            //$group->setPlace(3);
             $entityManager->persist($group);
             $entityManager->flush();
 
@@ -101,7 +101,7 @@ class GroupController extends AbstractController
         $form = $this->createForm(GroupType::class, $group);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValvid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('group_index', [

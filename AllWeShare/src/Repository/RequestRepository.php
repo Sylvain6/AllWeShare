@@ -47,7 +47,7 @@ class RequestRepository extends ServiceEntityRepository
         $posts = $postRepository->findBy(['author' => $user]);
         $requests = [];
         foreach ($posts as $post){
-            $requests = $this->findBy(['post' => $post]);
+            $requests = $this->findBy(['post' => $post, 'status' => 'PENDING']);
         }
         $result=$arrayflatten->arrayFlatten($requests);
         return $result;

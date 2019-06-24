@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
 
+{% block title %}Login !{% endblock %}
+
+{% block body %}
 
     {#<img class="img-fluid svg-blob col-md-7" src={{ asset( "images/blob.svg") }}>#}
 
@@ -63,8 +65,9 @@
 
                 <div class="box-login-content">
                     <div class="buttons-login col-md-10 col-lg-10">
-                        <a class="btn btn-outline-primary col-lg-6 col-md-6 col-xs-6 btns-login active-login" id="_signin">Sign In</a>
-                        <a class="btn btn-primary col-lg-6 col-md-6 col-xs-6 btns-login btn-login-right inactive-login" id="_login">Log In</a>
+                        <a class="btn btn-outline-primary col-lg-6 col-md-6 col-xs-6 btns-login active-login" id="_login">Log In</a>
+                        <a class="btn btn-primary col-lg-6 col-md-6 col-xs-6 btns-login btn-login-right inactive-login" id="_signin">Sign In</a>
+
                     </div>
                     <div class="tab-content">
 
@@ -131,7 +134,7 @@
             target = '#'+ $(this).attr('id').slice(1);
 
             console.log( target );
-            if( target === 'signin' ){
+            if( target === '#signin' ){
                 $.ajax({
 
                     url : "/register" ,

@@ -22,22 +22,22 @@ class UserAccountType extends AbstractType
                 'attr' => ['class' => 'inputfile', 'id' => 'file']
             ))*/
             ->add('pseudo', TextType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'], 'required' => false
             ))
             ->add('firstname', TextType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'], 'required' => false
             ))
             ->add('lastname', TextType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'], 'required' => false
             ))
 //            ->add('email', EmailType::class, array(
 //                'attr' => ['class' => 'form-control', 'disabled' => 'disabled']
 //            ))
             ->add('address', TextType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'], 'required' => false
             ))
             ->add('city', TextType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'], 'required' => false
             ))
         ;
     }

@@ -7,30 +7,41 @@
         <div class="row">
 
             {{ form_start(formPic, {attr: {class: 'col-md-6 text-center subscribe_form'} }) }}
-                &nbsp;
-                <h1>{{ user.firstname }} {{ user.lastname }}</h1>
-                <hr>
-                &nbsp;
-                {{ form_widget(formPic.picture) }}
-                <label for="profil_picture_picture">
-                    {% if user.picture %}
-                        <div id="user_profile_pic">
-                            <img src="{{ asset('uploads/pictures/' ~ user.picture) }}" class="profil_pic">
-                        </div>
-                    {% else %}
-                        <div id="user_profile_pic">
-                            <img src="{{ asset('images/verified_user.png') }}" class="profil_pic">
-                        </div>
-                    {% endif %}
-                    <div id="edit_user_profile_pic">
-                        <i class="fas fa-camera fa-md edit-button"></i>
 
+                <h1>{{ user.pseudo }}</h1>
+                <hr>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        {{ form_widget(formPic.picture) }}
+                        <label for="profil_picture_picture">
+                            {% if user.picture %}
+                                <div id="user_profile_pic">
+                                    <img src="{{ asset('uploads/pictures/' ~ user.picture) }}" class="profil_pic">
+                                </div>
+                            {% else %}
+                                <div id="user_profile_pic">
+                                    <img src="{{ asset('images/verified_user.png') }}" class="profil_pic">
+                                </div>
+                            {% endif %}
+                            <div id="edit_user_profile_pic">
+                                <i class="fas fa-camera fa-md edit-button"></i>
+
+                            </div>
+
+                        </label>
                     </div>
 
-                </label>
-            <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
+                </div>
+            <div class="row">
+                <div class="container-fluid">
+                    <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
 
-            {{ form_end(formPic) }}
+                    {{ form_end(formPic) }}
+                </div>
+
+            </div>
+
         </div>
         <div class="row">
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Shared Accounts{% endblock %}
 
 {% block body %}
     <div class="">
@@ -18,7 +18,7 @@
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">New Share !</button>
                         </div>
                         <!-- Modal -->
-                        <div class="modal" id="myModal">
+                        <div class="modal fade" id="myModal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -36,8 +36,6 @@
                     </div>
                 {% endif %}
             </div>
-
-
         </div>
 
         <div class="row">
@@ -54,10 +52,14 @@
                     {% for post in posts %}
                         <div class="callout secondary-c col-5 col-sm-10 col-lg-5 d-inline-block margin-card card-shadow">
                             {# TODO: Put the right logo on the cards here #}
-                            <img src="{{ "/images/netflix-n-logo-png.png" }}" class="col-2 col-lg-2" style="border-radius: 100px;">
+                            {% if post.typePost != 'undefined' %}
+                                <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="col-2 col-lg-2 profil_pic">
+                            {%  else %}
+                                <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="col-2 col-lg-2 profil_pic">
+                            {% endif %}
                             <h5 class="d-inline-block card-title text-center col-7 col-lg-7">{{ post.title }}</h5>
                             {% if post.author.picture %}
-                                <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="pofil_pic col-2 col-lg-2 float-right">
+                                <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="profil_pic col-2 col-lg-2 float-right">
                             {% else %}
                                 <img src="{{ asset('images/verified_user.png') }}" class="profil_pic col-2 col-lg-2 float-right">
                             {% endif %}
@@ -66,8 +68,8 @@
 
                                 <div class="col-12 col-lg-12 col-sm-12">
 
-                                    {# {{ post.descritpion }} #}
-                                    <p class="card-text col-12 col-lg-12 col-sm-12">{{ post.descritpion | length > 50? post.descritpion | slice(0,50) ~ ' [...]': post.descritpion }}</p>
+                                    {# {{ post.description }} #}
+                                    <p class="card-text col-12 col-lg-12 col-sm-12">{{ post.description | length > 50? post.description | slice(0,50) ~ ' [...]': post.description }}</p>
                                     <br>
                                     <h6 class="card-subtitle float-left m-top-10 col-6 col-lg-6 col-sm-6">{{ post.createdAt| date }}</h6>
                                     <h6 class="card-subtitle float-right m-top-10 col-6 col-lg-6 col-sm-6 text-right">Authored by {{ post.author.firstname }}</h6>
@@ -93,7 +95,7 @@
                         </div>
                     {% else %}
                         <div>
-                            <h6 colspan="6">no records found</h6>
+                            <h6>no records found</h6>
                         </div>
                     {% endfor %}
 
@@ -102,5 +104,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+            function reportToGroup( value ) {
+
+                $('#post_organization').val(value);
+                console.log( value );
+            }
+    </script>
 
 {% endblock %}

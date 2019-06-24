@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table("`user`")
  */
-class User implements UserInterface
+class User implements UserInterface, Serializable
 {
     /**
      * @ORM\Id()
@@ -87,7 +87,7 @@ class User implements UserInterface
     private $token;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="users")
      */
     private $groups;
 
@@ -112,6 +112,11 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId( $id ){
+        $this->id = $id;
+        return $this;
     }
 
     public function getFirstname(): ?string
@@ -396,4 +401,39 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->getId(),
+            $this->getEmail(),
+            $this->getPassword(),
+            $this->getIsActive()
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->isActive
+            ) = unserialize( $serialized );
+
+    }
 }

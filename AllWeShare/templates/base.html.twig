@@ -2,10 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="description" content="Allweshare">
     <title>{% block title %}AllWeShare!{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         <link rel="icon" type="image/x-icon" href="{{ asset('/images/favicon.ico') }}" />
+        <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=cv1iaiy59li07wxzo3ruuy3pmivhf4mwwrhr1cljdvgwwf03"></script>
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('icons/foundation-icons.css') }}" />
@@ -16,24 +19,12 @@
     {% endblock %}
 </head>
 
-<body onload="assignDefaultForm()">
+<body>
 
 
 
     <div id="main">
         {% include 'navigation/navbar.html.twig' %}
-
-        <!--<div class="polygon"></div>-->
-        {#<svg viewBox="0 0 120 40" height="500" preserveAspectRatio="xMidYMax slice">
-            <defs>
-                <linearGradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#F9C956"></stop>
-                    <stop offset="100%" stop-color="#F0704B"></stop>
-                </linearGradient>
-            </defs>
-            <polygon points="0,0 0,40 1400,500" fill="url(#Gradient1)"></polygon>
-        </svg>#}
-
         {% block body %}{% endblock %}
 
         {% for label, messages in app.flashes %}
@@ -64,24 +55,6 @@
                 notif();
             </script>
         {% endif %}
-    <script>
-        function assignDefaultForm() {
-
-
-            target = $("#signin");
-            $.ajax({
-
-                url : "/register" ,
-                success : function(data) {
-
-                    $('.tab-content').append(data);
-
-                }
-            });
-
-            $('.tab-content > form').not(target).hide();
-        }
-    </script>
 
 {% endblock %}
 </body>

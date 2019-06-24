@@ -4,127 +4,118 @@
 
 {% block body %}
 
-
-{#<div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-        <div class="tab_admin">
-            <table class="table">
-                <tbody>
-                <tr>
-                    <th>Utilisateur Number</th>
-                    <td>{{ user.id }}</td>
-                </tr>
-                <tr>
-                    <th>Firstname</th>
-                    <td>{{ user.firstname }}</td>
-                </tr>
-                <tr>
-                    <th>Lastname</th>
-                    <td>{{ user.lastname }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                #}{#<tr>
-                    <th>Password</th>
-                    <td>{{ user.password }}</td>
-                </tr>#}{#
-                <tr>
-                    <th>Address</th>
-                    <td>{{ user.address }}</td>
-                </tr>
-                <tr>
-                    <th>City</th>
-                    <td>{{ user.city }}</td>
-                </tr>
-                </tbody>
-            </table>
 
-            <a class="btn btn-outline-info" href="{{ path('admin_user_index') }}">Back to list</a>
+        {{ form_start(formPic, {attr: {class: 'col-md-6 text-center subscribe_form'} }) }}
 
-            <a class="btn btn-outline-success" href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
+        <h1>{{ user.pseudo }}</h1>
+        <hr>
 
-            {{ include('Back/user/_delete_form.html.twig') }}
-        </div>
-    </div>
-</div>#}
-
-    <div class="container-fluid">
         <div class="row">
+            <div class="container-fluid">
+                {{ form_widget(formPic.picture) }}
+                <label for="profil_picture_picture">
+                    {% if user.picture %}
+                        <div id="user_profile_pic">
+                            <img src="{{ asset('uploads/pictures/' ~ user.picture) }}" class="profil_pic">
+                        </div>
+                    {% else %}
+                        <div id="user_profile_pic">
+                            <img src="{{ asset('images/verified_user.png') }}" class="profil_pic">
+                        </div>
+                    {% endif %}
+                    <div id="edit_user_profile_pic">
+                        <i class="fas fa-camera fa-md edit-button"></i>
 
-            <div class="text-center subscribe_form">
+                    </div>
 
-                &nbsp;
-                <h1>{{ user.firstname }} {{ user.lastname }}</h1>
-                &nbsp;
-                <img src="{{ asset('images/verified_user.png') }}"  width="128px" height="128px">
+                </label>
             </div>
-        </div>
 
+        </div>
         <div class="row">
+            <div class="container-fluid">
+                <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
 
-            {{ form_start(form, {attr: {class: 'col-md-6 subscribe_form'} }) }}
-            <table class="table">
+                {{ form_end(formPic) }}
+            </div>
 
-                <h3 class="text-center">Informations</h3>
-                <hr>
-                <tbody>
-                    <tr>
-                        <th>Firstname</th>
-                        <td class="editableColumns" id="firstname">{{ user.firstname }}</td>
-                        <td id="form_firstname" style="display: none;">
-                            <div class="form-group" >
-                                {{ form_widget(form.firstname) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
-                    </tr>
-                    <tr  style="background-color: rgba(0, 0, 0, 0.05);">
-                        <th>Lastname</th>
-                        <td class="editableColumns" id="lastname">{{ user.lastname }}</td>
-                        <td style="display: none;" id="form_lastname">
-                            <div class="form-group">
-                                {{ form_widget(form.lastname) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td id="address">{{ user.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td class="editableColumns" id="address">{{ user.address }}</td>
-                        <td style="display: none;" id="form_address">
-                            <div class="form-group">
-                                {{ form_widget(form.address) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
-                    </tr>
-                    <tr  style="background-color: rgba(0, 0, 0, 0.05);">
-                        <th>City</th>
-                        <td class="editableColumns" id="city">{{ user.city }}</td>
-                        <td style="display: none;" id="form_city">
-                            <div class="form-group">
-                                {{ form_widget(form.city) }}
-                            </div>
-                        </td>
-                        <td><input class="editValues btn btn-outline-secondary" type="button" value="Edit"></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <a class="btn btn-outline-info" href="{{ path('admin_user_index') }}">Back to list</a>
-
-            <button class="btn btn-outline-primary register float-right">{{ button_label|default('Save') }}</button>
-
-            {{ form_end(form) }}
-            &nbsp;
         </div>
+
     </div>
+    <div class="row">
+
+        {{ form_start(form, {attr: {class: 'col-md-6 text-center subscribe_form'} }) }}
+        <hr>
+        <h3 class="text-center">Informations</h3>
+        <table class="table">
+
+            <tbody>
+            <tr>
+                <th>Pseudo</th>
+                <td class="editableColumns" id="pseudo">{{ user.pseudo }}</td>
+                <td id="form_pseudo" style="display: none;">
+                    <div class="form-group" >
+                        {{ form_widget(form.pseudo) }}
+                    </div>
+                </td>
+                <td><button class="editValues edit-button" type="button"><i class="fas fa-pen fa-lg"></i></button></td>
+            </tr>
+            <tr style="background-color: rgba(0, 0, 0, 0.05);">
+                <th>Firstname</th>
+                <td class="editableColumns" id="firstname">{{ user.firstname }}</td>
+                <td id="form_firstname" style="display: none;">
+                    <div class="form-group" >
+                        {{ form_widget(form.firstname) }}
+                    </div>
+                </td>
+                <td><button class="editValues edit-button" type="button"><i class="fas fa-pen fa-lg"></i></button></td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td class="editableColumns" id="lastname">{{ user.lastname }}</td>
+                <td style="display: none;" id="form_lastname">
+                    <div class="form-group">
+                        {{ form_widget(form.lastname) }}
+                    </div>
+                </td>
+                <td><button class="editValues edit-button" type="button"><i class="fas fa-pen fa-lg"></i></button></td>
+            </tr>
+            <tr style="background-color: rgba(0, 0, 0, 0.05);">
+                <th>Email</th>
+                <td id="address">{{ user.email }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td class="editableColumns" id="address">{{ user.address }}</td>
+                <td style="display: none;" id="form_address">
+                    <div class="form-group">
+                        {{ form_widget(form.address) }}
+                    </div>
+                </td>
+                <td><button class="editValues edit-button" type="button"><i class="fas fa-pen fa-lg"></i></button></td>
+            </tr>
+            <tr  style="background-color: rgba(0, 0, 0, 0.05);">
+                <th>City</th>
+                <td class="editableColumns" id="city">{{ user.city }}</td>
+                <td style="display: none;" id="form_city">
+                    <div class="form-group">
+                        {{ form_widget(form.city) }}
+                    </div>
+                </td>
+                <td><button class="editValues edit-button" type="button"><i class="fas fa-pen fa-lg"></i></button></td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-outline-info float-left" href="{{ path('admin_user_index') }}">Back to list</a>
+        <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
+
+        {{ form_end(form) }}
+        &nbsp;
+    </div>
+</div>
 
 
 {% endblock %}

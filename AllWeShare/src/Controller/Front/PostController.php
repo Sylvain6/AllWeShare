@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\Comment;
+use App\Entity\Group;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Service\NotificationService;
@@ -26,13 +27,32 @@ class PostController extends AbstractController
     public function new(Request $request, PostRepository $postRepository, GroupRepository $groupRepository, PaginationService $paginationService): Response
     {
         $post = new Post();
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $post->setAuthor($user);
+            $post->getOrganization()->setOwner( $this->getUser() );
+
+
+            /*
+             * Analyse du texte afin de detecter le type du compte
+             */
+            $res = self::analyzeContent( strtolower( $post->getTitle() ) );
+            //throw new \Exception( $res );
+            if( $res !== 'undefined' ){
+                $post->setTypePost( $res );
+            }
+            else{
+                $res = self::analyzeContent( $post->getDescription() );
+                $post->setTypePost( $res );
+            }
+
+
             $entityManager = $this->getDoctrine()->getManager();
+            //throw new \Exception( json_encode( $this->getUser() ) );
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -47,8 +67,8 @@ class PostController extends AbstractController
 
         $posts = $paginationService->finWithPagination( $page, 4,
             $entityManager->getRepository(Post::class ),
-            'CURRENT_DATE() >= p.createdAt', 'p', 'p.createdAt', 'DESC' );
-
+            null, 'p', 'p.createdAt', 'DESC' );
+        //throw new \Exception( $posts->count() );
         $pagination = array(
             'page' => $page,
             'nbPages' => ceil(count($posts) / 4),
@@ -123,18 +143,33 @@ class PostController extends AbstractController
     /**
      * @Route("/post/{id}/edit", name="post_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Post $post): Response
+    public function edit(Request $request, Post $post ): Response
     {
         $this->denyAccessUnlessGranted('edit', $post);
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
+
+            /*
+            * Analyse du texte afin de detecter le type du compte
+            */
+            $res = self::analyzeContent( $post->getTitle() );
+
+            if( $res !== 'undefined' ){
+                $post->setTypePost( $res );
+            }
+            else{
+                $res = self::analyzeContent( $post->getDescription() );
+                $post->setTypePost( $res );
+            }
+
+            $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('post_index', ['id' => $post->getId()]);
         }
 
+        //throw new \Exception( $post->getTypePost() );
         return $this->render('Front/post/edit.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
@@ -154,5 +189,35 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('post_index');
+    }
+
+
+    public function analyzeContent( $content ){
+
+        $content_exploded = explode(' ', $content);
+        $find = false;
+
+        $types_posts = [
+            "netflix",
+            'adn',
+            'spotify',
+            'deezer',
+            'wakanim',
+            'anime digital network'
+        ];
+
+        foreach ( $content_exploded as $content_e ){
+            if( in_array( $content_e, $types_posts ) ){
+                $type = $content_e;
+                $find = true;
+                break;
+            }
+        }
+        if( $find ){
+            return $type;
+        }
+        else{
+            return "undefined";
+        }
     }
 }

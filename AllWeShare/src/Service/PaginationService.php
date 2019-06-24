@@ -28,12 +28,20 @@ class PaginationService extends AbstractController{
             );
         }
 
-        $qb = $repository->createQueryBuilder($indicator) //p
-            ->where($where);//'CURRENT_DATE() >= p.createdAt'
+        if( $where !== null ){
+            $qb = $repository->createQueryBuilder($indicator) //p
+            ->where($where);
+        }
+        else{
+            $qb = $repository->createQueryBuilder($indicator); //p
+            //->where($where);
+        }
+        //'CURRENT_DATE() >= p.createdAt'
             if( !empty( $parameters ) ){
                 $qb->setParameter( $parameters[0], $parameters[1] );
             }
             $qb->orderBy($order_by_field, $order_by);
+
 
         //throw new \Exception( $qb );
         $query = $qb->getQuery();

@@ -1,13 +1,7 @@
-{% extends 'base.html.twig' %}
+{{ form_start(form, {action: '/comment/'~comment.id~'/edit'}) }}
+    <div class="form-group">
+        {{ form_widget(form ) }}
+    </div>
+    <button class="card-link float-right edit-button" type="submit"><i class="fas fa-save fa-lg" id="edit-icon"></i></button>
 
-{% block title %}Edit Comment{% endblock %}
-
-{% block body %}
-    <h1>Edit Comment</h1>
-
-    {{ include('front/comment/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('comment_index') }}">back to list</a>
-
-    {{ include('front/comment/_delete_form.html.twig') }}
-{% endblock %}
+{{ form_end(form) }}
