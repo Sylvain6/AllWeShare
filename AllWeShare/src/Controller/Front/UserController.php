@@ -2,20 +2,24 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\ProfilePicture;
 use App\Entity\User;
 use App\Form\ChangePasswordType;
+use App\Form\ProfilPictureType;
 use App\Form\UserType;
 use App\Form\UserAccountType;
 use App\Repository\UserRepository;
 use App\Service\GenerateToken;
+use App\Service\UploadFilesService;
 use Egulias\EmailValidator\Exception\ExpectingDomainLiteralClose;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
 /*
  * Uses for accountForm
  */
@@ -30,6 +34,8 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/", name="user_index", methods={"GET"})
+     * @param UserRepository $userRepository
+     * @return Response
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -38,6 +44,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
      */
     public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -63,26 +72,52 @@ class UserController extends AbstractController
 
     /**
      * @Route("/account", name="user_account", methods={"GET", "POST"})
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @param \Swift_Mailer $mailer
+     * @param MailSending $mailSending
+     * @param GenerateToken $token
+     * @param UploadFilesService $uploadFilesService
+     * @return Response
      */
-    public function account( Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, MailSending $mailSending , GenerateToken $token ): Response
+    public function account( Request $request, UserPasswordEncoderInterface $encoder,
+                             \Swift_Mailer $mailer, MailSending $mailSending , GenerateToken $token, UploadFilesService $uploadFilesService
+                             ): Response
     {
         $user = $this->getUser();
+
+        $pic = new ProfilePicture();
+
+
         $form = $this->createForm(UserAccountType::class, $user);
         $form->handleRequest($request);
+        $form_picture = $this->createForm( ProfilPictureType::class, $pic);
+        $form_picture->handleRequest($request);
 
         $formPassword = $this->createForm(ChangePasswordType::class, $user );
         $formPassword->handleRequest( $request );
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if( $form_picture->isSubmitted() && $form_picture->isValid() ){
+
+            $file = $pic->getPicture();
+            $fileName = $uploadFilesService->upload($file);
+
+            $pic->setPicture($fileName);
+            $user->setPicture( $pic );
+
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        if ($form->isSubmitted() && $form->isValid() ) {
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_account');
         }
 
         if( $formPassword->isSubmitted() && $formPassword->isValid() ){
-            //throw new Exception( json_encode(  $user->getPassword() ) );
+
             $encoded = $encoder->encodePassword($user, $user->getToChangePassword());
-            //throw new Exception( json_encode( $encoded ) );
             $user->setToChangePassword($encoded);
 
             $generated = $token->generateToken();
@@ -113,12 +148,17 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
             'formPwd' => $formPassword->createView(),
+            'formPic' => $form_picture->createView(),
         ]);
 
     }
 
     /**
      * @Route("/change_password/{token}", name="user_change_pwd", methods={"GET", "POST"})
+     * @param Request $request
+     * @param User $user
+     * @param $token
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
 
     public function changePassword( Request $request, User $user , $token ){
@@ -144,4 +184,6 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_account');
         }
     }
+
+
 }

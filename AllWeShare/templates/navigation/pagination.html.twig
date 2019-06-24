@@ -1,0 +1,68 @@
+{% if pagination.nbPages > 0 %}
+    <div class="col-md-4 col-lg-4 col-xs-4 title-center">
+        <div class="pagination pagination-perso text-center">
+            {% if pagination.page > 1 %}
+                <a href="{{ path(pagination.nomRoute,
+                pagination.paramsRoute|merge({'page': pagination.page-1})) }}">
+                    &laquo;
+                </a>
+            {% endif %}
+
+            {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.nbPages)) %}
+                <a {% if p == pagination.page %}class="active"{% endif %} href="{{ path(pagination.nomRoute, pagination.paramsRoute|merge({'page': p})) }}">
+                    {{ p }}
+                </a>
+            {% endfor %}
+
+            {% if pagination.page < pagination.nbPages %}
+                <a href="{{ path(pagination.nomRoute,
+                pagination.paramsRoute|merge({'page': pagination.page+1})) }}">
+                    &raquo;
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endif %}
+
+{#
+
+<div class="text-center">
+    <div class="col-md-4 title-center">
+        <div class="pagination col-lg-6 col-md-6 col-xs-6 text-center">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a class="active" href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="pagination col-lg-6 col-md-6 col-xs-6 text-center">
+                {% if pagination.page > 1 %}
+                    <a href="{{ path(pagination.nomRoute,
+                    pagination.paramsRoute|merge({'page': pagination.page-1})) }}">
+                        &laquo;
+                    </a>
+                {% endif %}
+
+                {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.nbPages)) %}
+                    <a {% if p == pagination.page %}class="active"{% endif %} href="{{ path(pagination.nomRoute, pagination.paramsRoute|merge({'page': p})) }}">
+                        {{ p }}
+                    </a>
+                {% endfor %}
+
+                {% if pagination.page < pagination.nbPages %}
+                    <a href="{{ path(pagination.nomRoute,
+                    pagination.paramsRoute|merge({'page': pagination.page+1})) }}">
+                        &raquo;
+                    </a>
+                {% endif %}
+</div>
+
+#}

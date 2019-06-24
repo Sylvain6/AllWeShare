@@ -1,68 +1,116 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Shared Accounts{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="">
         <div class="row">
+            <div class="container-fluid">
+                {% if(app.user) %}
+                    <div class="col-md-12">
 
-            {% if(app.user) %}
-                 <div class="col-md-12">
-                    <!-- Trigger the modal with a button -->
-                    &nbsp;
-                    <div class="col-md-2 float-right margin-top-modal">
-                        <button type="button" class="btn btn-outline-primary btn" data-toggle="modal" data-target="#myModal">New Advertisement</button>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Create your personal advertisement</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ include('Front/post/_form.html.twig') }}
+                        <div class="search col-md-3 col-lg-3 float-left margin-card">
+                            <input type="text" class="search" name="search" placeholder="Search.." id="search_articles">
+                        </div>
+                        <!-- Trigger the modal with a button -->
+
+                        <div class="col-md-2 float-right margin-top-modal text-center">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">New Share !</button>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Create your personal advertisement</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ include('Front/post/_form.html.twig') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endif %}
-
+                {% endif %}
+            </div>
         </div>
 
         <div class="row">
+            <div class="container-fluid">
+                <div class="col-12">
 
-            <div class="col-md-12">
-                <div class="text-center">
-                    <h1>Post index</h1>
-                    &nbsp;
-                </div>
-
-                {% for post in posts %}
-                    <div class="callout secondary-c col-md-5 d-inline-block margin-card card-shadow">
-                        <h5 class="text-center">{{ post.title }}</h5>
-                        <hr>
-                        <p>authored by {{ post.author.firstname }}</p>
-                        <p>{{ post.descritpion }}</p>
-                        <hr>
-                        <p class="d-inline-block primary-color">{{ post.nbLike }}</p>
-                        <a class="primary-color" href="#"> J'aime</a>
-                        <a class="btn btn-outline-secondary pull-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
-                        {% if app.user and app.user != post.author %}
-                            <a class="btn btn-outline-primary pull-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
-                        {% endif %}
+                    <div class="text-center">
+                        <div class="col-4 title-center">
+                            <h1 class="active">What's New ?</h1>
+                            <hr class="hr">
+                        </div>
                     </div>
-                {% else %}
-                    <tr>
-                        <td colspan="6">no records found</td>
-                    </tr>
-                {% endfor %}
+
+                    {% for post in posts %}
+                        <div class="callout secondary-c col-5 col-sm-10 col-lg-5 d-inline-block margin-card card-shadow">
+                            {# TODO: Put the right logo on the cards here #}
+                            {% if post.typePost != 'undefined' %}
+                                <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="col-2 col-lg-2 profil_pic">
+                            {%  else %}
+                                <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="col-2 col-lg-2 profil_pic">
+                            {% endif %}
+                            <h5 class="d-inline-block card-title text-center col-7 col-lg-7">{{ post.title }}</h5>
+                            {% if post.author.picture %}
+                                <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="profil_pic col-2 col-lg-2 float-right">
+                            {% else %}
+                                <img src="{{ asset('images/verified_user.png') }}" class="profil_pic col-2 col-lg-2 float-right">
+                            {% endif %}
+                            <hr>
+                            <div class="card-body-perso">
+
+                                <div class="col-12 col-lg-12 col-sm-12">
+
+                                    {# {{ post.description }} #}
+                                    <p class="card-text col-12 col-lg-12 col-sm-12">{{ post.description | length > 50? post.description | slice(0,50) ~ ' [...]': post.description }}</p>
+                                    <br>
+                                    <h6 class="card-subtitle float-left m-top-10 col-6 col-lg-6 col-sm-6">{{ post.createdAt| date }}</h6>
+                                    <h6 class="card-subtitle float-right m-top-10 col-6 col-lg-6 col-sm-6 text-right">Authored by {{ post.author.firstname }}</h6>
+                                </div>
+
+                            </div>
+
+                            <hr class="col-11 col-lg-11 col-sm-11">
+
+                            <span class="d-inline-block likes">{{ post.nbLike }}</span>
+                            {# TODO: if user have liked the post, load <img src="{{ "/images/like-full.png" }} #}
+                            {% if app.user  %}
+                                <a class="primary-color text-decoration-none" href="#"> <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> </a> -
+                            {% else %}
+                                <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> -
+                            {% endif %}
+                            <a class="primary-color request-btn" href="#"> Report</a>
+                            <a class="btn btn-outline-secondary float-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+
+                            {% if app.user and app.user != post.author %}
+                                <a class="btn btn-outline-danger request-btn float-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div>
+                            <h6>no records found</h6>
+                        </div>
+                    {% endfor %}
+
+                    {%  include "navigation/pagination.html.twig" %}
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+            function reportToGroup( value ) {
+
+                $('#post_organization').val(value);
+                console.log( value );
+            }
+    </script>
 
 {% endblock %}

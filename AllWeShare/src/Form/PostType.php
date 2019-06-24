@@ -24,19 +24,20 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class
-                , array('attr' => ['class' => 'form-control'])
+                , array('attr' => ['class' => 'form-control', 'onkeyup' => 'reportToGroup( this.value )', 'value' => ''])
             )
-            ->add('descritpion', TextareaType::class
-                , array('attr' => ['class' => 'form-control'])
+            ->add('description', TextareaType::class
+                , array('attr' => ['class' => 'form-control', 'value' => ''])
             )
-            ->add('organization', EntityType::class
-                , array(
-                    'class' => Group::class,
+            ->add('organization', GroupType::class
+                //, array(
+                    /*'class' => Group::class,
     'choice_label' => function (Group $group) {
         return $group->getName();
-    },
-                    'attr' => ['class' => 'form-control'])
+    },*/
+                    //'attr' => ['class' => 'form-control'])
             )
+
         ;
     }
 

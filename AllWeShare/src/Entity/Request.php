@@ -28,7 +28,7 @@ class Request
     private $applicant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Post")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="requests")
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;
