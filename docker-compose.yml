@@ -37,3 +37,9 @@ services:
     - POSTGRES_DB=allweshare
     - POSTGRES_USER=user
     - POSTGRES_PASSWORD=password
+
+  blackfire:
+    image: blackfire/blackfire
+    environment:
+    - BLACKFIRE_SERVER_ID
+    - BLACKFIRE_SERVER_TOKEN
