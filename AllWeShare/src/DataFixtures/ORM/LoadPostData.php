@@ -51,21 +51,21 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
         return [
             [
                 'title' => 'I want to share my account',
-                'descritpion' => 'I have a streaming platform account that i want to share',
+                'description' => 'I have a streaming platform account that i want to share',
                 'nblike' => 34,
                 'author' => 3,
                 'organization' => 3,
             ],
             [
                 'title' => '1 pace left',
-                'descritpion' => 'There is a place left in my account sharing, we are a friendly group',
+                'description' => 'There is a place left in my account sharing, we are a friendly group',
                 'nblike' => 5,
                 'author' => 2,
                 'organization' => 2,
             ],
             [
                 'title' => 'WESH ALORS',
-                'descritpion' => 'VASY VENEZ',
+                'description' => 'VASY VENEZ',
                 'nblike' => 0,
                 'author' => 1,
                 'organization' => 1,

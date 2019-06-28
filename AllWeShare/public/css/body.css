@@ -698,7 +698,7 @@ Notif
     webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding-bottom: 1.25rem;
+    padding: 0 1rem 1.25rem 1rem;
 }
 
 .pagination-perso{
@@ -823,4 +823,60 @@ ul.breadcrumb-perso li a {
 ul.breadcrumb-perso li a:hover {
     color: #4aa48a;
 
+}
+
+/* ########### COMPONENTS ########### */
+
+.btn-allWeShare {
+    border: 2px solid #ffa13d;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 32px;
+    background-color: #ffa13d;
+}
+
+.btn-allWeShare:hover {
+    border: 2px solid #e79237;
+    background-color: #e79237;
+}
+
+.content-post {
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+}
+
+.header-post {
+    padding: 2.5rem 0 2.5rem 0;
+}
+
+.main-posts {
+    margin: 0 10.5rem 0 10.5rem;
+}
+
+.card-post-allWeShare {
+    position: relative;
+    margin: 0 2.55rem 1rem 0;
+    padding: 0 0 1rem 0;
+    border-radius: 10px;
+}
+
+.banner-brand {
+    width: 469px;
+    height: 69px;
+    opacity: 0.65;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.post-content {
+    padding: 0.5rem;
+}
+
+.size-content{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.footer-base {
+    border-top: 1px solid #e0e0e0;
 }

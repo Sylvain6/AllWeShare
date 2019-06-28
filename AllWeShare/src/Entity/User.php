@@ -87,7 +87,7 @@ class User implements UserInterface, Serializable
     private $token;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Group", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
      */
     private $groups;
 
