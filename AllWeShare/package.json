@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@symfony/webpack-encore": "^0.22.0",
+    "cypress": "^3.3.2",
     "webpack-notifier": "^1.6.0"
   },
   "license": "UNLICENSED",
@@ -9,11 +10,20 @@
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
-    "build": "encore production --progress"
+    "build": "encore production --progress",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "bootstrap": "^4.2.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7"
-  }
+  },
+  "name": "allweshare",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "AllWeShare",
+  "description": ""
 }

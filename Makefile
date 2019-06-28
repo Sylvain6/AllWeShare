@@ -10,6 +10,9 @@ start:
 down:
 		docker-compose down
 
+cypress:
+		yarn --cwd ./AllWeShare cypress
+
 bash:
 		docker exec -it allweshare_php-fpm_1 bash
 
