@@ -58,7 +58,7 @@ class Post
     private $requests;
 
     /**
-     * @ORM\Column(type="string", nullable=false, options={"default":"netflix"})
+     * @ORM\Column(type="string", nullable=true, options={"default":"netflix"})
      */
     private $type_post;
 

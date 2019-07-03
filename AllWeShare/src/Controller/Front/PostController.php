@@ -34,20 +34,19 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $post->setAuthor($user);
-            $post->getOrganization()->setOwner( $this->getUser() );
+            $post->getOrganization()->setOwner($this->getUser());
 
 
             /*
              * Analyse du texte afin de detecter le type du compte
              */
-            $res = self::analyzeContent( strtolower( $post->getTitle() ) );
+            $res = self::analyzeContent(strtolower($post->getTitle()));
             //throw new \Exception( $res );
-            if( $res !== 'undefined' ){
-                $post->setTypePost( $res );
-            }
-            else{
-                $res = self::analyzeContent( $post->getDescription() );
-                $post->setTypePost( $res );
+            if ($res !== 'undefined') {
+                $post->setTypePost($res);
+            } else {
+                $res = self::analyzeContent($post->getDescription());
+                $post->setTypePost($res);
             }
 
 

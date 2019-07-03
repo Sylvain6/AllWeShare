@@ -114,8 +114,8 @@ class SecurityController extends Controller
      */
     public function activateAccount( Request $request, User $user , $token ){
 
-        if( !empty( $user->getId() ) && $user->getToken() == $token && $user->getIsActive() == false ){
-            $user->setIsActive( true );
+        if (!empty($user->getId()) && $user->getToken() == $token && $user->getIsActive() == false) {
+            $user->setIsActive(true);
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
