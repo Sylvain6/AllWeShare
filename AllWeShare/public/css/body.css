@@ -319,13 +319,28 @@ footer .footer-left {
 }
 
 footer .footer-middle{
-    margin-left: 10em;
     text-align: center;
 }
 
 footer p.footer-links {
     margin: 0 0 10px;
     padding: 0;
+}
+
+footer div.first-item {
+    position: relative;
+    width: 100%;
+    padding: 0 15px 0 15px;
+    flex: 0 0 28%;
+    max-width: 33.3333333333%;
+}
+
+footer div.second-item {
+    position: relative;
+    width: 100%;
+    padding: 0 15px 0 15px;
+    flex: 0 0 52.6666666667%;
+    max-width: 52.6666666667%;
 }
 
 footer .footer-right a {
@@ -850,12 +865,13 @@ ul.breadcrumb-perso li a:hover {
 }
 
 .main-posts {
+    display: flex;
+    justify-content: space-between;
     margin: 0 10.5rem 0 10.5rem;
 }
 
 .card-post-allWeShare {
     position: relative;
-    margin: 0 2.55rem 1rem 0;
     padding: 0 0 1rem 0;
     border-radius: 10px;
 }
@@ -879,4 +895,10 @@ ul.breadcrumb-perso li a:hover {
 
 .footer-base {
     border-top: 1px solid #e0e0e0;
+}
+
+.footer-align {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10.5rem 0 10.5rem;
 }
