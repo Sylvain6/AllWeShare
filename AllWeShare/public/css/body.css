@@ -616,8 +616,13 @@ Notif
 }
 
 .signIn-btn{
+    max-width: 100%;
     margin-right: auto;
     margin-left: auto;
+}
+
+.form-control:focus {
+    border-color: #FFA13D !important;
 }
 
 .svg-login{

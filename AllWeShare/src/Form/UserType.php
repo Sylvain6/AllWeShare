@@ -21,9 +21,6 @@ class UserType extends AbstractType
             ->add('pseudo', TextType::class, array(
                 'attr' => ['class' => 'form-control']
             ))
-            /*->add('lastname', TextType::class, array(
-                'attr' => ['class' => 'form-control']
-            ))*/
             ->add('email', EmailType::class, array(
                 'attr' => ['class' => 'form-control']
             ))
@@ -33,13 +30,8 @@ class UserType extends AbstractType
                 'second_options' => array('label' => 'Repeat Password', 'attr' => ['class' => 'form-control']),
 
             ))
-            /*->add('address', TextType::class, array(
-                'attr' => ['class' => 'form-control']
-            ))
-            ->add('city', TextType::class, array(
-                'attr' => ['class' => 'form-control']
-            ))*/
             ->add('termsAccepted', CheckboxType::class, array(
+                'label' => 'Terms Accepted',
                 'mapped' => false,
                 'constraints' => new IsTrue(),
                 'attr' => ['class' => 'form-check-input m-ipt'],
