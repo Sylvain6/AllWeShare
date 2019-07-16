@@ -8,15 +8,6 @@
             <div class="container-fluid">
                 {% if(app.user) %}
                     <div class="col-md-12">
-
-                        <div class="search col-md-3 col-lg-3 float-left margin-card">
-                            <input type="text" class="search" name="search" placeholder="Search.." id="search_articles">
-                        </div>
-                        <!-- Trigger the modal with a button -->
-
-                        <div class="col-md-2 float-right margin-top-modal text-center">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">New Share !</button>
-                        </div>
                         <!-- Modal -->
                         <div class="modal fade" id="myModal">
                             <div class="modal-dialog" role="document">
@@ -44,8 +35,11 @@
                     <div class="header-post text-center">
                         <div class="col-10 title-center main-title">
                             <h1 class="active">What's New ?</h1>
-                            <hr class="hr">
+                            {% if(app.user) %}
+                                <button type="button" class="btn btn-allWeShare btn-title" data-toggle="modal" data-target="#myModal">New Share !</button>
+                            {% endif %}
                         </div>
+                        <hr class="col-10 hr">
                     </div>
 
                     <div class="main-posts">
@@ -54,20 +48,11 @@
                                 {# TODO: Put the right logo on the cards here #}
                                 {% if post.typePost != 'undefined' %}
                                     <img src="{{ asset('images/' ~ post.typePost ~ '-banniere.png') }}" class="banner-brand">
-                                    {# {%  else %}
-                                        <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="col-2 col-lg-2 profil_pic">  #}
                                 {% endif %}
-                                {# <h5 class="d-inline-block card-title text-center col-7 col-lg-7">{{ post.title }}</h5> #}
-                                {# {% if post.author.picture %}
-                                    <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="profil_pic col-2 col-lg-2 float-right">
-                                {% else %}
-                                    <img src="{{ asset('images/verified_user.png') }}" class="profil_pic col-2 col-lg-2 float-right">
-                                {% endif %} #}
                                 <div class="card-body-perso">
                                     <h6 class="card-subtitle m-top-10 col-6 col-lg-6 col-sm-6 size-content">{{ post.createdAt| date }}</h6>
                                     <br>
                                     <p class="card-text col-12 col-lg-12 col-sm-12">{{ post.description | length > 50? post.description | slice(0,50) ~ ' [...]': post.description }}</p>
-                                    {# <h6 class="card-subtitle float-right m-top-10 col-6 col-lg-6 col-sm-6 text-right">Authored by {{ post.author.firstname }}</h6> #}
                                 </div>
 
                                 <hr class="col-10 col-lg-10 col-sm-10">
@@ -81,12 +66,11 @@
                                         <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> -
                                     {% endif %}
                                     <a class="primary-color request-btn" href="#"> Report</a>
-                                    <a class="btn btn-allWeShare btn-allWeShare-post float-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                                    <a class="btn btn-allWeShare float-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                                    {% if app.user and app.user != post.author %}
+                                        <a class="btn btn-allWeShare request-btn float-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
+                                    {% endif %}
                                 </div>
-
-                                {% if app.user and app.user != post.author %}
-                                    <a class="btn btn-outline-danger request-btn float-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
-                                {% endif %}
                             </div>
                         {% else %}
                             <div>

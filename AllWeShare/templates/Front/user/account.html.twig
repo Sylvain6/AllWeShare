@@ -10,7 +10,6 @@
 
                 <h1>{{ user.pseudo }}</h1>
                 <hr>
-
                 <div class="row">
                     <div class="container-fluid">
                         {{ form_widget(formPic.picture) }}
@@ -26,22 +25,16 @@
                             {% endif %}
                             <div id="edit_user_profile_pic">
                                 <i class="fas fa-camera fa-md edit-button"></i>
-
                             </div>
-
                         </label>
                     </div>
-
                 </div>
             <div class="row">
                 <div class="container-fluid">
-                    <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
-
+                    <button class="btn btn-allWeShare-success register float-right">{{ button_label|default('Save') }}</button>
                     {{ form_end(formPic) }}
                 </div>
-
             </div>
-
         </div>
         <div class="row">
 
@@ -49,7 +42,6 @@
             <hr>
             <h3 class="text-center">Informations</h3>
                 <table class="table">
-
                     <tbody>
                         <tr>
                             <th>Pseudo</th>
@@ -108,7 +100,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-outline-success register float-right">{{ button_label|default('Save') }}</button>
+                <button class="btn btn-allWeShare-success register float-right">{{ button_label|default('Save') }}</button>
 
             {{ form_end(form) }}
             &nbsp;
@@ -135,7 +127,7 @@
                         {{ form_row(formPwd.password.second) }}
                     </div>
 
-                    <button class="btn btn-outline-danger register float-right">{{ button_label|default('Change Password') }}</button>
+                    <button class="btn btn-allWeShare register float-right">{{ button_label|default('Change Password') }}</button>
                 {{ form_end(formPwd) }}
             </div>
 

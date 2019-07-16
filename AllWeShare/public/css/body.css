@@ -170,6 +170,7 @@ p.related a:hover {
     margin-bottom: 10px;
 }
 
+
 .m-ipt{
     margin-left: 5px;
 }
@@ -855,11 +856,24 @@ ul.breadcrumb-perso li a:hover {
 
 /* ########### COMPONENTS ########### */
 
+.btn-allWeShare-success {
+    border: 2px solid #56CC9D;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 28px;
+    background-color: #56CC9D;
+}
+
+.btn-allWeShare-success:hover {
+    border: 2px solid #4dbc90;
+    background-color: #4dbc90;
+}
+
 .btn-allWeShare {
     border: 2px solid #ffa13d;
     font-size: 15px;
     font-weight: bold;
-    padding: 10px 32px;
+    padding: 10px 28px;
     background-color: #ffa13d;
 }
 
@@ -914,4 +928,13 @@ ul.breadcrumb-perso li a:hover {
     display: flex;
     justify-content: space-between;
     margin: 0 10.5rem 0 10.5rem;
+}
+
+.main-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-title {
+    justify-content: flex-end;
 }

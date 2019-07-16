@@ -5,23 +5,15 @@
 {% block body %}
 
     <div class="container-fluid">
-
         <div class="row">
-            <ul class="breadcrumb-perso">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Private</a></li>
-                <li><a href="#">Pictures</a></li>
-                <li class="active">Vacation</li>
-            </ul>
-        </div>
-        <div class="row">
-
             <div class="col-md-8 div-center m-top-5">
-
+                <div class="m-top-5 m-bot">
+                    <a class="btn btn-outline-primary m-bot" href="{{ path('post_index') }}">Back to list</a>
+                    {% if app.user %}
+                        {#<a class="btn btn-outline-secondary float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>#}
+                    {% endif %}
+                </div>
                 <div class="card m-top-5 card-shadow">
-
-
-
                     <div class="card-body">
                         <div class="row">
                             <div class="container-fluid">
@@ -47,12 +39,10 @@
                                         {% else %}
                                             <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> -
                                         {% endif %}
-                                        <a class="primary-color request-btn" href="#"> Report</a>
+                                        <a class="primary-color request-btn" href="#">Report</a>
                                         {% if app.user is same as(post.author) %}
                                             <a class="float-right edit-button" href="{{ path('post_edit', {'id': post.id}) }}"><i class="fas fa-pen fa-lg"></i></a>
-
                                             {{ include('Front/post/_delete_form.html.twig') }}
-
                                         {% endif %}
                                     </div>
                                 </div>
@@ -71,12 +61,9 @@
                     <div class="card-body" id="content-comments">
                         {% if app.user %}
                             <div>
-                                <!-- Trigger the modal with a button -->
-                                &nbsp;
                                 <div class="float-right margin-top-modal ">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">Comment</button>
                                 </div>
-                                <!-- Modal -->
                                 <div class="modal" id="myModal">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -124,12 +111,6 @@
                             </div>
                         {% endfor %}
                         {% include "navigation/pagination.html.twig" %}
-                        <div class="m-top-5 m-bot">
-                            <a class="btn btn-outline-info m-bot" href="{{ path('post_index') }}">Back to list</a>
-                            {% if app.user %}
-                                {#<a class="btn btn-outline-secondary float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>#}
-                            {% endif %}
-                        </div>
                     </div>
                 </div>
             </div>
