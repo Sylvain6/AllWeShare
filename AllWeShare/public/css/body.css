@@ -278,11 +278,23 @@ p.related a:hover {
     margin-top: 0.5rem;
 }
 
+.modal-main-title{
+    text-align: center;
+    font-weight: bold
+}
+
+.modal-label {
+    padding-top: 12px
+}
+
+.organization_title {
+    padding: 14px 0 3px;
+    font-size: 20px;
+}
+
 .margin-card{
     margin-left: 5rem;
 }
-
-
 
 .card-shadow {
     /* Add shadows to create the "card" effect */
@@ -623,8 +635,9 @@ Notif
 }
 
 .form-control:focus {
-    border-color: #FFA13D !important;
-}
+     box-shadow: 0 1px 5px -2px #42A5F5;
+     border-bottom: 2px solid #FFA13D;
+ }
 
 .svg-login{
     position: absolute;
@@ -787,6 +800,11 @@ Notif
     position: absolute;
 }
 
+.text-informations {
+    padding: 10px;
+    margin-bottom: 12px
+}
+
 .trash-button{
     border: none;
     background-color: transparent;
@@ -895,6 +913,12 @@ ul.breadcrumb-perso li a:hover {
     display: flex;
     justify-content: space-between;
     margin: 0 10.5rem 0 10.5rem;
+}
+
+.demands-cards {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .card-post-allWeShare {

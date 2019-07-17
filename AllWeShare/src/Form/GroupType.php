@@ -19,18 +19,21 @@ class GroupType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'modal-label']
             ))
-            ->add( 'place', NumberType::class, array(
-                'attr' => ['class' => 'form-control']
+            ->add('place', NumberType::class, array(
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'modal-label']
             ))
             ->add('username', EmailType::class, array(
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'modal-label']
             ))
-            ->add('password', PasswordType::class,
-                array('attr' => ['class' => 'form-control'])
-                //, array(['class' => 'form-control'])
-            )
+            ->add('password', PasswordType::class, array(
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'modal-label']
+            ))
         ;
     }
 

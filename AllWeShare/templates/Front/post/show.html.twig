@@ -17,7 +17,6 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="container-fluid">
-                                {# TODO: Put the right logo on the cards here #}
                                 <img src="{{ "/images/netflix.png" }}" class="col-2 col-lg-2" style="border-radius: 100px;">
                                 <h4 class="d-inline-block card-title text-center col-8 col-lg-8">{{ post.title }}</h4>
                                 <hr>
@@ -33,7 +32,6 @@
                                 <div class="card-body-perso">
                                     <div class="col-12 col-lg-12 col-sm-12">
                                         <span class="d-inline-block likes">{{ post.nbLike }}</span>
-                                        {# TODO: if user have liked the post, load <img src="{{ "/images/like-full.png" }} #}
                                         {% if app.user  %}
                                             <a class="primary-color text-decoration-none" href="#"> <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> </a> -
                                         {% else %}

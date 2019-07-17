@@ -91,27 +91,23 @@ class UserController extends AbstractController
 
         $form = $this->createForm(UserAccountType::class, $user);
         $form->handleRequest($request);
-        $form_picture = $this->createForm( ProfilPictureType::class, $pic);
+        $form_picture = $this->createForm(ProfilPictureType::class, $pic);
         $form_picture->handleRequest($request);
 
         $formPassword = $this->createForm(ChangePasswordType::class, $user );
         $formPassword->handleRequest( $request );
 
-        if( $form_picture->isSubmitted() && $form_picture->isValid() ){
-
+        if ($form_picture->isSubmitted() && $form_picture->isValid()) {
             $file = $pic->getPicture();
             $fileName = $uploadFilesService->upload($file);
-
             $pic->setPicture($fileName);
-            $user->setPicture( $pic );
-
+            $user->setPicture($pic);
             $this->getDoctrine()->getManager()->flush();
         }
 
-        if ($form->isSubmitted() && $form->isValid() ) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('user_account');
         }
 

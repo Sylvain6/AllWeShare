@@ -6,12 +6,9 @@
 
 <div class="container-fluid">
     <div class="row">
-
         {{ form_start(formPic, {attr: {class: 'col-md-6 text-center subscribe_form'} }) }}
-
         <h1>{{ user.pseudo }}</h1>
         <hr>
-
         <div class="row">
             <div class="container-fluid">
                 {{ form_widget(formPic.picture) }}
@@ -27,7 +24,6 @@
                     {% endif %}
                     <div id="edit_user_profile_pic">
                         <i class="fas fa-camera fa-md edit-button"></i>
-
                     </div>
 
                 </label>

@@ -7,45 +7,36 @@
     <div class="row">
         <div class="container-fluid">
             <div class="col-12">
-
-                <div class="text-center">
-                    <div class="col-4 title-center">
-                        <h1 class="active">My demands</h1>
-                        <hr class="hr">
+                <div class="header-post text-center">
+                    <div class="col-10 title-center main-title">
+                        <h1 class="active">Demands</h1>
                     </div>
+                    <hr class="col-10 hr">
                 </div>
-                <div style="
-                    flex-wrap: wrap;
-                     display: inline-flex;">
-
+                <div class="col-10 title-center">
                     {% for request in requests %}
-
                         {% if request.status == 'PENDING' %}
-                                <div class="card text-white bg-warning mb-3 text-center" style="max-width: 20rem;order: 1;margin:5px;">
+                            <div class="card text-white bg-warning mb-3 text-center" style="max-width: 20rem;order: 1;margin:5px;">
                             {#{% elseif request.status == 'ACCEPTED' %}
                                 <div class="card text-white bg-success mb-3" style="max-width: 20rem; order: 2;margin:5px;">
                             {% elseif request.status == "REJECTED" %}
                                 <div class="card text-white bg-danger mb-3" style="max-width: 20rem; order: 3;margin:5px;">#}
-
-
-
-                                    <div class="card-header">REQUEST ({{ request.status }})</div>
+                                <div class="card-header">REQUEST ({{ request.status }})</div>
                                     <div class="card-body">
                                         <p class="card-text">You wanted to integrate the group from this post :
                                             "{{ request.post.title }}", owner is {{ request.post.author.firstname }} {{ request.post.author.lastname }}</p>
-
                                     </div>
                                 </div>
                         {% endif %}
                     {% endfor %}
 
                     {% if requests is empty %}
-                        <p> no request</p>
+                        <p class="text-center"> no request</p>
                     {% endif %}
                 </div>
             </div>
 
         </div>
     </div>
-
+    <!--style="flex-wrap: wrap; display: inline-flex;"-->>
 {% endblock %}

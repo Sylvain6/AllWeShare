@@ -23,22 +23,15 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class
-                , array('attr' => ['class' => 'form-control', 'onkeyup' => 'reportToGroup( this.value )', 'value' => ''])
-            )
-            ->add('description', TextareaType::class
-                , array('attr' => ['class' => 'form-control', 'value' => ''])
-            )
-            ->add('organization', GroupType::class
-                //, array(
-                    /*'class' => Group::class,
-    'choice_label' => function (Group $group) {
-        return $group->getName();
-    },*/
-                    //'attr' => ['class' => 'form-control'])
-            )
-
-        ;
+            ->add('title', TextType::class, array(
+                'attr' => ['class' => 'form-control',
+                'onkeyup' => 'reportToGroup(this.value)', 'value' => '']
+            ))
+            ->add('description', TextareaType::class, array(
+                'attr' => ['class' => 'form-control', 'value' => ''],
+                'label_attr' => ['class' => 'modal-label']
+            ))
+            ->add('organization', GroupType::class, array('label_attr' => ['class' => 'organization_title']));
     }
 
     public function configureOptions(OptionsResolver $resolver)
