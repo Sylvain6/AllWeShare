@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PaginationService extends AbstractController{
 
 
-    public function finWithPagination( $page, $nbMaxParPage, $repository, $where, $indicator, $order_by_field, $order_by, $parameters = null){
+    public function finWithPagination($page, $repository, $where, $parameters = null){
 
         if (!is_numeric($page)) {
             throw new InvalidArgumentException(
@@ -22,32 +22,32 @@ class PaginationService extends AbstractController{
             throw new NotFoundHttpException('La page demandée n\'existe pas');
         }
 
-        if (!is_numeric($nbMaxParPage)) {
+        if (!is_numeric(4)) {
             throw new InvalidArgumentException(
-                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . 4 . ').'
             );
         }
 
         if( $where !== null ){
-            $qb = $repository->createQueryBuilder($indicator) //p
+            $qb = $repository->createQueryBuilder('p') //p
             ->where($where);
         }
         else{
-            $qb = $repository->createQueryBuilder($indicator); //p
+            $qb = $repository->createQueryBuilder('p'); //p
             //->where($where);
         }
         //'CURRENT_DATE() >= p.createdAt'
             if( !empty( $parameters ) ){
                 $qb->setParameter( $parameters[0], $parameters[1] );
             }
-            $qb->orderBy($order_by_field, $order_by);
+            $qb->orderBy('p.createdAt', 'DESC');
 
 
         //throw new \Exception( $qb );
         $query = $qb->getQuery();
 
-        $premierResultat = ($page - 1) * $nbMaxParPage;
-        $query->setFirstResult($premierResultat)->setMaxResults($nbMaxParPage);
+        $premierResultat = ($page - 1) * 4;
+        $query->setFirstResult($premierResultat)->setMaxResults(4);
         $paginator = new Paginator($query);
 
         if ( ($paginator->count() <= $premierResultat) && $page != 1) {

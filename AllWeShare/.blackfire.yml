@@ -1,0 +1,7 @@
+tests:
+  "HomePage Metrics":
+    path: "/"
+    assertions:
+    - "metrics.sql.queries.count <= 7"
+    - "main.peak_memory < 20MB"
+    - "main.cpu_time < 150ms"
