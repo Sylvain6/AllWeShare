@@ -8,18 +8,10 @@
             <div class="container-fluid">
                 {% if(app.user) %}
                     <div class="col-md-12">
-
-                        <div class="search col-md-3 col-lg-3 float-left margin-card">
-                            <input type="text" class="search" name="search" placeholder="Search.." id="search_articles">
-                        </div>
-                        <!-- Trigger the modal with a button -->
-
-                        <div class="col-md-2 float-right margin-top-modal text-center">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">New Share !</button>
-                        </div>
+                    
                         <!-- Modal -->
                         <div class="modal fade" id="myModal">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog col-md-5 col-lg-5" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Create your personal advertisement</h5>
@@ -42,11 +34,21 @@
             <div class="container-fluid">
                 <div class="col-12">
 
-                    <div class="text-center">
-                        <div class="col-4 title-center">
+                    <div class="text-center header-post">
+                        <div class="col-10 title-center main-title ">
                             <h1 class="active">What's New ?</h1>
-                            <hr class="hr">
+                            {% if(app.user) %}
+                                {# <div class="search col-md-3 col-lg-3 margin-card">
+                                    <input type="text" class="search" name="search" placeholder="Search.." id="search_articles">
+                                </div> #}
+                                <!-- Trigger the modal with a button -->
+
+                                <div class="col-md-2 float-right margin-top-modal text-center">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal">New Share !</button>
+                                </div>
+                            {% endif %}
                         </div>
+                        <hr class="hr col-lg-10">
                     </div>
 
                     {% for post in posts %}
@@ -58,11 +60,11 @@
                                 <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="col-2 col-lg-2 profil_pic">
                             {% endif %}
                             <h5 class="d-inline-block card-title text-center col-7 col-lg-7">{{ post.title }}</h5>
-                            {% if post.author.picture %}
+                            {# {% if post.author.picture %}
                                 <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="profil_pic col-2 col-lg-2 float-right">
                             {% else %}
                                 <img src="{{ asset('images/verified_user.png') }}" class="profil_pic col-2 col-lg-2 float-right">
-                            {% endif %}
+                            {% endif %} #}
                             <hr>
                             <div class="card-body-perso">
 
@@ -87,10 +89,10 @@
                                 <img src="{{ "/images/heart-like.png" }}" style="width: 15px;"> -
                             {% endif %}
                             <a class="primary-color request-btn" href="#"> Report</a>
-                            <a class="btn btn-outline-secondary float-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
+                            <a class="btn btn-warning float-right" href="{{ path('post_show', {'id': post.id}) }}">See it</a>
 
                             {% if app.user and app.user != post.author %}
-                                <a class="btn btn-outline-danger request-btn float-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
+                                <a class="btn btn-outline-dark request-btn float-right" href="{{ path('request_new', {'id': post.id}) }}" onclick="return confirm('Are you sure you want to do a request?');">Request</a>
                             {% endif %}
                         </div>
                     {% else %}

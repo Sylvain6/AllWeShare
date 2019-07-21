@@ -54,6 +54,7 @@ class LoadUserData extends AbstractFixture
                 'password' => 'azertyuiop',
                 'roles' => '{ "roles": "ROLE_ADMIN" }',
                 'isActive' => true,
+                'pseudo' => 'Sylvain'
             ],
             [
                 'firstName' => 'Antoine',
@@ -64,6 +65,7 @@ class LoadUserData extends AbstractFixture
                 'password' => 'azertyuiop',
                 'roles' => '{ "roles": "ROLE_ADMIN" }',
                 'isActive' => true,
+                'pseudo' => 'Antoine_D'
             ],
             [
                 'firstName' => 'Jonathan',
@@ -74,16 +76,30 @@ class LoadUserData extends AbstractFixture
                 'password' => 'azertyuiop',
                 'roles' => '{ "roles": "ROLE_ADMIN" }',
                 'isActive' => true,
+                'pseudo' => 'Jrakoto'
             ],
             [
                 'firstName' => 'Hubert',
                 'lastName' => 'Tohula',
                 'email' => 'huberttohu@gmail.com',
-                'address' => '7 rue bis ter complique',
-                'city' => 'marseille',
+                'address' => '7 rue du Général De Gaule',
+                'city' => 'Paris',
                 'password' => 'azertyuiop',
                 'roles' => '{ "roles": "ROLE_USER" }',
                 'isActive' => true,
+                'pseudo' => 'Thubert'
+            ],
+
+            [
+                'firstName' => 'Andréa',
+                'lastName' => 'Dupuis',
+                'email' => 'adupuis@gmail.com',
+                'address' => '54 rue de la vieille forge',
+                'city' => 'Rouen',
+                'password' => 'azertyuiop',
+                'roles' => '{ "roles": "ROLE_USER" }',
+                'isActive' => true,
+                'pseudo' => 'Dupuis_A'
             ],
         ];
     }

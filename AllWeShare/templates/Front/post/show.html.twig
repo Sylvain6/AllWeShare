@@ -6,28 +6,27 @@
 
     <div class="container-fluid">
 
-        <div class="row">
-            <ul class="breadcrumb-perso">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Private</a></li>
-                <li><a href="#">Pictures</a></li>
-                <li class="active">Vacation</li>
-            </ul>
-        </div>
+    
         <div class="row">
 
             <div class="col-md-8 div-center m-top-5">
 
+                <div class="m-top-10">
+                <a class="btn btn-outline-dark m-bot" href="{{ path('post_index') }}">Back to list</a>
+                </div>
                 <div class="card m-top-5 card-shadow">
-
-
-
+                
                     <div class="card-body">
                         <div class="row">
                             <div class="container-fluid">
                                 {# TODO: Put the right logo on the cards here #}
-                                <img src="{{ "/images/netflix.png" }}" class="col-2 col-lg-2" style="border-radius: 100px;">
+                                <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" class="profil_pic col-2 col-lg-2" >
                                 <h4 class="d-inline-block card-title text-center col-8 col-lg-8">{{ post.title }}</h4>
+                                {% if post.author.picture %}
+                                    <img src="{{ asset('uploads/pictures/' ~ post.author.picture) }}" class="profil_pic col-2 col-lg-2 float-right">
+                                {% else %}
+                                    <img src="{{ asset('images/verified_user.png') }}" class="profil_pic col-2 col-lg-2 float-right">
+                                {% endif %}
                                 <hr>
                                 <div class="card-body-perso">
                                     <div class="col-12 col-lg-12 col-sm-12">
@@ -125,7 +124,7 @@
                         {% endfor %}
                         {% include "navigation/pagination.html.twig" %}
                         <div class="m-top-5 m-bot">
-                            <a class="btn btn-outline-info m-bot" href="{{ path('post_index') }}">Back to list</a>
+                            
                             {% if app.user %}
                                 {#<a class="btn btn-outline-secondary float-right m-bot" href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>#}
                             {% endif %}

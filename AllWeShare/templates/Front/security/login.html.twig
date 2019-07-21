@@ -74,12 +74,12 @@
                         <form method="post" class="form-login col-md-10 col-lg-10" id="login">
                             <div class="form-group">
                                 <label for="inputEmail" class="sr-only">Email</label>
-                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email *" required autofocus>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control login-ipt" placeholder="Email *" required autofocus>
                             </div>
 
                             <div class="form-group">
                                 <label for="inputPassword" class="sr-only">Password</label>
-                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password *" required>
+                                <input type="password" name="password" id="inputPassword" class="form-control login-ipt" placeholder="Password *" required>
                             </div>
                             <input type="hidden" name="_csrf_token"
                                    value="{{ csrf_token('authenticate') }}"
@@ -98,10 +98,16 @@
                                 #}
 
 
-                            <div class="signIn-btn col-lg-5 col-md-5 col-xs-6">
+                            <div class="col-lg-12 col-md-12 col-xs-12 signIn-btn">
                                 <button type="submit" class="btn btn-outline-primary col-lg-12 col-md-12 col-xs-12">
                                     Sign In
                                 </button>
+                            </div>
+                            &nbsp
+                            <div class="col-md-12 signIn-btn">
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
                             </div>
                             <hr>
                             <div class="text-center">
@@ -111,7 +117,7 @@
 
 
                     </div>
-
+                    
                 </div>
 
             </div>

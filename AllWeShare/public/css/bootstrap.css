@@ -19,7 +19,7 @@
   --pink: #e83e8c;
   --red: #FF7851;
   --orange: #fd7e14;
-  --yellow: #FFCE67;
+  --yellow: #FFA13D;
   --green: #56CC9D;
   --teal: #20c997;
   --cyan: #6CC3D5;
@@ -30,7 +30,7 @@
   --secondary: #F3969A;
   --success: #56CC9D;
   --info: #6CC3D5;
-  --warning: #FFCE67;
+  --warning: #FFA13D;
   --danger: #FF7851;
   --light: #f8f9fa;
   --dark: #343a40;
@@ -2040,12 +2040,13 @@ pre code {
 }
 
 .form-control:focus {
-  color: #5a5a5a;
+  /*color: #5a5a5a;
   background-color: #fff;
   border-color: #d0eae2;
-  outline: 0;
+  
   -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
-  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);*/
+  outline: 0;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -2754,8 +2755,8 @@ fieldset:disabled a.btn {
 
 .btn-warning {
   color: #fff;
-  background-color: #FFCE67;
-  border-color: #FFCE67;
+  background-color: #FFA13D;
+  border-color: #FFA13D;
 }
 
 .btn-warning:hover {
@@ -2778,8 +2779,8 @@ fieldset:disabled a.btn {
 .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
 .show > .btn-warning.dropdown-toggle {
   color: #fff;
-  background-color: #ffbe34;
-  border-color: #ffb927;
+  background-color: #FFA13D;
+  border-color: #FFA13D;
 }
 
 .btn-warning:not(:disabled):not(.disabled):active:focus, .btn-warning:not(:disabled):not(.disabled).active:focus,
@@ -5435,7 +5436,7 @@ a.badge-dark:hover, a.badge-dark:focus {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
+  padding: 0.3rem 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.4rem;
@@ -5977,7 +5978,7 @@ a.close.disabled {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 0.5rem;
+  /*margin: 0.5rem;*/
   pointer-events: none;
 }
 
@@ -6034,6 +6035,7 @@ a.close.disabled {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.6rem;
   outline: 0;
+  padding: 5px;
 }
 
 .modal-backdrop {
@@ -6122,7 +6124,7 @@ a.close.disabled {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    /*max-width: 500px;*/
     margin: 1.75rem auto;
   }
   .modal-dialog-centered {
@@ -12668,12 +12670,13 @@ pre code {
 }
 
 .form-control:focus {
-  color: #5a5a5a;
+  /*color: #5a5a5a;
   background-color: #fff;
   border-color: #d0eae2;
-  outline: 0;
+  
   -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
-  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);*/
+  outline: 0;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -13377,8 +13380,8 @@ fieldset:disabled a.btn {
 
 .btn-warning {
   color: #fff;
-  background-color: #FFCE67;
-  border-color: #FFCE67;
+  background-color: #FFA13D;
+  border-color: #FFA13D;
 }
 
 .btn-warning:hover {
@@ -16058,7 +16061,7 @@ a.badge-dark:hover, a.badge-dark:focus {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
+  padding: 0.3rem 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.4rem;
@@ -16600,7 +16603,7 @@ a.close.disabled {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 0.5rem;
+  /*margin: 0.5rem;*/
   pointer-events: none;
 }
 
@@ -16657,6 +16660,7 @@ a.close.disabled {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.6rem;
   outline: 0;
+  padding: 5px;
 }
 
 .modal-backdrop {
@@ -16745,7 +16749,7 @@ a.close.disabled {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    /*max-width: 500px;*/
     margin: 1.75rem auto;
   }
   .modal-dialog-centered {
@@ -23291,12 +23295,13 @@ pre code {
 }
 
 .form-control:focus {
-  color: #5a5a5a;
+  /*color: #5a5a5a;
   background-color: #fff;
   border-color: #d0eae2;
-  outline: 0;
+  
   -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
-  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);*/
+  outline: 0;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -24005,8 +24010,8 @@ fieldset:disabled a.btn {
 
 .btn-warning {
   color: #fff;
-  background-color: #FFCE67;
-  border-color: #FFCE67;
+  background-color: #FFA13D;
+  border-color: #FFA13D;
 }
 
 .btn-warning:hover {
@@ -26686,7 +26691,7 @@ a.badge-dark:hover, a.badge-dark:focus {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
+  padding: 0.3rem 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.4rem;
@@ -27228,7 +27233,7 @@ a.close.disabled {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 0.5rem;
+  /*margin: 0.5rem;*/
   pointer-events: none;
 }
 
@@ -27285,6 +27290,7 @@ a.close.disabled {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.6rem;
   outline: 0;
+  padding: 5px;
 }
 
 .modal-backdrop {
@@ -27373,7 +27379,7 @@ a.close.disabled {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    /*max-width: 500px;*/
     margin: 1.75rem auto;
   }
   .modal-dialog-centered {

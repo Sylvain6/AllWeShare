@@ -52,27 +52,35 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
     {
         return [
             [
-                'name' => 'NetGroup',
-                'username' => 'sylvain.coutrot@hotmail.fr',
+                'name' => 'Groupe Netflix 1',
+                'username' => 'huberttohu@hotmail.fr',
                 'password' => 'azertyuiop',
                 'place' => 1,
-                'owner' => 1,
+                'owner' => 4,
                 'user' => [3, 2],
             ],
             [
-                'name' => 'WeshGrp',
-                'username' => 'dumont.antoine27@gmail.com',
+                'name' => 'Groupe ADN',
+                'username' => 'hubert_T',
                 'password' => 'azertyuiop',
                 'place' => 2,
-                'owner' => 2,
+                'owner' => 4,
                 'user' => [1] ,
             ],
             [
-                'name' => 'TqtGroup',
-                'username' => 'jonathrakoto91400@gmail.com',
+                'name' => 'Groupe Spotify',
+                'username' => 'adupuis@gmail.com',
                 'password' => 'azertyuiop',
-                'place' => 3,
-                'owner' => 3,
+                'place' => 2,
+                'owner' => 5,
+            ],
+
+            [
+                'name' => 'Wakanim Andrea',
+                'username' => 'adupuis@gmail.com',
+                'password' => 'azertyuiop',
+                'place' => 1,
+                'owner' => 5,
             ],
         ];
     }

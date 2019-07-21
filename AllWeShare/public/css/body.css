@@ -185,6 +185,15 @@ p.related a:hover {
     margin-right: auto;
 }
 
+.header-post {
+    padding: 2.5rem 0 2.5rem 0;
+}
+
+.main-title {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 /*
 ===================================
@@ -349,6 +358,10 @@ footer {
     left: 0;
     padding: 0.5rem;
     background-color: white;
+}
+
+.footer-base {
+    border-top: 1px solid #e0e0e0;
 }
 
 
@@ -606,6 +619,7 @@ Notif
 .signIn-btn{
     margin-right: auto;
     margin-left: auto;
+    padding: 0;
 }
 
 .svg-login{
@@ -656,6 +670,10 @@ Notif
     padding: 0 0 0 15px;
 }
 
+
+.login-ipt:focus{
+    border-bottom: 2px solid #FFA13D;
+}
 
 /*
 ===================================
