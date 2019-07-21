@@ -43,15 +43,15 @@ class PostRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($post);
     }
 
-    /*
-    public function findOneBySomeField($value): ?Post
+    
+    public function findByOrganization($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.organization = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

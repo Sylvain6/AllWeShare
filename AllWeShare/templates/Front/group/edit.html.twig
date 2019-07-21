@@ -3,11 +3,49 @@
 {% block title %}Edit Group{% endblock %}
 
 {% block body %}
-    <h1>Edit Group</h1>
+    <div class="text-center header-post">
+                <div class="col-10 title-center main-title">
+                    <h1 class="active">Edit {{ group.name }}</h1>
+                    <div class="m-top-10">
+            <a class="btn btn-outline-dark m-bot" href="{{ path('post_index') }}">Back to list</a>
+        </div>
+                </div>
+                <hr class="hr col-lg-10">
+            </div>
 
-    {{ include('Front/group/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="container-fluid">
+    <div class="row">
 
-    <a href="{{ path('group_index') }}">back to list</a>
+        
 
-    {{ include('Front/group/_delete_form.html.twig') }}
+        <div class="subscribe_form card" style="margin-top: 5rem; width: 30%; padding-bottom: 2rem;">
+            <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" alt="logo-group" class="logo-group">
+
+            <div class="container">
+                <br>
+                <h2 class="text-center"><b>{{ group.name }}</b></h2>
+                <br>
+                <h4 class="text-center">Informations</h4>
+
+                {{ include('Front/group/_form.html.twig', {'button_label': 'Update'}) }}
+                
+                {# <table class="tab_admin text-center">
+                    <tr>
+                        <th>Username</th>
+                        <td>{{ group.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td>{{ group.password }}</td>
+                    </tr>
+                </table> #}
+                
+                <div class="m-top-10 d-inline-block float-right">
+                    {{ include('Front/group/_delete_form.html.twig') }}
+                </div>
+            </div> 
+        </div>
+        
+    </div>
+</div>
 {% endblock %}

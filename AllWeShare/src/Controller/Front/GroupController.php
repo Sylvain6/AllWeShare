@@ -32,6 +32,7 @@ class GroupController extends AbstractController
      */
     public function indexOwner(GroupRepository $groupRepository): Response
     {
+        
         return $this->render('Front/group/index.html.twig', [
             'groups' => $this->getUser()->getGroups(),
             'groupsOwn' => $groupRepository->findBy(['owner' => $this->getUser()]),
@@ -96,7 +97,7 @@ class GroupController extends AbstractController
     /**
      * @Route("/{id}/edit", name="group_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Group $group): Response
+    public function edit(Request $request, Group $group, PostRepository $postRepository, GroupRepository $groupRepository): Response
     {
         $form = $this->createForm(GroupType::class, $group);
         $form->handleRequest($request);
@@ -104,13 +105,14 @@ class GroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('group_index', [
-                'id' => $group->getId(),
-            ]);
+            return $this->redirectToRoute('group_me');
         }
 
+        $post = $postRepository->findByOrganization( $group->getId() );
+        
         return $this->render('Front/group/edit.html.twig', [
             'group' => $group,
+            'post' => $post,
             'form' => $form->createView(),
         ]);
     }

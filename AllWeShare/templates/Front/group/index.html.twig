@@ -6,43 +6,49 @@
 <div class="container-fluid" >
     <div class="row">
         <div class="tab_admin" >
-            <h1 class="text-center">Groups</h1>
-            <div style="
+            <div class="text-center header-post">
+                <div class="col-10 title-center main-title">
+                    <h1 class="active">My groups</h1>
+                    
+                </div>
+                <hr class="hr col-lg-10">
+            </div>
+            <div class="col-lg-12" style="
                     flex-wrap: wrap;
                      display: inline-flex;">
-                {% for groupOwned in groupsOwn %}
-                <div class="card text-black-50 bg-light mb-3 card-for-group" style="order: 3;">
-                    <div class="card-header text-center">{{ groupOwned.name }}</div>
-                    <div class="card-body">
-                        <p class="card-text">Group composed by : </p>
-                        <ul class="list-group">
-                                <li class="list-notif">
-                                    You (Owner)
-                                </li>
-                            {% for user in groupOwned.users %}
-                                {% if(user) %}
-                                        <li class="list-notif">
-                                            {{ user.firstname }} {{ user.lastname }}
-                                        </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                        <a class="btn btn-outline-success float-left" href="">Update</a>
-                        <div class="float-right list-group-bottom">
-                            {{ include('Front/group/_delete_form.html.twig') }}
+                {% for group in groupsOwn %}
+                    <div class="card text-black-50 bg-light mb-3 card-for-group" style="order: 3;">
+                        <div class="card-header text-center">{{ group.name }}</div>
+                        <div class="card-body">
+                            <p class="card-text">Group composed by : </p>
+                            <ul class="list-group">
+                                    <li class="list-notif">
+                                        You (Owner)
+                                    </li>
+                                {% for user in group.users %}
+                                    {% if(user) %}
+                                            <li class="list-notif">
+                                                {{ user.firstname }} {{ user.lastname }}
+                                            </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            <a class="btn btn-outline-success float-left" href="{{ path('group_edit', {'id': group.id}) }}">Update</a>
+                            <div class="float-right list-group-bottom">
+                                {{ include('Front/group/_delete_form.html.twig') }}
+                            </div>
                         </div>
+
                     </div>
 
-                </div>
-
-                        {% endfor %}
+                {% endfor %}
                 {% for group in groups %}
                         <div class="card text-black-50 bg-light mb-3 card-for-group" style="order: 3;">
                                 <div class="card-header text-center">{{ group.name }}</div>
                             <div class="card-body">
                                 <p class="card-text">Group composed by : </p>
                                 <ul class="list-group">
-                                    {% if(group.owner == app.user) %}
+                                    {% if (group.owner == app.user) %}
                                         <li class="list-notif">
                                             You (Owner)
                                         </li>
