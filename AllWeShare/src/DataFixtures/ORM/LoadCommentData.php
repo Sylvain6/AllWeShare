@@ -48,13 +48,18 @@ class LoadCommentData extends AbstractFixture implements DependentFixtureInterfa
     {
         return [
             [
-                'content' => 'I was sharing this account with him, he\'s ',
+                'content' => 'I was sharing this account with him, he\'s a great guy !',
                 'author' => 3,
                 'post' => 2,
             ],
             [
-                'content' => 'yo mec',
+                'content' => 'Enjoy the share with her !',
                 'author' => 2,
+                'post' => 1,
+            ],
+            [
+                'content' => 'Thanks Antoine !',
+                'author' => 5,
                 'post' => 1,
             ],
         ];

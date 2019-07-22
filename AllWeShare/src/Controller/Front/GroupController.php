@@ -32,9 +32,9 @@ class GroupController extends AbstractController
      */
     public function indexOwner(GroupRepository $groupRepository): Response
     {
-        
+        //dd( $this->getUser()->getGroups() );
         return $this->render('Front/group/index.html.twig', [
-            'groups' => $this->getUser()->getGroups(),
+            'groups' => $this->getUser()->getGroups(),//$groupRepository->findGroupByOwner( $this->getUser()->getId() ),
             'groupsOwn' => $groupRepository->findBy(['owner' => $this->getUser()]),
         ]);
     }
@@ -87,10 +87,12 @@ class GroupController extends AbstractController
     /**
      * @Route("/{id}/show", name="group_show", methods={"GET"})
      */
-    public function show(Group $group): Response
+    public function show( PostRepository $postRepository, Group $group): Response
     {
+        $post = $postRepository->findByOrganization( $group->getId() );
         return $this->render('Front/group/show.html.twig', [
             'group' => $group,
+            'post' => $post
         ]);
     }
 

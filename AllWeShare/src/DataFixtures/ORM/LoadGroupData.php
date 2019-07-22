@@ -52,27 +52,27 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
     {
         return [
             [
-                'name' => 'Groupe Netflix 1',
-                'username' => 'huberttohu@hotmail.fr',
+                'name' => 'Groupe Spotify 1',
+                'username' => 'andreaSpotify@gmail.com',
                 'password' => 'azertyuiop',
                 'place' => 1,
                 'owner' => 4,
                 'user' => [3, 2],
             ],
             [
-                'name' => 'Groupe ADN',
+                'name' => 'Groupe Netflix',
                 'username' => 'hubert_T',
                 'password' => 'azertyuiop',
                 'place' => 2,
                 'owner' => 4,
-                'user' => [1] ,
+                'user' => [1, 5] ,
             ],
             [
-                'name' => 'Groupe Spotify',
-                'username' => 'adupuis@gmail.com',
+                'name' => 'Groupe ADN',
+                'username' => 'hubert_t@gmail.com',
                 'password' => 'azertyuiop',
                 'place' => 2,
-                'owner' => 5,
+                'owner' => 4,
             ],
 
             [
@@ -81,6 +81,31 @@ class LoadGroupData extends AbstractFixture implements DependentFixtureInterface
                 'password' => 'azertyuiop',
                 'place' => 1,
                 'owner' => 5,
+                'user' => [1,2] ,
+            ],
+            [
+                'name' => 'Groupe Netflix Antoine',
+                'username' => 'AntoineD',
+                'password' => 'azertyuiop',
+                'place' => 2,
+                'owner' => 2,
+                'user' => [1,5] ,
+            ],
+            [
+                'name' => 'Groupe Deezer Hubert',
+                'username' => 'adupuis@gmail.com',
+                'password' => 'azertyuiop',
+                'place' => 2,
+                'owner' => 4,
+            ],
+
+            [
+                'name' => 'Netfix Andrea',
+                'username' => 'adupuis@gmail.com',
+                'password' => 'azertyuiop',
+                'place' => 1,
+                'owner' => 5,
+                'user' => [3,2] ,
             ],
         ];
     }

@@ -54,7 +54,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'description' => 'I have an account Spotify premium and i\'m looking for 3 people to join me on it !',
                 'nblike' => 34,
                 'author' => 5,
-                'organization' => 3,
+                'organization' => 1,
                 'TypePost' => 'spotify',
             ],
             [
@@ -70,7 +70,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'description' => 'Interested to share ADN account with me ? :D',
                 'nblike' => 12,
                 'author' => 4,
-                'organization' => 1,
+                'organization' => 3,
                 'TypePost' => 'adn',
             ],
             [
@@ -78,7 +78,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'description' => 'Come looking all animes you want with me ! ',
                 'nblike' => 21,
                 'author' => 5,
-                'organization' => 2,
+                'organization' => 4,
                 'TypePost' => 'wakanim',
             ],
 
@@ -87,7 +87,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'description' => 'There is a place left in my account sharing, we are a friendly group',
                 'nblike' => 5,
                 'author' => 2,
-                'organization' => 2,
+                'organization' => 5,
                 'TypePost' => 'netflix',
             ],
             [
@@ -95,7 +95,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'description' => 'Wanna listen music everywhere at minor cost ? join me',
                 'nblike' => 12,
                 'author' => 4,
-                'organization' => 1,
+                'organization' => 6,
                 'TypePost' => 'deezer',
             ],
             [
@@ -103,7 +103,7 @@ class LoadPostData extends AbstractFixture implements DependentFixtureInterface
                 'description' => 'Come looking all animes you want with me ! ',
                 'nblike' => 21,
                 'author' => 5,
-                'organization' => 2,
+                'organization' => 7,
                 'TypePost' => 'netflix',
             ],
         ];

@@ -3,11 +3,20 @@
 {% block title %}Group{% endblock %}
 
 {% block body %}
+<div class="text-center header-post">
+        <div class="col-10 title-center main-title">
+            <h1 class="active">Edit {{ group.name }}</h1>
+            <div class="m-top-10">
+                <a class="btn btn-outline-dark m-bot" href="{{ path('group_me') }}">Back to list</a>
+            </div>
+        </div>
+        <hr class="hr col-lg-10">
+    </div>
 <div class="container-fluid">
     <div class="row">
 
             <div class="subscribe_form card" style="margin-top: 5rem; width: 30%; padding-bottom: 2rem;">
-                <img src="{{ asset('images/netflix.png') }}" alt="logo-group" class="logo-group">
+                <img src="{{ asset('images/' ~ post.typePost ~ '.png') }}" alt="logo-group" class="logo-group">
 
                 <div class="container">
                     <br>

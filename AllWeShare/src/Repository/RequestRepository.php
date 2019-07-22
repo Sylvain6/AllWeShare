@@ -45,22 +45,25 @@ class RequestRepository extends ServiceEntityRepository
             ->getEntityManager()
             ->getRepository('App\Entity\Post');
         $posts = $postRepository->findBy(['author' => $user]);
+        
         $requests = [];
         foreach ($posts as $post){
-            $requests = $this->findBy(['post' => $post, 'status' => 'PENDING']);
+            $requests[] = $this->findBy(['post' => $post, 'status' => 'PENDING']);
         }
+        
         $result=$arrayflatten->arrayFlatten($requests);
         return $result;
     }
-    /*
-    public function findOneBySomeField($value): ?Request
+    
+    /*public function findRequestByOwner( $array )
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('r.post_id = :post AND r.status = :status')
+            ->setParameter('post', $array['post'])
+            ->setParameter('status', $array['status'])
             ->getQuery()
             ->getOneOrNullResult()
         ;
-    }
-    */
+    }*/
+       
 }

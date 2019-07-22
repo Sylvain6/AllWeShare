@@ -73,8 +73,8 @@
                                     {# {{ post.description }} #}
                                     <p class="card-text col-12 col-lg-12 col-sm-12">{{ post.description | length > 50? post.description | slice(0,50) ~ ' [...]': post.description }}</p>
                                     <br>
-                                    <h6 class="card-subtitle float-left m-top-10 col-6 col-lg-6 col-sm-6">{{ post.createdAt| date }}</h6>
-                                    <h6 class="card-subtitle float-right m-top-10 col-6 col-lg-6 col-sm-6 text-right">Authored by {{ post.author.firstname }}</h6>
+                                    <h6 class="card-subtitle float-left m-top-10 col-6 col-lg-6 col-sm-6"><i>{{ post.createdAt| date }}</i></h6>
+                                    <h6 class="card-subtitle float-right m-top-10 col-6 col-lg-6 col-sm-6 text-right"><i>Authored by {{ post.author.firstname }}</i></h6>
                                 </div>
 
                             </div>

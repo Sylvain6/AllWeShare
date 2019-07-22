@@ -33,11 +33,11 @@ class GroupRepository extends ServiceEntityRepository
     // /**
     //  * @return Group[] Returns an array of Group objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findGroupByOwner($value)
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
+            ->andWhere('g.owner = :val')
             ->setParameter('val', $value)
             ->orderBy('g.id', 'ASC')
             ->setMaxResults(10)
@@ -45,7 +45,7 @@ class GroupRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Group

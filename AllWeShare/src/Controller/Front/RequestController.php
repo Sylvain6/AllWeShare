@@ -42,6 +42,7 @@ class RequestController extends AbstractController
      */
     public function showByOwner(RequestRepository $requestRepository): Response
     {
+        //dd( $requestRepository->findByOwner($this->getUser()) );
         return $this->render('Front/request/index_owner.html.twig', [
             'requests' => $requestRepository->findByOwner($this->getUser()),
         ]);

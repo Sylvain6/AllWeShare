@@ -18,16 +18,16 @@
             <div class="col-lg-12 col-l-12">
                 {% for request in requests %}
                     {% if request.status == 'PENDING' %}
-                        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;order: 1;margin:5px;">
+                        <div class="card mb-3" style="max-width: 20rem;order: 1;margin:5px;">
 
-                            <div class="card-header">REQUEST ({{ request.status }})</div>
-                            <div class="card-body">
-                                <p class="card-text">{{ request.applicant.firstname }} {{ request.applicant.lastname }}
+                            <div class="card-header text-center">REQUEST ({{ request.status }})</div>
+                            <div class="card-body text-center">
+                                <p class="card-text m-bot-10">{{ request.applicant.firstname }} {{ request.applicant.lastname }}
                                     wants to integrate your group from the post : "{{ request.post.title }}"</p>
 
                                 {% if request.status == 'PENDING' %}
-                                    <a class="btn btn-success" href="{{ path('request_accept', {'id': request.id}) }}">accept</a>
-                                    <a class="btn btn-danger" href="{{ path('request_reject', {'id': request.id}) }}">reject</a>
+                                    <a class="btn btn-outline-success float-left m-top-10" href="{{ path('request_accept', {'id': request.id}) }}">accept</a>
+                                    <a class="btn btn-outline-secondary float-right m-top-10" href="{{ path('request_reject', {'id': request.id}) }}">reject</a>
                                 {% endif %}
                             </div>
                         </div>
