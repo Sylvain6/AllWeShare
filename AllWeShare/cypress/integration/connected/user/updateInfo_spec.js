@@ -3,11 +3,18 @@ const user = {
     password: 'azertyuiop'
 };
 
+const newInfo = {
+  firstName: 'test',
+  lastName: 'test'
+};
+
 const { email, password } = user;
 
-describe('Connected: User Info Page', function() {
+const { firstName, lastName } = newInfo;
+
+describe('Connected: User Info Update Info', function() {
     beforeEach(() => {
-        cy.exec('php bin/console d:s:u --force && php bin/console d:f:l')
+        cy.exec('php bin/console d:s:u --force && php bin/console d:f:l');
         cy.visit('/login');
         Cypress.Commands.add('loginByCSRF', (email, password, csrfToken) => {
             cy.request({
@@ -38,5 +45,10 @@ describe('Connected: User Info Page', function() {
     it('User Info Page', function() {
         cy.get('.nav-profil').click();
         cy.get('#profil_user').click();
+        cy.get('#firstNameEdit').click();
+        cy.get('#user_account_firstname').clear().type(firstName);
+        cy.get('#lastNameEdit').click();
+        cy.get('#user_account_lastname').clear().type(lastName);
+        cy.get('#info_user_account').submit();
     });
 });

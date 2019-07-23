@@ -5,7 +5,7 @@ const user = {
 
 const { email, password } = user;
 
-describe('Connected: User Info Page', function() {
+describe('Connected: User Info Change Password', function() {
     beforeEach(() => {
         cy.exec('php bin/console d:s:u --force && php bin/console d:f:l')
         cy.visit('/login');
@@ -35,8 +35,13 @@ describe('Connected: User Info Page', function() {
             })
     });
 
-    it('User Info Page', function() {
+    it('Change Password Page', function() {
         cy.get('.nav-profil').click();
         cy.get('#profil_user').click();
+        cy.wait(1000);
+        cy.get('#change_password_password_first').type(password);
+        cy.get('#change_password_password_second').type(password);
+        cy.get('#changePassordForm').submit();
     });
+
 });
