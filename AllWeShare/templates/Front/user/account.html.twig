@@ -121,7 +121,7 @@
                 <h3 class="text-center">Change your password</h3>
                 <hr>
 
-                {{ form_start(formPwd) }}
+                {{ form_start(formPwd, { 'attr': { 'id': 'changePassordForm'}}) }}
 
                     <div class="form-group" >
                         {{ form_row(formPwd.email) }}

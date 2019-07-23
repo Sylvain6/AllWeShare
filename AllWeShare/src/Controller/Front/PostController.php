@@ -22,12 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/", name="post_index", methods={"POST", "GET"} )
+     * @Route("/", name="post_index", methods={"POST", "GET"})
      */
     public function new(Request $request, PostRepository $postRepository, GroupRepository $groupRepository, PaginationService $paginationService): Response
     {
         $post = new Post();
-
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -35,13 +34,10 @@ class PostController extends AbstractController
             $user = $this->getUser();
             $post->setAuthor($user);
             $post->getOrganization()->setOwner($this->getUser());
-
-
             /*
              * Analyse du texte afin de detecter le type du compte
              */
             $res = self::analyzeContent(strtolower($post->getTitle()));
-            //throw new \Exception( $res );
             if ($res !== 'undefined') {
                 $post->setTypePost($res);
             } else {
@@ -49,9 +45,7 @@ class PostController extends AbstractController
                 $post->setTypePost($res);
             }
 
-
             $entityManager = $this->getDoctrine()->getManager();
-            //throw new \Exception( json_encode( $this->getUser() ) );
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -88,7 +82,6 @@ class PostController extends AbstractController
      * @Route("/post/{id}", name="post_show", methods={"GET", "POST"})
      */
     public function show(Request $request, Post $post, CommentRepository $commentRepository, NotificationService $notificationService, PaginationService $paginationService ): Response
-
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -96,7 +89,6 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setPost($post);
-
             $user = $this->getUser();
             $comment->setAuthor( $user );
 
@@ -113,7 +105,7 @@ class PostController extends AbstractController
         }
 
         $page = $request->get("page");
-        if( empty( $page) ){
+        if (empty($page)) {
             $page = 1;
         }
 

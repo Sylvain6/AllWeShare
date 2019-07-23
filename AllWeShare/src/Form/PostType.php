@@ -29,15 +29,7 @@ class PostType extends AbstractType
             ->add('description', TextareaType::class
                 , array('attr' => ['class' => 'form-control', 'value' => ''])
             )
-            ->add('organization', GroupType::class
-                //, array(
-                    /*'class' => Group::class,
-    'choice_label' => function (Group $group) {
-        return $group->getName();
-    },*/
-                    //'attr' => ['class' => 'form-control'])
-            )
-
+            ->add('organization', GroupType::class)
         ;
     }
 

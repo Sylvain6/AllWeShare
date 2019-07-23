@@ -4,7 +4,6 @@ namespace App\Controller\Front;
 
 use App\Entity\Post;
 use App\Entity\Request as RequestObject;
-use App\Form\RequestType;
 use App\Repository\RequestRepository;
 use App\Service\NotificationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -114,7 +113,7 @@ class RequestController extends AbstractController
         $request = new RequestObject();
         $user = $this->getUser();
 
-        $notificationService->setNotification( $user->getId(), $post->getAuthor()->getId(),
+        $notificationService->setNotification($user->getId(), $post->getAuthor()->getId(),
             $user->getFirstname() . ' has made a request to join your group.', $post->getId()
         );
 

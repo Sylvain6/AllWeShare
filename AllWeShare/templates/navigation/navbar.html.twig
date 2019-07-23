@@ -32,12 +32,12 @@
 
                     <li class="nav-item">
                         <div class="dropdown nav-item">
-                            <a class="dropdown-toggle nav-link  {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }}"
+                            <a class="dropdown-toggle nav-link  {{ ( app.request.attributes.get('_route') == 'user_account') ? 'active' }} nav-profil"
                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Account
                             </a>
                             <div class="dropdown-menu nav-item" aria-labelledby="dropdownMenuButton">
-                                <a class="nav-link" href="{{ path('user_account') }}">My profile</a>
+                                <a class="nav-link" id="profil_user" href="{{ path('user_account') }}">My profile</a>
                                 <hr>
                                 
                                 <a class="nav-link" href="{{ path('request_owner') }}">Requests to your accounts</a>
